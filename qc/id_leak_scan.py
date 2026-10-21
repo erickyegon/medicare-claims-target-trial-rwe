@@ -49,9 +49,9 @@ for rel in tracked:
     if found:
         hits_values.append(rel); rows.append((rel, "ID VALUE FOUND", ",".join(found), "; ".join(f"{k}:{len(v)}" for k, v in found.items())))
     # (d) absolute paths of the author's machine
-    if abs_path.search(text) and rel != "qc/id_leak_scan.py":
+    if abs_path.search(text) and rel not in ("qc/id_leak_scan.py", "qc/id_scan_report.csv"):   # the scanner and its own report only mention the patterns
         ex = abs_path.search(text); hits_abs.append(rel)
-        rows.append((rel, "ABSOLUTE PATH", "", text[ex.start():ex.start() + 40].splitlines()[0]))
+        rows.append((rel, "ABSOLUTE PATH", "", "machine-specific path (not echoed here)"))
     # (b) identifier columns in data files
     first = text.split("\n", 1)[0]
     cols = [c.strip().strip('"').upper() for c in re.split(r"[|,\t]", first)]
@@ -67,7 +67,7 @@ out = pd.DataFrame(rows, columns=["file", "finding", "ids", "detail"])
 out.to_csv(root / "qc/id_scan_report.csv", index=False)
 print(f"files scanned: {len(tracked)} tracked/staged ({int((out.finding.str.startswith('binary')).sum())} binary not text-scanned)")
 print(out.groupby("finding").size().to_string())
-print("\nID VALUE hits:", hits_values or "none"); print("ID COLUMN hits (data files):", hits_cols or "none")
+print("\nID VALUE hits:", hits_values or "none"); print("ID COLUMN hits (data files):", hits_cols or "none"); print("ABSOLUTE PATH hits:", hits_abs or "none")
 meta = out[out.finding.str.startswith("column name as a cell value")]
 if len(meta): print("\nmetadata files that list field names as values (not identifiers):", meta.file.tolist())
 sys.exit(1 if (hits_values or hits_cols or hits_abs) else 0)
