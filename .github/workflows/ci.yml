@@ -4,7 +4,7 @@ name: CI
 on: [push, pull_request]
 jobs:
   tests-and-docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04      # pinned: prebuilt package binaries (and libglpk.so.40 for igraph) match this release
     steps:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-r@v2
