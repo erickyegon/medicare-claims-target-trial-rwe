@@ -1,4 +1,4 @@
-"""Narrative audit: every number quoted in the static prose (amendments, protocol, notes, scan report) is recomputed from the database or the
+"""Narrative audit: every number quoted in the static prose (amendments, protocol, notes, scan report, README results) is recomputed from the database or the
 aggregate CSVs and checked against the text. Quarto documents that use inline R (feasibility, study report) are generated from the CSVs and are
 not audited here. Run from the project root:  python qc/narrative_audit.py   (writes qc/narrative_audit.csv; exit code 1 if any check fails)."""
 import duckdb, pandas as pd, pathlib, re, sys
@@ -6,6 +6,7 @@ root = pathlib.Path(__file__).resolve().parents[1]
 con = duckdb.connect(str(root / "data/medicare.duckdb"), read_only=True)
 txt = lambda f: (root / f).read_text(encoding="utf-8")
 amend, protocol, notes, scanq = txt("docs/amendments.md"), txt("docs/protocol.md"), txt("qc/profiling_notes.md"), txt("qc/indication_scan.qmd")
+readme = txt("README.md")
 q = lambda s: con.execute(s).fetchone()[0]
 rows = []
 def check(label, doc_name, doc, literal, actual, expected_literal=None):
@@ -64,6 +65,22 @@ cs = pd.read_csv(root / "qc/profile_ip_chisq_source.csv"); check("Cramer V sourc
 cc = pd.read_csv(root / "qc/scan/chronic_condition_classes.csv")
 none = [c for c in ["Chronic Obstructive Pulmonary Disease", "Asthma", "Heart Failure and Non-Ischemic Heart Disease"] if c not in set(cc.cond)]
 check("no classes for COPD/asthma/HF", "scan report", scanq, "no new-user classes for COPD, asthma or heart failure", "no new-user classes for COPD, asthma or heart failure" if len(none) == 3 else "classes exist", "no new-user classes for COPD, asthma or heart failure")
+# --- README results section: recomputed from the committed aggregate outputs (T5 for the primary result, attrition.csv, sensitivity_results.csv, SAS reconciliation) ---
+t5 = pd.read_csv(root / "output/tfl/T5.csv"); km = t5[(t5.Method == "weighted KM") & (t5.Horizon == "365 days")].iloc[0]
+cell = lambda c: re.match(r"(-?[\d.]+) \((-?[\d.]+) to (-?[\d.]+)\)", km[c]).groups()
+(ra, _, _), (rt, _, _), (rd, rdl, rdh), (rr, rrl, rrh) = cell("ACE inhibitor risk, % (95% CI)"), cell("Thiazide risk, % (95% CI)"), cell("Risk difference, percentage points (95% CI)"), cell("Risk ratio (95% CI)")
+for label, lit in [("primary risks", f"risk {ra}% (ACE inhibitor) vs {rt}% (thiazide)"), ("primary risk difference", f"risk difference {rd} points (95% CI {rdl} to {rdh})"), ("primary risk ratio", f"risk ratio {rr} ({rrl} to {rrh})")]:
+    check(label, "README", readme, lit, lit, lit)
+att = pd.read_csv(root / "qc/cohort/attrition.csv")
+for r in att.itertuples():
+    lit = f"| {int(r.n_persons):,} | {format(int(r.n_episodes), ',')} |" if not pd.isna(r.n_episodes) else f"| {int(r.n_persons):,} |"
+    lit_b = f"| **{int(r.n_persons):,}** | {int(r.n_episodes):,} |" if r.step == 10 else lit
+    check(f"attrition step {r.step}", "README", readme, lit_b if r.step == 10 else lit, lit_b if r.step == 10 else lit, lit_b if r.step == 10 else lit)
+sens = pd.read_csv(root / "qc/analysis/sensitivity_results.csv"); p0 = sens.iloc[0]; alt = sens.iloc[1:]
+lit = f"{int(p0.n)} in the final cohort (ACE inhibitor {int(p0.n_acei)}, thiazide/thiazide-like {int(p0.n_thiazide)})"; check("final cohort and arms", "README", readme, lit, lit, lit)
+lit = f"All {len(alt)} alternative analyses"; check("number of alternative analyses", "README", readme, lit, lit if ((alt.km365_rr_lo < 1) & (alt.km365_rr_hi > 1)).all() else "an interval excludes 1.0", lit)
+sr = pd.read_csv(root / "qc/cohort/sas_vs_r_attrition.csv"); sb = pd.read_csv(root / "qc/cohort/sas_vs_r_baseline.csv")
+lit = f"all {len(sr)} attrition rows and {len(sb)} baseline rows match R"; check("SAS reconciliation rows", "README", readme, lit, lit if ((sr.result == "PASS").all() and (sb.result == "PASS").all()) else "a row fails", lit)
 out = pd.DataFrame(rows, columns=["document", "claim", "text", "recomputed", "result"]); out.to_csv(root / "qc/narrative_audit.csv", index=False)
 print(out.assign(text=out.text.str[:60], recomputed=out.recomputed.astype(str).str[:40]).to_string(index=False))
 print("\nFAILED:", int((out.result != "PASS").sum()), "of", len(out)); sys.exit(0 if (out.result == "PASS").all() else 1)

@@ -70,3 +70,6 @@ time	step	description	n_in	n_out
 2026-10-21 09:24:20	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
 2026-10-21 09:24:24	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
 2026-10-21 09:27:29	09_analysis	analysis complete: 12 analyses, 500 bootstrap resamples each (primary ok: 500)	790	790
+2026-10-21 13:25:10	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 13:25:12	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 13:25:12	09_analysis	primary cohort: 790 people (zero-follow-up dropped: 0); PS covariates 16 (dropped: heart_failure,dementia)	790	790

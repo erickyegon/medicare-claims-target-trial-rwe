@@ -1,7 +1,7 @@
 # medicare-claims-target-trial-rwe
 
 [![CI](https://github.com/erickyegon/medicare-claims-target-trial-rwe/actions/workflows/ci.yml/badge.svg)](https://github.com/erickyegon/medicare-claims-target-trial-rwe/actions/workflows/ci.yml)
-![R](https://img.shields.io/badge/R-4.4%2B-276DC3) ![Python](https://img.shields.io/badge/Python-3.11-3776AB) ![SQL](https://img.shields.io/badge/SQL-DuckDB-FFF000) ![SAS](https://img.shields.io/badge/SAS-reconciled-00629B) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![R](https://img.shields.io/badge/R-4.6.1-276DC3) ![Python](https://img.shields.io/badge/Python-3.11-3776AB) ![SQL](https://img.shields.io/badge/SQL-DuckDB-FFF000) ![SAS](https://img.shields.io/badge/SAS-reconciled-00629B) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Claims RWE methods demonstration: ACE inhibitor vs thiazide initiation on CMS synthetic Medicare data, designed as a target trial emulation.
 
@@ -35,7 +35,7 @@ because the data could not support the first two questions. That path is documen
 | No inpatient stay overlapping the index date | 790 | 1,458 |
 | First qualifying episode per person (final cohort) | **790** | 790 |
 
-**Primary result** (IPTW, intention-to-treat, 365-day all-cause hospitalization, 500-resample bootstrap): risk 21.5% (ACE inhibitor) vs 17.7% (thiazide); risk difference 3.8 points (95% CI -3.5 to 9.4); risk ratio 1.21 (0.84 to 1.61). All 11 alternative analyses (an unweighted reference, untruncated weights, PS matching, IPCW, stricter diagnosis window, alternative follow-up rules and others) have intervals that include 1.0; see `output/tfl/T6.html`.
+**Primary result** (IPTW, intention-to-treat, 365-day all-cause hospitalization, 500-resample bootstrap): risk 21.4% (ACE inhibitor) vs 17.7% (thiazide); risk difference 3.8 points (95% CI -3.5 to 9.4); risk ratio 1.21 (0.84 to 1.61). All 11 alternative analyses (an unweighted reference, untruncated weights, PS matching, IPCW, stricter diagnosis window, alternative follow-up rules and others) have intervals that include 1.0; see `output/tfl/T6.html`.
 
 ![Study design](output/tfl/F1.png)
 
@@ -80,7 +80,7 @@ The final question: among adults 65+ with hypertension, does initiating an ACE i
 
 ## How to run
 
-Requirements: R 4.4 or later, Quarto, Python 3.11 with `duckdb`, `pandas`, `pdfplumber`, `openpyxl`. R packages are pinned in `renv.lock`; run from the repository root.
+Requirements: R 4.6.1 (the version recorded in `renv.lock`), Quarto, Python 3.11 with `duckdb`, `pandas`, `pdfplumber`, `openpyxl`. R packages are pinned in `renv.lock`; run from the repository root.
 
 ```bash
 Rscript -e "renv::restore()"                           # install the pinned R packages

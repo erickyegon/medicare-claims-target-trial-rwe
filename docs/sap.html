@@ -2209,7 +2209,7 @@ vertical-align: -.125em;
 </header>
 
 
-<p><strong>Methods demonstration on CMS synthetic Medicare claims. Estimates are illustrative; they are not treatment effects and are not inferential.</strong> This plan restates the protocol (<code>docs/protocol.md</code>, v0.4) as executable specifications and records every choice the protocol left open. Where this plan and an amendment differ, the amendment (<code>docs/amendments.md</code>) governs. Dataset version 4ac952d194.</p>
+<p><strong>Methods demonstration on CMS synthetic Medicare claims. Estimates are illustrative; they are not treatment effects and are not inferential.</strong> This plan restates the protocol (<code>docs/protocol.md</code>, v0.4) as executable specifications and records every choice the protocol left open. Where this plan and an amendment differ, the amendment (<code>docs/amendments.md</code>) governs. Dataset version 2888df05c7.</p>
 <section id="objectives-and-estimands" class="level2">
 <h2 class="anchored" data-anchor-id="objectives-and-estimands">1. Objectives and estimands</h2>
 <table class="caption-top table">
@@ -2256,7 +2256,7 @@ vertical-align: -.125em;
 <ul>
 <li><strong>Source:</strong> CMS Synthetic Medicare Enrollment, FFS Claims and PDE files (RIF format), loaded into DuckDB with every field first read as text (<code>R/01_ingest.R</code>; typing check on every converted column).</li>
 <li><strong>Population:</strong> one episode per beneficiary, the first fill of a study drug on or after 2016-03-01 that meets every criterion in protocol Section 5, in this order: new user (no antihypertensive fill, days -365 to -1); age 65 or older; continuous Part A, B and D from the month of day -365 through the index month; hypertension diagnosis (I10-I16) in days -365 to 0 (A-009); not both study drugs on the index date; no other antihypertensive class on the index date (A-010); no hospice claim in days -365 to -1; no inpatient stay overlapping the index date.</li>
-<li><strong>Analysis set:</strong> everyone in that cohort with at least one day of follow-up. The attrition table (T1) is produced by <code>R/06_cohort.R</code>, re-derived independently in pandas (<code>qc/python_crosscheck.py</code>) and in SAS (<code>sas/cohort_qc.sas</code>, run manually).</li>
+<li><strong>Analysis set:</strong> everyone in that cohort with at least one day of follow-up. The attrition table (T1) is produced by <code>R/06_cohort.R</code>, re-derived independently in pandas (<code>qc/python_crosscheck.py</code>) and in SAS (<code>sas/cohort_qc.sas</code>, run in SAS OnDemand on 2026-10-21: all attrition and baseline rows match R; <code>qc/sas_reconciliation.md</code>).</li>
 </ul>
 </section>
 <section id="exposure-outcomes-and-follow-up" class="level2">

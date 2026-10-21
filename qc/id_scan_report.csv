@@ -21,6 +21,7 @@ qc/analysis/figs/cumulative_incidence.png,binary (not text-scanned),,
 qc/analysis/figs/love_plot.png,binary (not text-scanned),,
 qc/analysis/figs/ps_distribution.png,binary (not text-scanned),,
 qc/id_leak_scan.py,column name mentioned in code or text,"BENE_ID,CLM_ID,PDE_ID",
+qc/id_scan_report.csv,ABSOLUTE PATH,,C:/Users/keyeg/OneDrive/Documents/linkei
 qc/id_scan_report.csv,column name as a cell value in a data file (metadata),"BENE_ID,CLM_ID,PDE_ID",
 qc/narrative_audit.py,column name mentioned in code or text,"BENE_ID,CLM_ID",
 qc/profile_fields.csv,column name as a cell value in a data file (metadata),"BENE_ID,CLM_ID,PDE_ID",

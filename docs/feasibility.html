@@ -2210,7 +2210,7 @@ vertical-align: -.125em;
 </header>
 
 
-<p><strong>Methods demonstration on synthetic data. Nothing here is a treatment effect.</strong> Every number below is read from the aggregate outputs of the pipeline (<code>qc/</code>); cells below 11 are flagged. Dataset version 4ac952d194. The study question changed twice during feasibility work; the history is in the study report and in <code>docs/amendments.md</code> (A-001 to A-013).</p>
+<p><strong>Methods demonstration on synthetic data. Nothing here is a treatment effect.</strong> Every number below is read from the aggregate outputs of the pipeline (<code>qc/</code>); cells below 11 are flagged. Dataset version 2888df05c7. The study question changed twice during feasibility work; the history is in the study report and in <code>docs/amendments.md</code> (A-001 to A-013).</p>
 <section id="t2.-what-the-data-can-and-cannot-support" class="level2">
 <h2 class="anchored" data-anchor-id="t2.-what-the-data-can-and-cannot-support">T2. What the data can and cannot support</h2>
 <div class="cell">
@@ -2428,7 +2428,7 @@ vertical-align: -.125em;
 </table>
 </div>
 </div>
-<p>Independent checks: a from-scratch pandas derivation (<code>qc/python_crosscheck.py</code>: attrition, arm sizes, ITT end dates and 365-day events) and the SAS program (<code>sas/cohort_qc.sas</code>, <strong>run manually in SAS OnDemand</strong>; see the README).</p>
+<p>Independent checks: a from-scratch pandas derivation (<code>qc/python_crosscheck.py</code>: attrition, arm sizes, ITT end dates and 365-day events) and the SAS program (<code>sas/cohort_qc.sas</code>, run in SAS OnDemand on 2026-10-21: all attrition and baseline rows match R; see <code>qc/sas_reconciliation.md</code>).</p>
 <p>Python agrees with R on 11 of 11 attrition steps and on 2 of 2 arms for follow-up and events.</p>
 <section id="sensitivity-cohorts-and-informational-counts" class="level3">
 <h3 class="anchored" data-anchor-id="sensitivity-cohorts-and-informational-counts">Sensitivity cohorts and informational counts</h3>
@@ -2690,7 +2690,7 @@ vertical-align: -.125em;
 </table>
 </div>
 </div>
-<p>Go rule for the analysis phase (each arm at least 200 people and at least 40 hospitalizations within 365 days): met in both arms (ACEI 433 people / 78 hospitalizations; THIAZIDE 357 people / 60 hospitalizations).</p>
+<p>Go rule for the analysis phase (each arm at least 200 people and at least 40 hospitalizations within 365 days): met in both arms (ACE inhibitor 433 people / 78 hospitalizations; thiazide 357 people / 60 hospitalizations).</p>
 </section>
 <section id="time-to-add-on-switch-and-discontinuation-descriptive" class="level2">
 <h2 class="anchored" data-anchor-id="time-to-add-on-switch-and-discontinuation-descriptive">Time to add-on, switch and discontinuation (descriptive)</h2>

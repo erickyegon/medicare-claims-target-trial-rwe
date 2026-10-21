@@ -55,14 +55,14 @@ The first move (influenza to bronchitis) was made at the end of the profiling ph
 kt(att %>% transmute(Step = step, Criterion = description, Episodes = n_episodes, Persons = n_persons, `Persons removed` = persons_removed))
 ```
 
-The final cohort has `r fmt(att$n_persons[att$step == 10])` people: `r paste(arms$arm, fmt(arms$n), collapse = " and ")`. The hypertension-diagnosis requirement removed `r fmt(att$persons_removed[att$step == 5])` people.
-The attrition table was re-derived independently in pandas (identical at every step) and in SAS (**to be run manually in SAS OnDemand**; see the README).
+The final cohort has `r fmt(att$n_persons[att$step == 10])` people: `r paste(arm_lab(arms$arm), fmt(arms$n), collapse = " and ")`. The hypertension-diagnosis requirement removed `r fmt(att$persons_removed[att$step == 5])` people.
+The attrition table was re-derived independently in pandas (identical at every step) and in SAS (run in SAS OnDemand on 2026-10-21: all 11 attrition rows and all 10 baseline-count rows match the R output; see `qc/sas_reconciliation.md`).
 
 ### Balance
 
 Before weighting the largest absolute standardized mean difference was `r sprintf("%.2f", max(abs(bal$smd_unweighted)))`; after IPTW it was `r sprintf("%.2f", max(abs(bal$smd_weighted)))`
 (target below 0.10; `r sum(abs(bal$smd_weighted) >= 0.1)` of `r nrow(bal)` covariate columns at or above 0.10). The propensity score c-statistic was `r sprintf("%.2f", ps$ps_c_statistic[1])`;
-effective sample sizes after weighting were `r paste(ps$arm, sprintf("%.0f", ps$effective_n), collapse = " and ")`, and `r sum(ps$n_truncated)` weights were truncated.
+effective sample sizes after weighting were `r paste(arm_lab(ps$arm), sprintf("%.0f", ps$effective_n), collapse = " and ")`, and `r sum(ps$n_truncated)` weights were truncated.
 
 ```{r f2, out.width = "70%"}
 knitr::include_graphics("../output/tfl/F2.png")
@@ -70,11 +70,11 @@ knitr::include_graphics("../output/tfl/F2.png")
 
 ### Primary and secondary outcomes
 
-Crude hospitalization events within 365 days: `r paste(pc$arm, pc$hosp_365_events_unweighted, collapse = " and ")` (`r paste(pc$arm, pc$n, sep = ": ", collapse = "; ")` people).
+Crude hospitalization events within 365 days: `r paste(arm_lab(pc$arm), pc$hosp_365_events_unweighted, collapse = " and ")` (`r paste(arm_lab(pc$arm), pc$n, sep = ": ", collapse = "; ")` people).
 
 ```{r t5}
 w <- pr %>% pivot_wider(names_from = quantity, values_from = c(estimate, lo, hi)) %>% arrange(desc(method), desc(horizon))
-kt(w %>% transmute(Method = method, Horizon = paste(horizon, "days"), `ACEI risk %` = ci(estimate_risk_acei, lo_risk_acei, hi_risk_acei), `Thiazide risk %` = ci(estimate_risk_thiazide, lo_risk_thiazide, hi_risk_thiazide),
+kt(w %>% transmute(Method = method, Horizon = paste(horizon, "days"), `ACE inhibitor risk %` = ci(estimate_risk_acei, lo_risk_acei, hi_risk_acei), `Thiazide risk %` = ci(estimate_risk_thiazide, lo_risk_thiazide, hi_risk_thiazide),
                    `Risk difference, points` = ci(estimate_rd, lo_rd, hi_rd), `Risk ratio` = ci(estimate_rr, lo_rr, hi_rr, 1, 2)))
 ```
 
@@ -82,7 +82,7 @@ In the weighted Kaplan-Meier analysis the 365-day risk was `r sprintf("%.1f", 10
 a risk difference of `r ci(p(km, 365, "rd"), p(km, 365, "rd", "lo"), p(km, 365, "rd", "hi"))` percentage points and a risk ratio of `r ci(p(km, 365, "rr"), p(km, 365, "rr", "lo"), p(km, 365, "rr", "hi"), 1, 2)`.
 `r if (all_include(p(km, 365, "rd", "lo"), p(km, 365, "rd", "hi"), 0)) "The interval for the risk difference includes zero." else "The interval for the risk difference excludes zero."`
 The weighted pooled logistic model gave a 365-day risk ratio of `r sprintf("%.2f", p("weighted pooled logistic", 365, "rr"))`. The E-value for the point estimate is `r sprintf("%.2f", ev$value[1])` and `r sprintf("%.2f", ev$value[2])` for the confidence limit.
-For the secondary 30-day outcome the risk difference was `r ci(p(km, 30, "rd"), p(km, 30, "rd", "lo"), p(km, 30, "rd", "hi"))` percentage points (weighted Kaplan-Meier); the 30-day analysis rests on few events (`r paste(ce$arm, ce$hosp_30, collapse = " and ")`), so it is unstable.
+For the secondary 30-day outcome the risk difference was `r ci(p(km, 30, "rd"), p(km, 30, "rd", "lo"), p(km, 30, "rd", "hi"))` percentage points (weighted Kaplan-Meier); the 30-day analysis rests on few events (`r paste(arm_lab(ce$arm), ce$hosp_30, collapse = " and ")`), so it is unstable.
 
 ```{r f4, out.width = "80%"}
 knitr::include_graphics("../output/tfl/F4.png")
@@ -91,7 +91,7 @@ knitr::include_graphics("../output/tfl/F4.png")
 ### Sensitivity analyses
 
 ```{r t6}
-kt(se %>% transmute(Analysis = trunc_chr(analysis, 80), N = n, `ACEI risk %` = sprintf("%.1f", 100 * km365_risk_acei), `Thiazide risk %` = sprintf("%.1f", 100 * km365_risk_thiazide),
+kt(se %>% transmute(Analysis = trunc_chr(analysis, 80), N = n, `ACE inhibitor risk %` = sprintf("%.1f", 100 * km365_risk_acei), `Thiazide risk %` = sprintf("%.1f", 100 * km365_risk_thiazide),
                     `RD, points` = ci(km365_rd, km365_rd_lo, km365_rd_hi), `RR` = ci(km365_rr, km365_rr_lo, km365_rr_hi, 1, 2)))
 sens_only <- se[-1, ]
 ```
@@ -107,13 +107,13 @@ The IPCW analysis for loss of Part A/B/D entitlement used `r ipd$value[1]` censo
 kt(nc %>% transmute(Arm = arm, N = n, `Fracture events` = fracture_365_itt, `Person-years` = py_fracture))
 ```
 
-The negative control (hip or femur fracture) is reported descriptively only: `r paste(nc$arm, nc$fracture_365_itt, collapse = " and ")` events, too few to interpret (counts below 11 are not interpretable).
+The negative control (hip or femur fracture) is reported descriptively only: `r paste(arm_lab(nc$arm), nc$fracture_365_itt, collapse = " and ")` events, too few to interpret (counts below 11 are not interpretable).
 
 ```{r t4}
 kt(tc %>% transmute(Arm = arm, N = n, `Add-on` = n_addon, Switch = n_switch, Discontinued = n_discontinued, `Index days supply (median)` = idx_days_supply_median))
 ```
 
-Add-on or switch to the other study drug was rare (`r paste(tc$arm, tc$n_addon + tc$n_switch, collapse = " and ")` people). Most people have a single 90-day fill followed by a second fill about a year later
+Add-on or switch to the other study drug was rare (`r paste(arm_lab(tc$arm), tc$n_addon + tc$n_switch, collapse = " and ")` people). Most people have a single 90-day fill followed by a second fill about a year later
 (`r fmt(rp$with_second_fill)` of `r fmt(rp$cohort_n)` have a second fill, median `r rp$median_days_to_second_fill` days), which is why discontinuation does not censor any analysis.
 
 ## 4. Limitations and what not to conclude
@@ -127,5 +127,5 @@ Add-on or switch to the other study drug was rare (`r paste(tc$arm, tc$n_addon +
 
 ## 5. Reproducibility
 
-Programs in `R/`, SQL in `sql/`, code lists in `codelists/`, tests in `tests/`, continuous integration in `.github/workflows/ci.yml`. SAS reconciliation (`sas/cohort_qc.sas`) is run manually in SAS OnDemand.
+Programs in `R/`, SQL in `sql/`, code lists in `codelists/`, tests in `tests/`, continuous integration in `.github/workflows/ci.yml`. SAS reconciliation (`sas/cohort_qc.sas`) was run in SAS OnDemand on 2026-10-21 with all attrition and baseline rows matching R (`qc/sas_reconciliation.md`); it is not part of CI.
 Every table, figure and listing in `output/tfl/` names its generating program and the dataset version.

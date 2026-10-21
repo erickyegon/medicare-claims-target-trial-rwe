@@ -51,7 +51,7 @@ kt(a %>% transmute(step, description, episodes = n_episodes, persons = n_persons
 ```
 
 Independent checks: a from-scratch pandas derivation (`qc/python_crosscheck.py`: attrition, arm sizes, ITT end dates and 365-day events) and the SAS program
-(`sas/cohort_qc.sas`, **run manually in SAS OnDemand**; see the README).
+(`sas/cohort_qc.sas`, run in SAS OnDemand on 2026-10-21: all attrition and baseline rows match R; see `qc/sas_reconciliation.md`).
 
 ```{r xcheck}
 x <- S("qc", "cohort", "python_vs_r_attrition.csv"); xf <- S("qc", "cohort", "python_vs_r_followup.csv")
@@ -88,7 +88,7 @@ gr <- ce %>% transmute(arm, people = n, hospitalizations_365 = hosp_365_itt, mee
 ```
 
 Go rule for the analysis phase (each arm at least 200 people and at least 40 hospitalizations within 365 days): `r if (all(gr$meets)) "met in both arms" else "NOT met"`
-(`r paste(gr$arm, gr$people, "people /", gr$hospitalizations_365, "hospitalizations", collapse = "; ")`).
+(`r paste(arm_lab(gr$arm), gr$people, "people /", gr$hospitalizations_365, "hospitalizations", collapse = "; ")`).
 
 ## Time to add-on, switch and discontinuation (descriptive)
 

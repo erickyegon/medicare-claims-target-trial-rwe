@@ -1,4 +1,4 @@
-Covariate,ACEI (unweighted),Thiazide (unweighted),ACEI (weighted),Thiazide (weighted),SMD before weighting,SMD after weighting
+Covariate,ACE inhibitor (unweighted),Thiazide (unweighted),ACE inhibitor (weighted),Thiazide (weighted),SMD before weighting,SMD after weighting
 N (weighted N),433,357,430.5,351.3,,
 age,73.665,73.765,73.628,73.672,-0.010,-0.004
 sexmale,0.517,0.521,0.529,0.527,-0.007,0.004

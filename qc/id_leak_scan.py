@@ -3,8 +3,9 @@ Builds the sets of real BENE_ID, CLM_ID and PDE_ID values from data/raw (never w
 (`git ls-files`, so run `git add -A` first) for
   (a) ID VALUES: any token equal to a real BENE_ID / CLM_ID / PDE_ID (with or without a leading minus sign);
   (b) ID COLUMNS: a data file (csv/tsv/txt/json) whose header row has a column named BENE_ID, CLM_ID or PDE_ID;
+(d) ABSOLUTE PATHS: any machine-specific path (C:/, C:\, /Users/, /home/<name>/) in a tracked text file;
 and reports separately (c) harmless mentions of the column NAMES inside code and documents, or as a cell value in a metadata file.
-Run from the project root:  python qc/id_leak_scan.py      (writes qc/id_scan_report.csv; exit code 1 if (a) or (b) finds anything)."""
+Run from the project root:  python qc/id_leak_scan.py      (writes qc/id_scan_report.csv; exit code 1 if (a), (b) or (d) finds anything)."""
 import pathlib, re, subprocess, sys
 import pandas as pd
 root = pathlib.Path(__file__).resolve().parents[1]
@@ -32,6 +33,8 @@ tracked = [t for t in tracked if t]
 BINARY = {".png", ".jpg", ".gif", ".rds", ".rda", ".duckdb", ".pdf", ".xlsx", ".zip", ".ico"}
 DATA = {".csv", ".tsv", ".txt", ".json", ".lock"}
 tok = re.compile(r"-?\d{6,}")
+abs_path = re.compile(r"(?<![A-Za-z0-9_])(?:[A-Za-z]:[\/]|/Users/|/home/(?!&sysuserid)[A-Za-z0-9_.-]+/)")   # machine-specific absolute paths (C:/, C:\, /Users/, /home/<name>/)
+hits_abs = []
 rows, hits_values, hits_cols = [], [], []
 for rel in tracked:
     p = root / rel; ext = p.suffix.lower()
@@ -45,6 +48,10 @@ for rel in tracked:
             if t in s or t.lstrip("-") in s: found.setdefault(k, set()).add(t)
     if found:
         hits_values.append(rel); rows.append((rel, "ID VALUE FOUND", ",".join(found), "; ".join(f"{k}:{len(v)}" for k, v in found.items())))
+    # (d) absolute paths of the author's machine
+    if abs_path.search(text) and rel != "qc/id_leak_scan.py":
+        ex = abs_path.search(text); hits_abs.append(rel)
+        rows.append((rel, "ABSOLUTE PATH", "", text[ex.start():ex.start() + 40].splitlines()[0]))
     # (b) identifier columns in data files
     first = text.split("\n", 1)[0]
     cols = [c.strip().strip('"').upper() for c in re.split(r"[|,\t]", first)]
@@ -63,4 +70,4 @@ print(out.groupby("finding").size().to_string())
 print("\nID VALUE hits:", hits_values or "none"); print("ID COLUMN hits (data files):", hits_cols or "none")
 meta = out[out.finding.str.startswith("column name as a cell value")]
 if len(meta): print("\nmetadata files that list field names as values (not identifiers):", meta.file.tolist())
-sys.exit(1 if (hits_values or hits_cols) else 0)
+sys.exit(1 if (hits_values or hits_cols or hits_abs) else 0)

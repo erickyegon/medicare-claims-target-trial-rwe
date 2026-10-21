@@ -40,11 +40,11 @@ save_table("T2", "Feasibility: data facts, nulls and the hypertension cohort", t
 # ---- T3 baseline by arm with SMDs ------------------------------------------------------------------------------------------
 bal <- S("qc", "analysis", "balance_smd.csv"); pc <- S("qc", "analysis", "primary_counts.csv")
 f3 <- function(x) sprintf("%.3f", x)
-t3 <- bal %>% transmute(Covariate = covariate, `ACEI (unweighted)` = f3(mean_acei), `Thiazide (unweighted)` = f3(mean_thiazide), `SMD before weighting` = f3(smd_unweighted),
-                        `ACEI (weighted)` = f3(wmean_acei), `Thiazide (weighted)` = f3(wmean_thiazide), `SMD after weighting` = f3(smd_weighted))
+t3 <- bal %>% transmute(Covariate = covariate, `ACE inhibitor (unweighted)` = f3(mean_acei), `Thiazide (unweighted)` = f3(mean_thiazide), `SMD before weighting` = f3(smd_unweighted),
+                        `ACE inhibitor (weighted)` = f3(wmean_acei), `Thiazide (weighted)` = f3(wmean_thiazide), `SMD after weighting` = f3(smd_weighted))
 cm <- function(x) formatC(x, format = "f", digits = 1, big.mark = ",")
-t3 <- bind_rows(tibble::tibble(Covariate = "N (weighted N)", `ACEI (unweighted)` = formatC(pc$n[pc$arm == "ACEI"], format = "d", big.mark = ","), `Thiazide (unweighted)` = formatC(pc$n[pc$arm == "THIAZIDE"], format = "d", big.mark = ","),
-                               `ACEI (weighted)` = cm(pc$weighted_n[pc$arm == "ACEI"]), `Thiazide (weighted)` = cm(pc$weighted_n[pc$arm == "THIAZIDE"])), t3)
+t3 <- bind_rows(tibble::tibble(Covariate = "N (weighted N)", `ACE inhibitor (unweighted)` = formatC(pc$n[pc$arm == "ACEI"], format = "d", big.mark = ","), `Thiazide (unweighted)` = formatC(pc$n[pc$arm == "THIAZIDE"], format = "d", big.mark = ","),
+                               `ACE inhibitor (weighted)` = cm(pc$weighted_n[pc$arm == "ACEI"]), `Thiazide (weighted)` = cm(pc$weighted_n[pc$arm == "THIAZIDE"])), t3)
 save_table("T3", "Baseline characteristics by arm before and after IPTW, with standardized mean differences", t3, "R/09_analysis.R", "qc/analysis/balance_smd.csv",
            note = "Means of model-matrix columns: proportions for indicators, means for age, visit days and counts. Heart failure and dementia are too rare for the propensity model (see A-011).")
 
@@ -69,7 +69,7 @@ save_table("T5", "All-cause hospitalization, intention-to-treat: 365-day (primar
 
 # ---- T6 sensitivity -----------------------------------------------------------------------------------------------------------------
 se <- S("qc", "analysis", "sensitivity_results.csv")
-t6 <- se %>% transmute(Analysis = analysis, N = n, `Events (ACEI / thiazide)` = paste(events_acei, "/", events_thiazide), `ACEI risk, %` = pct(km365_risk_acei), `Thiazide risk, %` = pct(km365_risk_thiazide),
+t6 <- se %>% transmute(Analysis = analysis, N = n, `Events (ACE inhibitor / thiazide)` = paste(events_acei, "/", events_thiazide), `ACE inhibitor risk, %` = pct(km365_risk_acei), `Thiazide risk, %` = pct(km365_risk_thiazide),
                        `RD, points (95% CI)` = ci_str(km365_rd, km365_rd_lo, km365_rd_hi), `RR (95% CI)` = ci_str(km365_rr, km365_rr_lo, km365_rr_hi, 1, 2), Note = note)
 save_table("T6", "Sensitivity analyses: 365-day hospitalization (weighted Kaplan-Meier)", t6, "R/09_analysis.R", "qc/analysis/sensitivity_results.csv")
 

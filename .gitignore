@@ -1,4 +1,5 @@
-data/
+data/*
+!data/urls.txt
 *.duckdb
 renv/library
 __pycache__/

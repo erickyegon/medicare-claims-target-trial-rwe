@@ -2,7 +2,7 @@ analysis,n,n_acei,n_thiazide,events_acei,events_thiazide,km365_risk_acei,km365_r
 "Primary: IPTW, ITT, follow-up to loss of A/B/D, end of data 2023-03-31",790,433,357,78,60,0.2145,0.177,0.0375,-0.0353,0.0938,1.212,0.84,1.6141,0.0375,1.2121,
 Unadjusted (no weights),790,433,357,78,60,0.1965,0.1818,0.0147,-0.0441,0.0664,1.0809,0.7889,1.4257,0.0147,1.0809,reference only
 Untruncated weights,790,433,357,78,60,0.2146,0.1769,0.0377,-0.0304,0.1096,1.2128,0.8351,1.6968,0.0376,1.2127,
-"PS matching 1:1, caliper 0.2 SD of the logit (matched sample, ATT)",790,433,357,78,60,0.2085,0.1746,0.0339,-0.0452,0.0922,1.1944,0.7874,1.6033,0.0339,1.1943,pairs formed in each bootstrap resample; 276 matched pairs in the full sample
+"PS matching 1:1, caliper 0.2 SD of the logit (matched sample, ATT)",552,276,276,53,45,0.2085,0.1746,0.0339,-0.0452,0.0922,1.1944,0.7874,1.6033,0.0339,1.1943,pairs formed in each bootstrap resample; 276 matched pairs (N = 552) in the full sample; N and events are for the matched sample
 "Keep other-class co-starters, indicator covariate (A-010)",1101,595,506,95,88,0.1781,0.1939,-0.0158,-0.0687,0.0349,0.9183,0.6978,1.2123,-0.0157,0.9192,
 Exclude any baseline fill with no RxNorm record (A-010),669,364,305,64,50,0.219,0.1722,0.0468,-0.0287,0.1166,1.2719,0.8552,1.8392,0.0466,1.2702,
 Hypertension diagnosis only in days -365 to -1 (A-009),617,332,285,63,57,0.2238,0.2189,0.005,-0.0751,0.0768,1.0227,0.7121,1.4398,0.0049,1.0223,

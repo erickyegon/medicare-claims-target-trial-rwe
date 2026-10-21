@@ -8,8 +8,13 @@ digest_string <- function(x) { f <- tempfile(); writeLines(x, f); unname(tools::
 
 build_manifest <- function() {
   files <- c(list.files(file.path(PROJ_ROOT, "data", "raw"), recursive = TRUE, full.names = TRUE), list.files(file.path(PROJ_ROOT, "codelists"), pattern = "\\.csv$", full.names = TRUE))
-  m <- tibble::tibble(file = sub(paste0(PROJ_ROOT, "/"), "", normalizePath(files, winslash = "/"), fixed = TRUE), bytes = file.size(files), md5 = unname(tools::md5sum(files)))
-  ver <- substr(digest_string(paste(m$file, m$md5, collapse = "|")), 1, 10)
+  root <- paste0(normalizePath(PROJ_ROOT, winslash = "/", mustWork = TRUE), "/")
+  full <- normalizePath(files, winslash = "/", mustWork = TRUE)
+  stopifnot(all(startsWith(full, root)))
+  rel <- substring(full, nchar(root) + 1)                      # paths relative to the project root, never absolute (the manifest is committed)
+  m <- tibble::tibble(file = rel, bytes = file.size(files), md5 = unname(tools::md5sum(files))) %>% arrange(file)
+  stopifnot(!any(grepl("^([A-Za-z]:|/)", m$file)))
+  ver <- substr(digest_string(paste(sort(m$md5), collapse = "|")), 1, 10)   # version = hash of file CONTENT only (not paths), so it is identical on any machine
   write_csv(m, file.path(PROJ_ROOT, "qc", "dataset_manifest.csv")); writeLines(ver, file.path(PROJ_ROOT, "qc", "dataset_version.txt"))
   list(manifest = m, version = ver)
 }

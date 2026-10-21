@@ -33,7 +33,7 @@ Where this plan and an amendment differ, the amendment (`docs/amendments.md`) go
 
 - **Source:** CMS Synthetic Medicare Enrollment, FFS Claims and PDE files (RIF format), loaded into DuckDB with every field first read as text (`R/01_ingest.R`; typing check on every converted column).
 - **Population:** one episode per beneficiary, the first fill of a study drug on or after 2016-03-01 that meets every criterion in protocol Section 5, in this order: new user (no antihypertensive fill, days -365 to -1); age 65 or older; continuous Part A, B and D from the month of day -365 through the index month; hypertension diagnosis (I10-I16) in days -365 to 0 (A-009); not both study drugs on the index date; no other antihypertensive class on the index date (A-010); no hospice claim in days -365 to -1; no inpatient stay overlapping the index date.
-- **Analysis set:** everyone in that cohort with at least one day of follow-up. The attrition table (T1) is produced by `R/06_cohort.R`, re-derived independently in pandas (`qc/python_crosscheck.py`) and in SAS (`sas/cohort_qc.sas`, run manually).
+- **Analysis set:** everyone in that cohort with at least one day of follow-up. The attrition table (T1) is produced by `R/06_cohort.R`, re-derived independently in pandas (`qc/python_crosscheck.py`) and in SAS (`sas/cohort_qc.sas`, run in SAS OnDemand on 2026-10-21: all attrition and baseline rows match R; `qc/sas_reconciliation.md`).
 
 ## 3. Exposure, outcomes and follow-up
 

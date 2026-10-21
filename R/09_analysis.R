@@ -136,7 +136,10 @@ run_sens <- function(label, cohort, end_col = "itt_end", type = "iptw", covar_ad
   p <- prepare_ps_data(d0, c(PS_COVARIATES, covar_add)); d <- p$data
   bts <- bootstrap(d, make_estimator(type, p$covars, trunc), B = B_REPS, seed = SEED)
   message(sprintf("  %-70s n=%d (%.1f min)", label, nrow(d), as.numeric(difftime(Sys.time(), t0, units = "mins"))))
-  if (type == "match") { pr <- ps_match(d$arm_acei, fit_ps(d, p$covars)$ps, 0.2, seed = 1); note <- sprintf("%s; %d matched pairs in the full sample", note, nrow(pr)) }
+  if (type == "match") {   # report the MATCHED sample (pairs x 2) and its event counts, because that is the sample the estimates come from
+    pr <- ps_match(d$arm_acei, fit_ps(d, p$covars)$ps, 0.2, seed = 1); d <- d[c(pr[, 1], pr[, 2]), ]
+    note <- sprintf("%s; %d matched pairs (N = %d) in the full sample; N and events are for the matched sample", note, nrow(pr), nrow(d))
+  }
   sens_row(label, bts, d, note, if (type == "ipcw") "as_event" else "event")
 }
 `%||%` <- function(a, b) if (is.null(a)) b else a

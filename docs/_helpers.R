@@ -11,3 +11,6 @@ trunc_chr <- function(x, n) ifelse(nchar(x) > n, paste0(substr(x, 1, n - 1), "..
 # narrative helper: states whether every interval in a set includes a value, so prose can never contradict the table
 all_include <- function(lo, hi, v = 1) all(lo <= v & hi >= v)
 n_excluding <- function(lo, hi, v = 1) sum(!(lo <= v & hi >= v))
+
+# Arm labels for report prose (the data keep the codes ACEI / THIAZIDE)
+arm_lab <- function(x) ifelse(x == "ACEI", "ACE inhibitor", ifelse(x == "THIAZIDE", "thiazide", x))

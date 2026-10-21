@@ -15,10 +15,9 @@ Imports:
     survival,
     ggplot2,
     knitr,
-    rmarkdown
-Suggests:
+    rmarkdown,
+    jsonlite,
+    targets,
     testthat,
     WeightIt,
-    cobalt,
-    targets,
-    tarchetypes
+    cobalt
