@@ -33,21 +33,21 @@ for (n in names(ip)) out(ip[[n]], paste0("profile_ip_", n, ".csv"))
 
 # ---- outpatient ----
 op <- list(
-  rev_hcpcs = q("SELECT REV_CNTR, HCPCS_CD, count(*) n_rows, count(DISTINCT CLM_ID) n_claims FROM outpatient GROUP BY ALL ORDER BY 3 DESC LIMIT 40"),
+  rev_hcpcs = q("SELECT REV_CNTR, HCPCS_CD, count(*) n_rows, count(DISTINCT CLM_ID) n_claims FROM outpatient GROUP BY ALL ORDER BY 3 DESC, 1, 2 LIMIT 40"),
   rev_vs_claim_class = q("SELECT REV_CNTR, CLM_SRVC_CLSFCTN_TYPE_CD, count(*) n FROM outpatient GROUP BY ALL ORDER BY 1,2"),
-  rev_per_claim = q("SELECT n_lines, n_0001, count(*) n_claims FROM (SELECT CLM_ID, count(*) n_lines, count(*) FILTER (WHERE REV_CNTR='0001') n_0001 FROM outpatient GROUP BY 1) GROUP BY ALL ORDER BY 1 LIMIT 15"),
-  telemed_hcpcs = q("SELECT HCPCS_CD, count(*) n FROM outpatient WHERE REV_CNTR IN ('0780','0789') GROUP BY 1 ORDER BY 2 DESC LIMIT 15"),
+  rev_per_claim = q("SELECT n_lines, n_0001, count(*) n_claims FROM (SELECT CLM_ID, count(*) n_lines, count(*) FILTER (WHERE REV_CNTR='0001') n_0001 FROM outpatient GROUP BY 1) GROUP BY ALL ORDER BY 1, 2 LIMIT 15"),
+  telemed_hcpcs = q("SELECT HCPCS_CD, count(*) n FROM outpatient WHERE REV_CNTR IN ('0780','0789') GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT 15"),
   # which claims carry bronchitis, by file (this is what 'index setting' would distinguish)
   bronch_by_file = q("SELECT src, count(DISTINCT CLM_ID) claims, count(DISTINCT BENE_ID) benes FROM (
       SELECT 'carrier' src, CLM_ID, BENE_ID FROM carrier WHERE PRNCPAL_DGNS_CD LIKE 'J20%' OR ICD_DGNS_CD1 LIKE 'J20%'
-      UNION ALL SELECT 'outpatient', CLM_ID, BENE_ID FROM outpatient WHERE PRNCPAL_DGNS_CD LIKE 'J20%' OR ICD_DGNS_CD1 LIKE 'J20%') GROUP BY 1"),
-  hcpcs_top_outpatient = q("SELECT HCPCS_CD, count(*) n FROM outpatient GROUP BY 1 ORDER BY 2 DESC LIMIT 12"),
-  hcpcs_top_carrier = q("SELECT HCPCS_CD, count(*) n FROM carrier GROUP BY 1 ORDER BY 2 DESC LIMIT 12"),
-  carrier_pos = q("SELECT LINE_PLACE_OF_SRVC_CD pos, LINE_CMS_TYPE_SRVC_CD type_srvc, count(*) n FROM carrier GROUP BY ALL ORDER BY 3 DESC LIMIT 12"))
+      UNION ALL SELECT 'outpatient', CLM_ID, BENE_ID FROM outpatient WHERE PRNCPAL_DGNS_CD LIKE 'J20%' OR ICD_DGNS_CD1 LIKE 'J20%') GROUP BY 1 ORDER BY 1"),
+  hcpcs_top_outpatient = q("SELECT HCPCS_CD, count(*) n FROM outpatient GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT 12"),
+  hcpcs_top_carrier = q("SELECT HCPCS_CD, count(*) n FROM carrier GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT 12"),
+  carrier_pos = q("SELECT LINE_PLACE_OF_SRVC_CD pos, LINE_CMS_TYPE_SRVC_CD type_srvc, count(*) n FROM carrier GROUP BY ALL ORDER BY 3 DESC, 1, 2 LIMIT 12"))
 # do bronchitis diagnoses appear in both files for the same person/day? (setting overlap)
 op$bronch_overlap <- q("WITH b AS (SELECT DISTINCT 'carrier' src, BENE_ID, CLM_FROM_DT d FROM carrier WHERE PRNCPAL_DGNS_CD LIKE 'J20%' OR ICD_DGNS_CD1 LIKE 'J20%'
    UNION SELECT 'outpatient', BENE_ID, CLM_FROM_DT FROM outpatient WHERE PRNCPAL_DGNS_CD LIKE 'J20%' OR ICD_DGNS_CD1 LIKE 'J20%')
-  SELECT n_src, count(*) n_bene_days FROM (SELECT BENE_ID, d, count(DISTINCT src) n_src FROM b GROUP BY 1,2) GROUP BY 1")
+  SELECT n_src, count(*) n_bene_days FROM (SELECT BENE_ID, d, count(DISTINCT src) n_src FROM b GROUP BY 1,2) GROUP BY 1 ORDER BY 1")
 # does setting relate to patient characteristics? first bronchitis claim per bene: setting vs age, sex, any prior-year hospitalization
 op$setting_vs_age <- q("WITH f AS (SELECT BENE_ID, src, d, row_number() OVER (PARTITION BY BENE_ID ORDER BY d, src) rn FROM (
     SELECT 'carrier' src, BENE_ID, CLM_FROM_DT d FROM carrier WHERE PRNCPAL_DGNS_CD LIKE 'J20%' OR ICD_DGNS_CD1 LIKE 'J20%'
@@ -55,7 +55,7 @@ op$setting_vs_age <- q("WITH f AS (SELECT BENE_ID, src, d, row_number() OVER (PA
   SELECT src, count(*) n, round(avg(date_diff('year', b.BENE_BIRTH_DT, f.d)),1) mean_age,
     round(100*avg((b.SEX_IDENT_CD='2')::INT),1) pct_female,
     round(100*avg(EXISTS (SELECT 1 FROM inpatient i WHERE i.BENE_ID=f.BENE_ID AND i.CLM_ADMSN_DT BETWEEN f.d - 365 AND f.d - 1)::INT),1) pct_prior_year_admission
-  FROM f JOIN (SELECT BENE_ID, min(BENE_BIRTH_DT) BENE_BIRTH_DT, any_value(SEX_IDENT_CD) SEX_IDENT_CD FROM bene GROUP BY 1) b USING (BENE_ID) WHERE rn=1 GROUP BY 1")
+  FROM f JOIN (SELECT BENE_ID, min(BENE_BIRTH_DT) BENE_BIRTH_DT, any_value(SEX_IDENT_CD) SEX_IDENT_CD FROM bene GROUP BY 1) b USING (BENE_ID) WHERE rn=1 GROUP BY 1 ORDER BY 1")
 for (n in names(op)) out(op[[n]], paste0("profile_op_", n, ".csv"))
 cat("IP\n"); for (n in names(ip)) { cat("\n--", n, "\n"); print(ip[[n]], row.names = FALSE) }
 cat("\nOP\n"); for (n in names(op)) { cat("\n--", n, "\n"); print(op[[n]], row.names = FALSE) }

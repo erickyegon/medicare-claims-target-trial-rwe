@@ -1,6 +1,6 @@
 cond,a_cls,b_cls,n_a,n_b,n_a_with_b,n_b_with_a,min_arm,a_name,b_name,overlap,flag_lt11
 Chronic Kidney Disease,A10AB,A10AC,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
-Chronic Kidney Disease,A10AC,A10AD,505,505,505,505,505,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
-Diabetes,A10AB,A10AD,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
+Chronic Kidney Disease,A10AB,A10AD,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
 Diabetes,A10AB,A10AC,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
-Hypertension,A10AB,A10AD,374,374,374,374,374,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
+Diabetes,A10AB,A10AD,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
+Hypertension,A10AB,A10AC,374,374,374,374,374,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE

@@ -1,72 +1,72 @@
 cond,a_cls,b_cls,n_a,n_b,n_a_with_b,n_b_with_a,min_arm,a_name,b_name,overlap,flag_lt11
 Chronic Kidney Disease,A10AB,A10AC,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
-Diabetes,A10AB,A10AD,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
+Chronic Kidney Disease,A10AB,A10AD,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
 Chronic Kidney Disease,A10AC,A10AD,505,505,505,505,505,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
 Diabetes,A10AB,A10AC,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
+Diabetes,A10AB,A10AD,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
 Diabetes,A10AC,A10AD,505,505,505,505,505,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
-Chronic Kidney Disease,A10AB,A10AD,505,505,505,505,505,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
-Diabetes,A10AE,A10AF,504,504,504,504,504,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
-Diabetes,A10AD,A10AE,505,504,504,504,504,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Diabetes,A10AC,A10AF,505,504,504,504,504,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
-Chronic Kidney Disease,A10AD,A10AF,505,504,504,504,504,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
+Chronic Kidney Disease,A10AB,A10AE,505,504,504,504,504,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Chronic Kidney Disease,A10AB,A10AF,505,504,504,504,504,"Insulins and analogues for injection, fast-acting",Insulins and analogues for inhalation,1,FALSE
+Chronic Kidney Disease,A10AC,A10AE,505,504,504,504,504,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Chronic Kidney Disease,A10AC,A10AF,505,504,504,504,504,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
+Chronic Kidney Disease,A10AD,A10AE,505,504,504,504,504,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Chronic Kidney Disease,A10AD,A10AF,505,504,504,504,504,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
+Chronic Kidney Disease,A10AE,A10AF,504,504,504,504,504,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
+Diabetes,A10AB,A10AE,505,504,504,504,504,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Diabetes,A10AB,A10AF,505,504,504,504,504,"Insulins and analogues for injection, fast-acting",Insulins and analogues for inhalation,1,FALSE
 Diabetes,A10AC,A10AE,505,504,504,504,504,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Diabetes,A10AC,A10AF,505,504,504,504,504,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
+Diabetes,A10AD,A10AE,505,504,504,504,504,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Diabetes,A10AD,A10AF,505,504,504,504,504,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
-Chronic Kidney Disease,A10AE,A10AF,504,504,504,504,504,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
-Chronic Kidney Disease,A10AC,A10AE,505,504,504,504,504,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Chronic Kidney Disease,A10AD,A10AE,505,504,504,504,504,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Chronic Kidney Disease,A10AB,A10AE,505,504,504,504,504,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Diabetes,A10AB,A10AE,505,504,504,504,504,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Chronic Kidney Disease,A10AC,A10AF,505,504,504,504,504,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
+Diabetes,A10AE,A10AF,504,504,504,504,504,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
+Hypertension,A10AB,A10AC,374,374,374,374,374,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
 Hypertension,A10AB,A10AD,374,374,374,374,374,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
 Hypertension,A10AC,A10AD,374,374,374,374,374,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
-Hypertension,A10AB,A10AC,374,374,374,374,374,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
-Hypertension,A10AC,A10AF,374,373,373,373,373,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
 Hypertension,A10AB,A10AE,374,373,373,373,373,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Hypertension,A10AB,A10AF,374,373,373,373,373,"Insulins and analogues for injection, fast-acting",Insulins and analogues for inhalation,1,FALSE
+Hypertension,A10AC,A10AE,374,373,373,373,373,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Hypertension,A10AC,A10AF,374,373,373,373,373,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
+Hypertension,A10AD,A10AE,374,373,373,373,373,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Hypertension,A10AD,A10AF,374,373,373,373,373,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
 Hypertension,A10AE,A10AF,373,373,373,373,373,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
-Hypertension,A10AC,A10AE,374,373,373,373,373,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Hypertension,A10AD,A10AE,374,373,373,373,373,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Anemia,A10AB,A10AC,342,342,342,342,342,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
 Anemia,A10AB,A10AD,342,342,342,342,342,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
 Anemia,A10AC,A10AD,342,342,342,342,342,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
-Anemia,A10AC,A10AE,342,341,341,341,341,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Anemia,A10AB,A10AF,342,341,341,341,341,"Insulins and analogues for injection, fast-acting",Insulins and analogues for inhalation,1,FALSE
-Anemia,A10AD,A10AF,342,341,341,341,341,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
-Anemia,A10AC,A10AF,342,341,341,341,341,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
 Anemia,A10AB,A10AE,342,341,341,341,341,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Anemia,A10AE,A10AF,341,341,341,341,341,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
+Anemia,A10AB,A10AF,342,341,341,341,341,"Insulins and analogues for injection, fast-acting",Insulins and analogues for inhalation,1,FALSE
+Anemia,A10AC,A10AE,342,341,341,341,341,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Anemia,A10AC,A10AF,342,341,341,341,341,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
 Anemia,A10AD,A10AE,342,341,341,341,341,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Anemia,A10AD,A10AF,342,341,341,341,341,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
+Anemia,A10AE,A10AF,341,341,341,341,341,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
+Ischemic Heart Disease,A10AB,A10AC,328,328,328,328,328,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
 Ischemic Heart Disease,A10AB,A10AD,328,328,328,328,328,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
 Ischemic Heart Disease,A10AC,A10AD,328,328,328,328,328,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
-Ischemic Heart Disease,A10AB,A10AC,328,328,328,328,328,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
 Ischemic Heart Disease,A10AB,A10AE,328,327,327,327,327,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Ischemic Heart Disease,A10AD,A10AE,328,327,327,327,327,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Ischemic Heart Disease,A10AC,A10AF,328,327,327,327,327,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
-Ischemic Heart Disease,A10AE,A10AF,327,327,327,327,327,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
-Ischemic Heart Disease,A10AC,A10AE,328,327,327,327,327,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Ischemic Heart Disease,A10AD,A10AF,328,327,327,327,327,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
 Ischemic Heart Disease,A10AB,A10AF,328,327,327,327,327,"Insulins and analogues for injection, fast-acting",Insulins and analogues for inhalation,1,FALSE
+Ischemic Heart Disease,A10AC,A10AE,328,327,327,327,327,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Ischemic Heart Disease,A10AC,A10AF,328,327,327,327,327,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
+Ischemic Heart Disease,A10AD,A10AE,328,327,327,327,327,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Ischemic Heart Disease,A10AD,A10AF,328,327,327,327,327,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
+Ischemic Heart Disease,A10AE,A10AF,327,327,327,327,327,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
 Diabetes,A10AB,A10BA,482,230,19,20,230,"Insulins and analogues for injection, fast-acting",Biguanides,0.09,FALSE
-Diabetes,A10AF,A10BA,481,230,19,20,230,Insulins and analogues for inhalation,Biguanides,0.09,FALSE
 Diabetes,A10AC,A10BA,482,230,19,20,230,"Insulins and analogues for injection, intermediate-acting",Biguanides,0.09,FALSE
 Diabetes,A10AD,A10BA,482,230,19,20,230,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Biguanides,0.09,FALSE
 Diabetes,A10AE,A10BA,481,230,19,20,230,"Insulins and analogues for injection, long-acting",Biguanides,0.09,FALSE
+Diabetes,A10AF,A10BA,481,230,19,20,230,Insulins and analogues for inhalation,Biguanides,0.09,FALSE
+Hyperlipidemia,A10AB,A10AC,218,218,218,218,218,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
+Hyperlipidemia,A10AB,A10AD,218,218,218,218,218,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
+Hyperlipidemia,A10AB,A10AE,218,218,218,218,218,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Hyperlipidemia,A10AB,A10AF,218,218,218,218,218,"Insulins and analogues for injection, fast-acting",Insulins and analogues for inhalation,1,FALSE
 Hyperlipidemia,A10AC,A10AD,218,218,218,218,218,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
-Hyperlipidemia,A10AD,A10AF,218,218,218,218,218,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
-Hyperlipidemia,A10AB,A10AC,218,218,218,218,218,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate-acting",1,FALSE
-Hyperlipidemia,A10AE,A10AF,218,218,218,218,218,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
-Hyperlipidemia,A10AD,A10AE,218,218,218,218,218,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
-Hyperlipidemia,A10AB,A10AE,218,218,218,218,218,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Hyperlipidemia,A10AC,A10AE,218,218,218,218,218,"Insulins and analogues for injection, intermediate-acting","Insulins and analogues for injection, long-acting",1,FALSE
 Hyperlipidemia,A10AC,A10AF,218,218,218,218,218,"Insulins and analogues for injection, intermediate-acting",Insulins and analogues for inhalation,1,FALSE
-Hyperlipidemia,A10AB,A10AD,218,218,218,218,218,"Insulins and analogues for injection, fast-acting","Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",1,FALSE
+Hyperlipidemia,A10AD,A10AE,218,218,218,218,218,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting","Insulins and analogues for injection, long-acting",1,FALSE
+Hyperlipidemia,A10AD,A10AF,218,218,218,218,218,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Insulins and analogues for inhalation,1,FALSE
+Hyperlipidemia,A10AE,A10AF,218,218,218,218,218,"Insulins and analogues for injection, long-acting",Insulins and analogues for inhalation,1,FALSE
 Ischemic Heart Disease,C01DA,C01EB,211,255,0,2,211,Organic nitrates,Other cardiac preparations,0.01,FALSE
-Hyperlipidemia,A10AF,A10BA,196,214,13,13,196,Insulins and analogues for inhalation,Biguanides,0.07,FALSE
-Hyperlipidemia,A10AE,A10BA,196,214,13,13,196,"Insulins and analogues for injection, long-acting",Biguanides,0.07,FALSE
-Hyperlipidemia,A10AC,A10BA,196,214,13,13,196,"Insulins and analogues for injection, intermediate-acting",Biguanides,0.07,FALSE
 Hyperlipidemia,A10AB,A10BA,196,214,13,13,196,"Insulins and analogues for injection, fast-acting",Biguanides,0.07,FALSE
+Hyperlipidemia,A10AC,A10BA,196,214,13,13,196,"Insulins and analogues for injection, intermediate-acting",Biguanides,0.07,FALSE
 Hyperlipidemia,A10AD,A10BA,196,214,13,13,196,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",Biguanides,0.07,FALSE
+Hyperlipidemia,A10AE,A10BA,196,214,13,13,196,"Insulins and analogues for injection, long-acting",Biguanides,0.07,FALSE
+Hyperlipidemia,A10AF,A10BA,196,214,13,13,196,Insulins and analogues for inhalation,Biguanides,0.07,FALSE

@@ -5,29 +5,29 @@ J20,R06AA,Aminoalkyl ethers,722,112,1,609,112,0.004116688879016733,0.15512465373
 J20,C10AA,HMG CoA reductase inhibitors,722,23,175,524,23,0.07036975150979877,0.03185595567867036,0.5,Acute bronchitis
 J20,C09AA,"ACE inhibitors, plain",722,12,224,486,12,0.255054543718521,0.01662049861495845,0.1,Acute bronchitis
 J20,C03AA,"Thiazides, plain",722,7,195,520,7,0.2276513976081923,0.009695290858725761,0,Acute bronchitis
-J20,A10AD,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",722,5,149,568,5,0.1299262406607309,0.006925207756232687,0.1,Acute bronchitis
-J20,A10AC,"Insulins and analogues for injection, intermediate-acting",722,5,149,568,5,0.1299262406607309,0.006925207756232687,0.1,Acute bronchitis
-J20,A10AF,Insulins and analogues for inhalation,722,5,149,568,5,0.12949657460673622,0.006925207756232687,0.1,Acute bronchitis
 J20,A10AB,"Insulins and analogues for injection, fast-acting",722,5,149,568,5,0.1299262406607309,0.006925207756232687,0.1,Acute bronchitis
-J20,C08CA,Dihydropyridine derivatives,722,5,183,534,5,0.2025159334495023,0.006925207756232687,0,Acute bronchitis
+J20,A10AC,"Insulins and analogues for injection, intermediate-acting",722,5,149,568,5,0.1299262406607309,0.006925207756232687,0.1,Acute bronchitis
+J20,A10AD,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",722,5,149,568,5,0.1299262406607309,0.006925207756232687,0.1,Acute bronchitis
 J20,A10AE,"Insulins and analogues for injection, long-acting",722,5,149,568,5,0.12949657460673622,0.006925207756232687,0.1,Acute bronchitis
+J20,A10AF,Insulins and analogues for inhalation,722,5,149,568,5,0.12949657460673622,0.006925207756232687,0.1,Acute bronchitis
+J20,C08CA,Dihydropyridine derivatives,722,5,183,534,5,0.2025159334495023,0.006925207756232687,0,Acute bronchitis
 J20,M05BA,Bisphosphonates,722,4,80,638,4,0.0871267276155921,0.00554016620498615,0.1,Acute bronchitis
-J20,M01AE,Propionic acid derivatives,722,2,25,695,2,0.029885661088964743,0.002770083102493075,0.1,Acute bronchitis
-J20,G02CC,Antiinflammatory products for vaginal administration,722,2,25,695,2,0.029885661088964743,0.002770083102493075,0.1,Acute bronchitis
+J20,B01AC,Platelet aggregation inhibitors excl. heparin,722,2,10,710,2,0.01678084644212637,0.002770083102493075,0.2,Acute bronchitis
 J20,C01EB,Other cardiac preparations,722,2,25,695,2,0.029599217052968276,0.002770083102493075,0.1,Acute bronchitis
+J20,G02CC,Antiinflammatory products for vaginal administration,722,2,25,695,2,0.029885661088964743,0.002770083102493075,0.1,Acute bronchitis
+J20,M01AE,Propionic acid derivatives,722,2,25,695,2,0.029885661088964743,0.002770083102493075,0.1,Acute bronchitis
 J20,M02AA,"Antiinflammatory preparations, non-steroids for topical use",722,2,25,695,2,0.029885661088964743,0.002770083102493075,0.1,Acute bronchitis
 J20,R02AX,Other throat preparations,722,2,25,695,2,0.029599217052968276,0.002770083102493075,0.1,Acute bronchitis
-J20,B01AC,Platelet aggregation inhibitors excl. heparin,722,2,10,710,2,0.01678084644212637,0.002770083102493075,0.2,Acute bronchitis
-J20,C05AE,Muscle relaxants,722,1,3,718,1,0.0022915522879717377,0.0013850415512465374,0.6,Acute bronchitis
-J20,C01DA,Organic nitrates,722,1,3,718,1,0.0022915522879717377,0.0013850415512465374,0.6,Acute bronchitis
 J20,A01AD,Other agents for local oral treatment,722,1,8,713,1,0.014250590790824243,0.0013850415512465374,0.1,Acute bronchitis
-J20,N01AH,Opioid anesthetics,722,1,20,701,1,0.018642732676103405,0.0013850415512465374,0.1,Acute bronchitis
 J20,B01AA,Vitamin K antagonists,722,1,20,701,1,0.022056190771727973,0.0013850415512465374,0.1,Acute bronchitis
-J20,N02AB,Phenylpiperidine derivatives,722,1,20,701,1,0.018666603012436445,0.0013850415512465374,0.1,Acute bronchitis
-J20,D11AH,"Agents for dermatitis, excluding corticosteroids",722,1,66,655,1,0.08041916310600816,0.0013850415512465374,0,Acute bronchitis
+J20,C01DA,Organic nitrates,722,1,3,718,1,0.0022915522879717377,0.0013850415512465374,0.6,Acute bronchitis
+J20,C05AE,Muscle relaxants,722,1,3,718,1,0.0022915522879717377,0.0013850415512465374,0.6,Acute bronchitis
 J20,C07AB,"Beta blocking agents, selective",722,1,5,716,1,0.0032463657412932947,0.0013850415512465374,0.4,Acute bronchitis
-J20,N02AX,Other opioids,722,1,20,701,1,0.017998233595111355,0.0013850415512465374,0.1,Acute bronchitis
+J20,D11AH,"Agents for dermatitis, excluding corticosteroids",722,1,66,655,1,0.08041916310600816,0.0013850415512465374,0,Acute bronchitis
 J20,L04AD,Calcineurin inhibitors,722,1,66,655,1,0.0804430334423412,0.0013850415512465374,0,Acute bronchitis
-J20,N02AJ,Opioids in combination with non-opioid analgesics,722,1,21,700,1,0.01341512901916788,0.0013850415512465374,0.1,Acute bronchitis
+J20,N01AH,Opioid anesthetics,722,1,20,701,1,0.018642732676103405,0.0013850415512465374,0.1,Acute bronchitis
 J20,N02AA,Natural opium alkaloids,722,1,31,690,1,0.03969636932184374,0.0013850415512465374,0,Acute bronchitis
+J20,N02AB,Phenylpiperidine derivatives,722,1,20,701,1,0.018666603012436445,0.0013850415512465374,0.1,Acute bronchitis
+J20,N02AJ,Opioids in combination with non-opioid analgesics,722,1,21,700,1,0.01341512901916788,0.0013850415512465374,0.1,Acute bronchitis
+J20,N02AX,Other opioids,722,1,20,701,1,0.017998233595111355,0.0013850415512465374,0.1,Acute bronchitis
 J20,N02BA,Salicylic acid and derivatives,722,1,8,713,1,0.014250590790824243,0.0013850415512465374,0.1,Acute bronchitis

@@ -1,12 +1,63 @@
 # medicare-claims-target-trial-rwe
 
-Claims RWE methods demonstration: ACE inhibitor vs thiazide initiation on CMS synthetic Medicare data.
+[![CI](https://github.com/erickyegon/medicare-claims-target-trial-rwe/actions/workflows/ci.yml/badge.svg)](https://github.com/erickyegon/medicare-claims-target-trial-rwe/actions/workflows/ci.yml)
+![R](https://img.shields.io/badge/R-4.4%2B-276DC3) ![Python](https://img.shields.io/badge/Python-3.11-3776AB) ![SQL](https://img.shields.io/badge/SQL-DuckDB-FFF000) ![SAS](https://img.shields.io/badge/SAS-reconciled-00629B) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+Claims RWE methods demonstration: ACE inhibitor vs thiazide initiation on CMS synthetic Medicare data, designed as a target trial emulation.
 
 > **Synthetic data. Nothing here is a real-world finding.** The estimates in this repository are programming and methods demonstrations. The CMS synthetic
 > files come from a simulation (Synthea); CMS advises against scientific inference from them. Do not cite any result as evidence about a drug.
 
+**For reviewers, in two minutes:** read [Results at a glance](#results-at-a-glance), then the [study report](docs/study_report.html) (rendered; source `docs/study_report.qmd`) and the [amendment log](docs/amendments.md), which records every analytic decision before it was used, including the two earlier research questions (influenza antivirals, bronchitis antibiotics) that the data could not support. Independent QC: [R vs Python cross-check](qc/python_crosscheck.py), [SAS reconciliation, all rows match](qc/sas_reconciliation.md), [prose-vs-data audit](qc/narrative_audit.py) (28 checks that recompute quoted numbers), and a [pre-commit scan](qc/id_leak_scan.py) that no record-level identifiers are tracked.
+
 *About the name:* the project started as an influenza antiviral study, moved to bronchitis and antibiotics, and ended as the hypertension comparison below,
 because the data could not support the first two questions. That path is documented in `docs/study_report.qmd` and `docs/amendments.md`.
+
+## Results at a glance
+
+*Illustrative only (synthetic data). The point is that the machinery works and is checked, not what the drug comparison shows.*
+
+**Cohort** (adults 65+ with hypertension, new users, one episode per person): 9,179 beneficiaries, 790 in the final cohort (ACE inhibitor 433, thiazide/thiazide-like 357). Attrition (protocol v0.4 Section 5):
+
+| Step | Persons | Episodes |
+| --- | ---: | ---: |
+| Beneficiaries in the files | 9,179 | |
+| Study-drug fill on/after 2016-03-01 (candidate index dates) | 3,916 | 57,338 |
+| New user (no antihypertensive fill in days -365 to -1) | 3,561 | 10,639 |
+| Age 65 or older | 2,156 | 6,162 |
+| Continuous Part A+B+D, 365-day look-back | 1,604 | 4,793 |
+| Hypertension diagnosis (I10-I16) | 1,424 | 3,294 |
+| Not both study drugs on the index date | 1,142 | 2,259 |
+| No other antihypertensive class on the index date | 821 | 1,529 |
+| No hospice claim | 792 | 1,466 |
+| No inpatient stay overlapping the index date | 790 | 1,458 |
+| First qualifying episode per person (final cohort) | **790** | 790 |
+
+**Primary result** (IPTW, intention-to-treat, 365-day all-cause hospitalization, 500-resample bootstrap): risk 21.5% (ACE inhibitor) vs 17.7% (thiazide); risk difference 3.8 points (95% CI -3.5 to 9.4); risk ratio 1.21 (0.84 to 1.61). All 11 alternative analyses (an unweighted reference, untruncated weights, PS matching, IPCW, stricter diagnosis window, alternative follow-up rules and others) have intervals that include 1.0; see `output/tfl/T6.html`.
+
+![Study design](output/tfl/F1.png)
+
+| Covariate balance (IPTW) | Weighted cumulative incidence |
+| --- | --- |
+| ![Love plot](output/tfl/F2.png) | ![Cumulative incidence](output/tfl/F4.png) |
+
+## Pipeline
+
+```mermaid
+flowchart LR
+  A[CMS synthetic files<br/>beneficiary, claims, PDE] --> B[01 ingest + profile<br/>DuckDB]
+  R[RxNorm / RxClass / CCW / ResDAC<br/>reference builders] --> C[code lists<br/>ICD-10, NDC]
+  B --> D[enrollment spans]
+  C --> E[06 cohort<br/>new-user, active comparator]
+  D --> E
+  E --> F[07 follow-up<br/>ITT, censoring]
+  F --> G[09 analysis<br/>IPTW, IPCW, KM, bootstrap, E-value]
+  G --> H[11 tables, figures, listings]
+  H --> I[Quarto: SAP, feasibility, study report]
+  E -.independent re-derivation.-> P[Python cross-check]
+  E -.independent re-derivation.-> S[SAS reconciliation]
+  I --> Q[narrative audit<br/>prose vs data]
+```
 
 ## Purpose
 

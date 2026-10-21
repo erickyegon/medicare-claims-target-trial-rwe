@@ -50,23 +50,23 @@ acute <- win %>% left_join(icd3, by = "dx3") %>%
   left_join(top_str("0-2") %>% rename(top5_drugs_0_2 = top), by = "dx3") %>% left_join(top_str("0-7") %>% rename(top5_drugs_0_7 = top), by = "dx3") %>%
   mutate(pct_with_drug_0_2 = round(100 * with_drug_0_2 / n_episodes, 1), pct_with_drug_0_7 = round(100 * with_drug_0_7 / n_episodes, 1)) %>%
   select(dx3, description, n_episodes, with_drug_0_2, pct_with_drug_0_2, no_drug_only_0_2, nofill_0_2, with_drug_0_7, pct_with_drug_0_7, no_drug_only_0_7, nofill_0_7, top5_drugs_0_2, top5_drugs_0_7) %>%
-  arrange(desc(n_episodes)) %>%
+  arrange(desc(n_episodes), dx3) %>%
   mutate(flag_lt11 = (with_drug_0_2 < MIN_CELL) | (no_drug_only_0_2 < MIN_CELL) | (nofill_0_2 < MIN_CELL) | (with_drug_0_7 < MIN_CELL) | (no_drug_only_0_7 < MIN_CELL) | (nofill_0_7 < MIN_CELL))
 write_out(acute, "acute_scan.csv")
 # enrichment = share treated with the class in this diagnosis / share treated with the class over all scanned episodes (background use of the drug)
 acute_class <- q("SELECT * FROM acute_class") %>% group_by(atc_id) %>% mutate(pooled_share = sum(n_treated) / sum(n_episodes)) %>% ungroup() %>%
   mutate(treated_share = n_treated / n_episodes, enrichment = round(treated_share / pooled_share, 1)) %>%
-  left_join(icd3, by = "dx3") %>% rename(dx_description = description) %>% arrange(desc(min_arm))
+  left_join(icd3, by = "dx3") %>% rename(dx_description = description) %>% arrange(desc(min_arm), dx3, atc_id)   # full tie-breakers: row order must not depend on DuckDB's thread scheduling
 write_out(acute_class %>% filter(n_treated >= MIN_CELL) %>% mutate(flag_lt11 = n_untreated < MIN_CELL | n_late < MIN_CELL), "acute_class_arms.csv")
 
 # ---- 2. chronic new users -------------------------------------------------------------------------------
 run_sql_file(con, "scan_chronic.sql")
 log_step("05_scan", "chronic: new users by ATC4 class (age>=65, 365d A+B+D); then by condition", cnt("nu"), cnt("nu_cond"))
 atc_names <- rx_atc %>% distinct(atc_id, atc_name)
-cond_class <- q("SELECT * FROM cond_class") %>% left_join(atc_names, by = "atc_id") %>% arrange(cond, desc(n_new_users))
+cond_class <- q("SELECT * FROM cond_class") %>% left_join(atc_names, by = "atc_id") %>% arrange(cond, desc(n_new_users), atc_id)
 write_out(cond_class, "chronic_condition_classes.csv")
 pairs <- q("SELECT * FROM pair_arms") %>% left_join(atc_names %>% rename(a_name = atc_name), by = c("a_cls" = "atc_id")) %>%
-  left_join(atc_names %>% rename(b_name = atc_name), by = c("b_cls" = "atc_id")) %>% arrange(desc(min_arm)) %>%
+  left_join(atc_names %>% rename(b_name = atc_name), by = c("b_cls" = "atc_id")) %>% arrange(desc(min_arm), cond, a_cls, b_cls) %>%
   mutate(overlap = round(pmax(n_a_with_b / n_a, n_b_with_a / n_b), 2), flag_lt11 = n_a < MIN_CELL | n_b < MIN_CELL)
 write_out(pairs, "chronic_pairs.csv")
 
@@ -74,19 +74,19 @@ write_out(pairs, "chronic_pairs.csv")
 run_sql_file(con, "scan_trace.sql")
 tf <- q("SELECT drug_name, count(*) AS fills, count(DISTINCT BENE_ID) AS benes FROM trace_fills GROUP BY 1")
 td <- q("SELECT drug_name, count(DISTINCT (BENE_ID, fill_dt, ndc11)) AS fills_with_dx, count(DISTINCT BENE_ID) AS benes_with_dx FROM trace_dx GROUP BY 1")
-trace_sum <- tf %>% left_join(td, by = "drug_name") %>% mutate(across(c(fills_with_dx, benes_with_dx), ~ coalesce(.x, 0)), fills_no_dx_in_7d = fills - fills_with_dx)
+trace_sum <- tf %>% left_join(td, by = "drug_name") %>% mutate(across(c(fills_with_dx, benes_with_dx), ~ coalesce(.x, 0)), fills_no_dx_in_7d = fills - fills_with_dx) %>% arrange(drug_name)
 trace_sum$listed_ndc_fills <- vapply(c("amoxicillin-clavulanate", "moxifloxacin")[match(trace_sum$drug_name, c("amoxicillin / clavulanate", "moxifloxacin"))],
   function(g) q(sprintf("SELECT count(*) AS n FROM fill f JOIN abx_list a ON a.ndc11 = f.ndc11 WHERE a.generic = '%s'", g))$n, 0)
 write_out(trace_sum, "trace_summary.csv")
 trace_dx3 <- q("SELECT drug_name, dx3, count(DISTINCT (BENE_ID, fill_dt, ndc11)) AS fills, count(DISTINCT BENE_ID) AS benes FROM trace_dx GROUP BY 1, 2") %>%
-  left_join(icd3, by = "dx3") %>% group_by(drug_name) %>% slice_max(fills, n = 25, with_ties = FALSE) %>% ungroup() %>% arrange(drug_name, desc(fills)) %>% mutate(flag_lt11 = fills < MIN_CELL | benes < MIN_CELL)
+  left_join(icd3, by = "dx3") %>% arrange(drug_name, desc(fills), dx3) %>% group_by(drug_name) %>% slice_head(n = 25) %>% ungroup() %>% mutate(flag_lt11 = fills < MIN_CELL | benes < MIN_CELL)
 write_out(trace_dx3, "trace_dx3.csv")
 trace_code <- q("SELECT drug_name, code, count(DISTINCT (BENE_ID, fill_dt, ndc11)) AS fills, count(DISTINCT BENE_ID) AS benes FROM trace_dx GROUP BY 1, 2") %>%
-  group_by(drug_name) %>% slice_max(fills, n = 25, with_ties = FALSE) %>% ungroup() %>% arrange(drug_name, desc(fills)) %>% mutate(flag_lt11 = fills < MIN_CELL | benes < MIN_CELL)
+  arrange(drug_name, desc(fills), code) %>% group_by(drug_name) %>% slice_head(n = 25) %>% ungroup() %>% mutate(flag_lt11 = fills < MIN_CELL | benes < MIN_CELL)
 write_out(trace_code, "trace_dx_code.csv")
 # inventory of ALL systemic antibacterial (ATC J01) fills in PDE identified through RxNorm, to re-test amendment A-004's premise
 abx_inv <- q("SELECT d.drug_name, count(DISTINCT (f.BENE_ID, f.fill_dt, f.ndc11)) AS fills, count(DISTINCT f.BENE_ID) AS benes
-   FROM fill f JOIN ndc_rxcui n ON n.ndc11 = f.ndc11 JOIN rx_atc a ON a.rxcui = n.rxcui AND a.atc_id LIKE 'J01%' JOIN rx_drug d ON d.rxcui = n.rxcui GROUP BY 1 ORDER BY 2 DESC") %>%
+   FROM fill f JOIN ndc_rxcui n ON n.ndc11 = f.ndc11 JOIN rx_atc a ON a.rxcui = n.rxcui AND a.atc_id LIKE 'J01%' JOIN rx_drug d ON d.rxcui = n.rxcui GROUP BY 1 ORDER BY 2 DESC, 1") %>%
   mutate(flag_lt11 = benes < MIN_CELL)
 write_out(abx_inv, "pde_antibacterial_inventory.csv")
 

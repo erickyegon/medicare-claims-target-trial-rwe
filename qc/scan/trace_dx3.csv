@@ -32,20 +32,20 @@ moxifloxacin,E11,172,63,Type 2 diabetes mellitus,FALSE
 moxifloxacin,M79,164,99,"Other and unspecified soft tissue disorders, not elsewhere classified",FALSE
 moxifloxacin,Z65,137,55,Problems related to other psychosocial circumstances,FALSE
 moxifloxacin,T74,136,78,"Adult and child abuse, neglect and other maltreatment, confirmed",FALSE
-moxifloxacin,R80,131,41,Proteinuria,FALSE
 moxifloxacin,D64,131,61,Other anemias,FALSE
+moxifloxacin,R80,131,41,Proteinuria,FALSE
 moxifloxacin,N18,129,37,Chronic kidney disease (CKD),FALSE
 moxifloxacin,I25,117,47,Chronic ischemic heart disease,FALSE
-moxifloxacin,R93,116,46,Abnormal findings on diagnostic imaging of other body structures,FALSE
 moxifloxacin,E88,116,52,Other and unspecified metabolic disorders,FALSE
+moxifloxacin,R93,116,46,Abnormal findings on diagnostic imaging of other body structures,FALSE
 moxifloxacin,R73,112,62,Elevated blood glucose level,FALSE
 moxifloxacin,I10,111,51,Essential (primary) hypertension,FALSE
 moxifloxacin,E78,110,42,Disorders of lipoprotein metabolism and other lipidemias,FALSE
 moxifloxacin,P29,94,43,Cardiovascular disorders originating in the perinatal period,FALSE
 moxifloxacin,G89,86,37,"Pain, not elsewhere classified",FALSE
 moxifloxacin,Z76,67,14,Persons encountering health services in other circumstances,FALSE
-moxifloxacin,Z95,61,21,Presence of cardiac and vascular implants and grafts,FALSE
 moxifloxacin,I13,61,30,Hypertensive heart and chronic kidney disease,FALSE
 moxifloxacin,J32,61,33,Chronic sinusitis,FALSE
+moxifloxacin,Z95,61,21,Presence of cardiac and vascular implants and grafts,FALSE
 moxifloxacin,O03,59,32,Spontaneous abortion,FALSE
 moxifloxacin,Y07,50,31,"Perpetrator of assault, maltreatment and neglect",FALSE
