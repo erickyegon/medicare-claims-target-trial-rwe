@@ -50,9 +50,9 @@ save_table("T3", "Baseline characteristics by arm before and after IPTW, with st
 
 # ---- T4 treatment patterns ---------------------------------------------------------------------------------------------------
 tc <- S("qc", "cohort", "timing_counts.csv"); cif <- S("qc", "cohort", "timing_cif.csv")
-t4a <- tc %>% transmute(Arm = arm, N = n, `Index days supply (median)` = idx_days_supply_median, `Add-on` = n_addon, Switch = n_switch, Discontinued = n_discontinued, `Censored before any event` = n_censored_before_any,
+t4a <- tc %>% transmute(Arm = arm_lab(arm), N = n, `Index days supply (median)` = idx_days_supply_median, `Add-on` = n_addon, Switch = n_switch, Discontinued = n_discontinued, `Censored before any event` = n_censored_before_any,
                         `Median days to add-on` = median_days_addon, `Median days to switch` = median_days_switch, `Median days to discontinuation` = median_days_discontinuation)
-t4b <- cif %>% transmute(Arm = arm, Day = day, `Add-on (%)` = cum_inc_pct_addon, `Switch (%)` = cum_inc_pct_switch, `Discontinuation (%)` = cum_inc_pct_discontinuation)
+t4b <- cif %>% transmute(Arm = arm_lab(arm), Day = day, `Add-on (%)` = cum_inc_pct_addon, `Switch (%)` = cum_inc_pct_switch, `Discontinuation (%)` = cum_inc_pct_discontinuation)
 save_table("T4", "Treatment patterns: days supply and time to add-on, switch and discontinuation (first event; descriptive)", bind_rows(t4a %>% mutate(across(everything(), as.character)) %>% mutate(Part = "A: counts and medians", .before = 1),
            t4b %>% mutate(across(everything(), as.character)) %>% mutate(Part = "B: cumulative incidence by day", .before = 1)), "R/07_followup.R", "qc/cohort/timing_counts.csv, timing_cif.csv",
            note = "Discontinuation = no refill within 30 days after the end of the days supply; it does not censor any analysis (A-007).")
@@ -62,9 +62,9 @@ pr <- S("qc", "analysis", "primary_results.csv"); ev <- S("qc", "analysis", "eva
 w <- pr %>% pivot_wider(names_from = quantity, values_from = c(estimate, lo, hi))
 t5 <- w %>% transmute(Method = method, Horizon = paste(horizon, "days"), `ACE inhibitor risk, % (95% CI)` = ci_str(estimate_risk_acei, lo_risk_acei, hi_risk_acei),
                       `Thiazide risk, % (95% CI)` = ci_str(estimate_risk_thiazide, lo_risk_thiazide, hi_risk_thiazide), `Risk difference, percentage points (95% CI)` = ci_str(estimate_rd, lo_rd, hi_rd),
-                      `Risk ratio (95% CI)` = ci_str(estimate_rr, lo_rr, hi_rr, scale = 1, d = 2)) %>% arrange(desc(Method), desc(Horizon))
+                      `Risk ratio (95% CI)` = ci_str(estimate_rr, lo_rr, hi_rr, scale = 1, d = 2)) %>% arrange(match(Method, c("weighted pooled logistic", "weighted KM", "weighted pooled logistic, 365-day model read at day 30")), desc(as.integer(sub(" days", "", Horizon))))
 save_table("T5", "All-cause hospitalization, intention-to-treat: 365-day (primary) and 30-day (secondary) risks, risk difference and risk ratio", t5, "R/09_analysis.R", "qc/analysis/primary_results.csv",
-           note = sprintf("IPTW-weighted; 95%% percentile bootstrap intervals (500 resamples of individuals, propensity score refitted). E-value for the 365-day risk ratio: %.2f (confidence limit: %.2f). Events: ACE inhibitor %d, thiazide %d (365 days).",
+           note = sprintf("IPTW-weighted; 95%% percentile bootstrap intervals (500 resamples of individuals, propensity score refitted). E-value for the 365-day risk ratio: %.2f (confidence limit: %.2f). Events: ACE inhibitor %d, thiazide %d (365 days). The 30-day pooled logistic rows come from a separate model fitted to days 1-30 (A-014); the row labelled '365-day model read at day 30' is the earlier approach, shown for transparency.",
                           ev$value[1], ev$value[2], pc$hosp_365_events_unweighted[pc$arm == "ACEI"], pc$hosp_365_events_unweighted[pc$arm == "THIAZIDE"]))
 
 # ---- T6 sensitivity -----------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ save_table("T6", "Sensitivity analyses: 365-day hospitalization (weighted Kaplan
 
 # ---- T7 negative control (descriptive) -------------------------------------------------------------------------------------------
 nc <- S("qc", "analysis", "negative_control_descriptive.csv")
-save_table("T7", "Negative control outcome: hip or femur fracture within 365 days (counts and person-time only; no model, A-006)", nc %>% transmute(Arm = arm, N = n, Events = fracture_365_itt, `Person-years` = py_fracture, `Events per 1,000 person-years` = round(1000 * fracture_365_itt / py_fracture, 1)),
+save_table("T7", "Negative control outcome: hip or femur fracture within 365 days (counts and person-time only; no model, A-006)", nc %>% transmute(Arm = arm_lab(arm), N = n, Events = fracture_365_itt, `Person-years` = py_fracture, `Events per 1,000 person-years` = round(1000 * fracture_365_itt / py_fracture, 1)),
            "R/07_followup.R, R/09_analysis.R", "qc/analysis/negative_control_descriptive.csv", note = "Counts below 11 are flagged and must not be interpreted.")
 
 # ---- F1 design diagram --------------------------------------------------------------------------------------------------------------------

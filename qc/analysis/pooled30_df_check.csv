@@ -1,0 +1,6 @@
+model,spline_df,risk_acei,risk_thiazide,rd,rr
+weighted KM,NA,0.0333,0.0246,0.0087,1.3528
+"pooled logistic, 365-day model read at day 30",4,0.0223,0.0238,-0.0016,0.9348
+"pooled logistic, separate model fitted to days 1-30",2,0.0333,0.0246,0.0087,1.3524
+"pooled logistic, separate model fitted to days 1-30",3,0.0333,0.0246,0.0087,1.3523
+"pooled logistic, separate model fitted to days 1-30",4,0.0333,0.0246,0.0087,1.3532

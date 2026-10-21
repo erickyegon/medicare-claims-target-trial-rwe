@@ -22,10 +22,10 @@
   <tr>
    <td style="text-align:left;"> weighted pooled logistic </td>
    <td style="text-align:left;"> 30 days </td>
-   <td style="text-align:left;"> 2.2 (0.9 to 3.7) </td>
-   <td style="text-align:left;"> 2.4 (1.1 to 4.0) </td>
-   <td style="text-align:left;"> -0.2 (-2.3 to 1.8) </td>
-   <td style="text-align:left;"> 0.93 (0.29 to 2.36) </td>
+   <td style="text-align:left;"> 3.3 (1.4 to 5.4) </td>
+   <td style="text-align:left;"> 2.5 (1.1 to 4.3) </td>
+   <td style="text-align:left;"> 0.9 (-2.1 to 3.4) </td>
+   <td style="text-align:left;"> 1.35 (0.46 to 3.29) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> weighted KM </td>
@@ -43,7 +43,15 @@
    <td style="text-align:left;"> 0.9 (-2.1 to 3.4) </td>
    <td style="text-align:left;"> 1.35 (0.46 to 3.30) </td>
   </tr>
+  <tr>
+   <td style="text-align:left;"> weighted pooled logistic, 365-day model read at day 30 </td>
+   <td style="text-align:left;"> 30 days </td>
+   <td style="text-align:left;"> 2.2 (0.9 to 3.7) </td>
+   <td style="text-align:left;"> 2.4 (1.1 to 4.0) </td>
+   <td style="text-align:left;"> -0.2 (-2.3 to 1.8) </td>
+   <td style="text-align:left;"> 0.93 (0.29 to 2.36) </td>
+  </tr>
 </tbody>
 </table>
-<p><em>IPTW-weighted; 95% percentile bootstrap intervals (500 resamples of individuals, propensity score refitted). E-value for the 365-day risk ratio: 1.72 (confidence limit: 1.00). Events: ACE inhibitor 78, thiazide 60 (365 days).</em></p>
+<p><em>IPTW-weighted; 95% percentile bootstrap intervals (500 resamples of individuals, propensity score refitted). E-value for the 365-day risk ratio: 1.72 (confidence limit: 1.00). Events: ACE inhibitor 78, thiazide 60 (365 days). The 30-day pooled logistic rows come from a separate model fitted to days 1-30 (A-014); the row labelled '365-day model read at day 30' is the earlier approach, shown for transparency.</em></p>
 <p><small>Program: R/11_tfl.R (inputs from qc/analysis/primary_results.csv). Dataset version: 2888df05c7 (CMS synthetic Medicare files, downloaded 2026-10-20). Synthetic data, not inferential.</small></p>

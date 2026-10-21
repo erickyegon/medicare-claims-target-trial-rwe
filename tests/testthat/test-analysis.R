@@ -61,6 +61,18 @@ test_that("pooled logistic risk agrees with Kaplan-Meier when hazards are smooth
   expect_equal(unname(km["rd"]), unname(km["risk_acei"] - km["risk_thiazide"])); expect_equal(unname(km["rr"]), unname(km["risk_acei"] / km["risk_thiazide"]))
 })
 
+test_that("a separate 30-day pooled logistic model resolves an early hazard that a 365-day spline cannot (A-014)", {
+  set.seed(11); n <- 6000; arm <- rbinom(n, 1, 0.5)
+  early <- rbinom(n, 1, ifelse(arm == 1, 0.06, 0.03)) == 1                      # events concentrated in the first days
+  t_ev <- ifelse(early, ceiling(rexp(n, 0.3)), ceiling(rexp(n, 0.0008)))
+  d <- data.frame(arm = arm, time = pmin(t_ev, 365), event = t_ev <= 365, w = 1)
+  agg <- agg_counts(d$time, d$event, d$w, d$arm, 365)
+  km30 <- risks_at(risk_km(agg), 30); from365 <- risks_at(risk_pooled(agg), 30); sep30 <- risks_at(risk_pooled(agg[agg$day <= 30, ]), 30)
+  expect_lt(abs(sep30["risk_acei"] - km30["risk_acei"]), 0.005); expect_lt(abs(sep30["risk_thiazide"] - km30["risk_thiazide"]), 0.005)
+  expect_gt(abs(from365["risk_acei"] - km30["risk_acei"]), abs(sep30["risk_acei"] - km30["risk_acei"]))
+  expect_equal(max(agg$day[agg$day <= 30]), 30L)
+})
+
 test_that("matching respects the caliper and uses each unit once", {
   set.seed(5); n <- 400; a <- rbinom(n, 1, 0.4); ps <- plogis(rnorm(n, ifelse(a == 1, 0.4, -0.2), 1))
   m <- ps_match(a, ps, 0.2, seed = 9)

@@ -73,3 +73,29 @@ time	step	description	n_in	n_out
 2026-10-21 13:25:10	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
 2026-10-21 13:25:12	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
 2026-10-21 13:25:12	09_analysis	primary cohort: 790 people (zero-follow-up dropped: 0); PS covariates 16 (dropped: heart_failure,dementia)	790	790
+2026-10-21 14:05:26	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:05:30	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:05:31	09_analysis	primary cohort: 790 people (zero-follow-up dropped: 0); PS covariates 16 (dropped: heart_failure,dementia)	790	790
+2026-10-21 14:06:55	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:06:57	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:07:55	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:07:58	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:08:57	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:08:59	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:10:01	08_baseline	htn_cohort_costart: 1101 people, 26 covariate columns	1101	1101
+2026-10-21 14:10:05	07_followup	htn_cohort_costart: 1101 people; hospitalization in ITT window 183; ITT ended by day 365 for 889	1101	1101
+2026-10-21 14:11:13	08_baseline	htn_cohort_nounid: 669 people, 26 covariate columns	669	669
+2026-10-21 14:11:19	07_followup	htn_cohort_nounid: 669 people; hospitalization in ITT window 114; ITT ended by day 365 for 527	669	669
+2026-10-21 14:12:22	08_baseline	htn_cohort_strictdx: 617 people, 26 covariate columns	617	617
+2026-10-21 14:12:24	07_followup	htn_cohort_strictdx: 617 people; hospitalization in ITT window 120; ITT ended by day 365 for 494	617	617
+2026-10-21 14:13:23	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:13:25	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:14:25	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:14:28	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:15:27	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:15:30	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:16:21	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:16:23	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:21:39	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 14:21:42	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 14:24:14	09_analysis	analysis complete: 12 analyses, 500 bootstrap resamples each (primary ok: 500)	790	790

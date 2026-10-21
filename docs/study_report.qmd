@@ -82,7 +82,7 @@ In the weighted Kaplan-Meier analysis the 365-day risk was `r sprintf("%.1f", 10
 a risk difference of `r ci(p(km, 365, "rd"), p(km, 365, "rd", "lo"), p(km, 365, "rd", "hi"))` percentage points and a risk ratio of `r ci(p(km, 365, "rr"), p(km, 365, "rr", "lo"), p(km, 365, "rr", "hi"), 1, 2)`.
 `r if (all_include(p(km, 365, "rd", "lo"), p(km, 365, "rd", "hi"), 0)) "The interval for the risk difference includes zero." else "The interval for the risk difference excludes zero."`
 The weighted pooled logistic model gave a 365-day risk ratio of `r sprintf("%.2f", p("weighted pooled logistic", 365, "rr"))`. The E-value for the point estimate is `r sprintf("%.2f", ev$value[1])` and `r sprintf("%.2f", ev$value[2])` for the confidence limit.
-For the secondary 30-day outcome the risk difference was `r ci(p(km, 30, "rd"), p(km, 30, "rd", "lo"), p(km, 30, "rd", "hi"))` percentage points (weighted Kaplan-Meier); the 30-day analysis rests on few events (`r paste(arm_lab(ce$arm), ce$hosp_30, collapse = " and ")`), so it is unstable.
+For the secondary 30-day outcome the weighted pooled logistic model was fitted to days 1-30 only (A-014), because a 4-df spline over 365 days cannot resolve the first-month hazard; it gave a risk ratio of `r sprintf("%.2f", p("weighted pooled logistic", 30, "rr"))`, against `r sprintf("%.2f", p("weighted pooled logistic, 365-day model read at day 30", 30, "rr"))` when the 365-day model is read at day 30 (both are in T5). The risk difference was `r ci(p(km, 30, "rd"), p(km, 30, "rd", "lo"), p(km, 30, "rd", "hi"))` percentage points (weighted Kaplan-Meier); the 30-day analysis rests on few events (`r paste(arm_lab(ce$arm), ce$hosp_30, collapse = " and ")`), so it is unstable.
 
 ```{r f4, out.width = "80%"}
 knitr::include_graphics("../output/tfl/F4.png")
@@ -104,13 +104,13 @@ The IPCW analysis for loss of Part A/B/D entitlement used `r ipd$value[1]` censo
 ### Negative control, treatment patterns and refills
 
 ```{r t7}
-kt(nc %>% transmute(Arm = arm, N = n, `Fracture events` = fracture_365_itt, `Person-years` = py_fracture))
+kt(nc %>% transmute(Arm = arm_lab(arm), N = n, `Fracture events` = fracture_365_itt, `Person-years` = py_fracture))
 ```
 
 The negative control (hip or femur fracture) is reported descriptively only: `r paste(arm_lab(nc$arm), nc$fracture_365_itt, collapse = " and ")` events, too few to interpret (counts below 11 are not interpretable).
 
 ```{r t4}
-kt(tc %>% transmute(Arm = arm, N = n, `Add-on` = n_addon, Switch = n_switch, Discontinued = n_discontinued, `Index days supply (median)` = idx_days_supply_median))
+kt(tc %>% transmute(Arm = arm_lab(arm), N = n, `Add-on` = n_addon, Switch = n_switch, Discontinued = n_discontinued, `Index days supply (median)` = idx_days_supply_median))
 ```
 
 Add-on or switch to the other study drug was rare (`r paste(arm_lab(tc$arm), tc$n_addon + tc$n_switch, collapse = " and ")` people). Most people have a single 90-day fill followed by a second fill about a year later

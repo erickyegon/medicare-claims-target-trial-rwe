@@ -39,7 +39,13 @@ make_analysis_df <- function(cohort, end_col = "itt_end", tag = cohort) {
 }
 
 # ---- estimators ------------------------------------------------------------------------------------------------------------
-scal <- function(rk, prefix) { out <- c(); for (h in c(365, 30)) { v <- risks_at(rk, h); names(v) <- paste0(prefix, h, "_", names(v)); out <- c(out, v) }; out }
+# Scalars: KM at 365 and 30 days; pooled logistic at 365 days from the 365-day model; pooled logistic at 30 days from a SEPARATE model fitted to days 1-30 only
+# (A-014: a 4-df spline over 365 days cannot resolve the first-month hazard). "plx30" keeps the old estimate (365-day model read at day 30) so both are reported.
+scal <- function(rk, prefix, h) { v <- risks_at(rk, h); names(v) <- paste0(prefix, h, "_", names(v)); v }
+est_scalars <- function(agg) {
+  km <- risk_km(agg); pl <- risk_pooled(agg); pl30 <- risk_pooled(agg[agg$day <= 30, ])   # at-risk and events for days <= 30 are identical with or without the 365-day clip
+  c(scal(km, "km", 365), scal(km, "km", 30), scal(pl, "pl", 365), scal(pl30, "pl", 30), scal(pl, "plx", 30))
+}
 make_estimator <- function(type, covars, trunc = c(0.01, 0.99), horizon = HORIZON) function(dat) {
   if (type == "unadjusted") { w <- rep(1, nrow(dat)); a <- dat }
   else if (type == "match") {
@@ -52,11 +58,12 @@ make_estimator <- function(type, covars, trunc = c(0.01, 0.99), horizon = HORIZO
     ip <- ipcw_multipliers(a$c_day, a$c_event, a$arm_acei, a$agegrp, a$sex, horizon)
     agg <- agg_counts(a$as_time, a$as_event, w, a$arm_acei, horizon, ip$cell, ip$cw)
   } else agg <- agg_counts(a$time, a$event, w, a$arm_acei, horizon)
-  km <- risk_km(agg); pl <- risk_pooled(agg)
-  list(scalars = c(scal(km, "km"), scal(pl, "pl")), curve = c(km$cuminc[km$arm == 0], km$cuminc[km$arm == 1]))
+  km <- risk_km(agg)
+  list(scalars = est_scalars(agg), curve = c(km$cuminc[km$arm == 0], km$cuminc[km$arm == 1]))
 }
 tidy_ci <- function(bt) { x <- as.data.frame(bt$ci); x$stat <- rownames(x); rownames(x) <- NULL
-  x %>% mutate(method = ifelse(grepl("^km", stat), "weighted KM", "weighted pooled logistic"), horizon = as.integer(str_extract(stat, "(?<=^(km|pl))[0-9]+")), quantity = sub("^(km|pl)[0-9]+_", "", stat)) %>%
+  x %>% mutate(method = case_when(grepl("^km", stat) ~ "weighted KM", grepl("^plx", stat) ~ "weighted pooled logistic, 365-day model read at day 30", TRUE ~ "weighted pooled logistic"),
+               horizon = as.integer(str_extract(stat, "[0-9]+")), quantity = sub("^[a-z]+[0-9]+_", "", stat)) %>%
     select(method, horizon, quantity, estimate, lo, hi) }
 
 # ---- primary analysis ----------------------------------------------------------------------------------------------------

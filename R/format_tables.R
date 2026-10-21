@@ -24,3 +24,8 @@ format_table <- function(df) {
 }
 # right-align the columns that were numeric before formatting
 table_align <- function(df) ifelse(vapply(df, is.numeric, TRUE), "r", "l")
+
+# Arm labels for reports and tables (the data keep the codes ACEI / THIAZIDE)
+arm_lab <- function(x) ifelse(x == "ACEI", "ACE inhibitor", ifelse(x == "THIAZIDE", "thiazide", x))
+# Relabel arm codes in any table: cell values and column names (ACEI -> ACE inhibitor, THIAZIDE -> thiazide)
+relabel_arms <- function(x) { x[] <- lapply(x, function(col) if (is.character(col)) arm_lab(col) else col); names(x) <- arm_lab(names(x)); x }

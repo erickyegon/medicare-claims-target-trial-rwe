@@ -81,6 +81,28 @@ lit = f"{int(p0.n)} in the final cohort (ACE inhibitor {int(p0.n_acei)}, thiazid
 lit = f"All {len(alt)} alternative analyses"; check("number of alternative analyses", "README", readme, lit, lit if ((alt.km365_rr_lo < 1) & (alt.km365_rr_hi > 1)).all() else "an interval excludes 1.0", lit)
 sr = pd.read_csv(root / "qc/cohort/sas_vs_r_attrition.csv"); sb = pd.read_csv(root / "qc/cohort/sas_vs_r_baseline.csv")
 lit = f"all {len(sr)} attrition rows and {len(sb)} baseline rows match R"; check("SAS reconciliation rows", "README", readme, lit, lit if ((sr.result == "PASS").all() and (sb.result == "PASS").all()) else "a row fails", lit)
+# --- T6 matching row: N is the matched sample (pairs x 2) and events are the matched events, as published in T6 ---
+mrow = sens[sens.analysis.str.startswith("PS matching")].iloc[0]; npairs = int(re.search(r"(\d+) matched pairs", mrow.note).group(1))
+t6m = pd.read_csv(root / "output/tfl/T6.csv").query("Analysis.str.startswith('PS matching')", engine="python").iloc[0]
+t6_text = f"{int(t6m.N)} / {t6m['Events (ACE inhibitor / thiazide)']}"
+lit = f"{2 * npairs} / {int(mrow.events_acei)} / {int(mrow.events_thiazide)}"
+consistent = int(mrow.n) == 2 * npairs and int(mrow.n_acei) == int(mrow.n_thiazide) == npairs
+check("T6 matching row: N = 2 x pairs, matched events per arm", "T6", t6_text, lit, lit if consistent else "N is not 2 x pairs", lit)
+# --- A-014: 30-day pooled logistic estimates from a separate model, and the df sensitivity ---
+pr_ = pd.read_csv(root / "qc/analysis/primary_results.csv")
+def p14(method, q): r = pr_[(pr_.method == method) & (pr_.horizon == 30) & (pr_.quantity == q)].iloc[0]; return r.estimate, r.lo, r.hi
+def txt14(method):
+    a, t, rd, rr = p14(method, "risk_acei")[0], p14(method, "risk_thiazide")[0], p14(method, "rd"), p14(method, "rr")
+    return (f"ACE inhibitor {100*a:.1f}%, thiazide {100*t:.1f}%, risk difference {100*rd[0]:.1f} percentage points (95% CI {100*rd[1]:.1f} to {100*rd[2]:.1f}), risk ratio {rr[0]:.2f} ({rr[1]:.2f} to {rr[2]:.2f})",
+            f"{100*a:.1f}%, {100*t:.1f}%, risk difference {100*rd[0]:.1f} ({100*rd[1]:.1f} to {100*rd[2]:.1f}), risk ratio {rr[0]:.2f} ({rr[1]:.2f} to {rr[2]:.2f})")
+lit = "separate model: " + txt14("weighted pooled logistic")[0]; check("A-014 separate 30-day model", "amendments", amend, lit, lit, lit)
+lit = "365-day model read at day 30: " + txt14("weighted pooled logistic, 365-day model read at day 30")[1]; check("A-014 365-day model read at day 30", "amendments", amend, lit, lit, lit)
+ce_ = pd.read_csv(root / "qc/cohort/crude_events.csv").set_index("arm"); lit = f"ACE inhibitor {int(ce_.loc['ACEI','hosp_30'])}, thiazide {int(ce_.loc['THIAZIDE','hosp_30'])}"
+check("A-014 30-day events by arm (crude_events.csv)", "amendments", amend, lit, lit, lit)
+lit = f"only {int(ce_.hosp_30.sum())} events in the first 30 days"; check("A-014 total 30-day events", "amendments", amend, lit, lit, lit)
+dfc = pd.read_csv(root / "qc/analysis/pooled30_df_check.csv"); sepdf = dfc[dfc.model.str.startswith("pooled logistic, separate")].sort_values("spline_df")
+lit = "(" + ", ".join(f"{v:.3f}" for v in sepdf.rr.iloc[:2]) + f" and {sepdf.rr.iloc[2]:.3f};"; check("A-014 risk ratio with 2, 3 and 4 df", "amendments", amend, lit, lit, lit)
+lit = f"weighted KM ({dfc[dfc.model == 'weighted KM'].rr.iloc[0]:.3f})"; check("A-014 KM risk ratio at 30 days", "amendments", amend, lit, lit, lit)
 out = pd.DataFrame(rows, columns=["document", "claim", "text", "recomputed", "result"]); out.to_csv(root / "qc/narrative_audit.csv", index=False)
 print(out.assign(text=out.text.str[:60], recomputed=out.recomputed.astype(str).str[:40]).to_string(index=False))
 print("\nFAILED:", int((out.result != "PASS").sum()), "of", len(out)); sys.exit(0 if (out.result == "PASS").all() else 1)

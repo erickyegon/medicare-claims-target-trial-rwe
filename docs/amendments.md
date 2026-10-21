@@ -148,6 +148,16 @@ Every departure from `protocol.md` is recorded here before it is applied.
 - **Specification:** primary ITT outcome (365-day hospitalization), stabilized IPTW combined with stabilized IPCW for loss of continuous Part A/B/D entitlement. Censoring model: discrete-time (30-day intervals) logistic regression on interval, arm, age, sex, region, any baseline hospitalization, diabetes, chronic kidney disease and ischemic heart disease (kept short because the cohort has about 75 such censoring events); numerator model on interval and arm. Reaching the end of data or day 365 is administrative and not weighted. Bootstrap as for the other analyses (500 resamples; both models refitted in every resample).
 - **Status:** APPLIED 2026-10-20; CONFIRMED 2026-10-21.
 
+## A-014: The 30-day pooled logistic estimate comes from a separate 30-day model
+
+- **Date:** 2026-10-21 (review fixes)
+- **Protocol sections:** 9 and 10 (statistical methods), 15 (T5); SAP item 4
+- **Issue:** the 30-day risks from the weighted pooled logistic model were read off the 365-day model (natural spline, 4 df over days 1-365). A spline with 4 df over a year cannot resolve the first-month hazard, so the 30-day estimate is mostly interpolation from the rest of the year. The estimates also disagreed in direction with weighted KM: risk ratio 0.93 from the 365-day model against 1.35 from KM.
+- **Change:** the 30-day pooled logistic risks come from a separate model fitted to days 1-30 only (same form: natural spline of day, arm-by-time interaction, weighted daily counts, 4 df; weights and bootstrap unchanged). The 365-day pooled logistic estimate is unchanged. T5 and the study report show both 30-day pooled estimates, labelled: the separate model (reported) and the 365-day model read at day 30 (kept for transparency).
+- **Estimates (30 days, IPTW):** separate model: ACE inhibitor 3.3%, thiazide 2.5%, risk difference 0.9 percentage points (95% CI -2.1 to 3.4), risk ratio 1.35 (0.46 to 3.29). 365-day model read at day 30: 2.2%, 2.4%, risk difference -0.2 (-2.3 to 1.8), risk ratio 0.93 (0.29 to 2.36). Both intervals include the null; there are only 21 events in the first 30 days (ACE inhibitor 11, thiazide 10; `qc/cohort/crude_events.csv`).
+- **Sensitivity to the spline:** the separate model gives the same risk ratio with 2, 3 and 4 df (1.352, 1.352 and 1.353; `qc/analysis/pooled30_df_check.csv`). Agreement with weighted KM (1.353) is a consistency check, not the reason for the change; the reason is the spline resolution.
+- **Status:** APPLIED 2026-10-21; CONFIRMED 2026-10-21.
+
 ## Notes (not deviations)
 
 - **Hospice file loaded.** Protocol 4 lists beneficiary, carrier, outpatient, inpatient and PDE, but exclusion 5.6 (hospice claim in baseline year) needs the hospice file, so it is ingested too.

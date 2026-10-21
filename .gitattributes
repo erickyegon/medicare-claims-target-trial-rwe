@@ -1,0 +1,7 @@
+# Line endings are normalised to LF in the repository AND in the working tree on every platform, so that file hashes
+# (the dataset version hashes the codelists) and diffs do not depend on a contributor's git settings.
+*.csv  text eol=lf
+*.R    text eol=lf
+*.sql  text eol=lf
+*.md   text eol=lf
+*.qmd  text eol=lf

@@ -2192,7 +2192,7 @@ vertical-align: -.125em;
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Statistical analysis plan: ACE inhibitor versus thiazide initiation and 365-day hospitalization</h1>
-<p class="subtitle lead">Version 1.0, derived from protocol v0.4 and amendments A-001 to A-013</p>
+<p class="subtitle lead">Version 1.0, derived from protocol v0.4 and amendments A-001 to A-014</p>
 </div>
 
 
@@ -2277,7 +2277,7 @@ vertical-align: -.125em;
 <li><strong>Propensity score.</strong> Logistic regression of ACE inhibitor initiation on the covariates above.</li>
 <li><strong>Weights.</strong> Stabilized ATE weights, P(arm) / P(arm | covariates), truncated at the 1st and 99th percentile of the weight distribution. Balance: standardized mean differences with the pooled unweighted standard deviation (target below 0.1), love plot, propensity score distributions. The implementation is checked against <code>WeightIt</code> and <code>cobalt</code> (<code>qc/analysis/weightit_cobalt_check.csv</code>).</li>
 <li><strong>Weighted Kaplan-Meier.</strong> Weighted daily hazards = weighted events / weighted at-risk mass; cumulative incidence = 1 - product(1 - hazard). Unit tests confirm equality with <code>survival::survfit</code> on weighted data.</li>
-<li><strong>Weighted pooled logistic regression.</strong> Binomial model (quasi-binomial dispersion) for the daily hazard with a natural spline in day (4 df) and an arm-by-time interaction, fitted to weighted person-days. Because the weights are constant within person and the model has only time and arm, it is fitted on the equivalent weighted daily counts. The 30-day risk is read from the same 365-day model.</li>
+<li><strong>Weighted pooled logistic regression.</strong> Binomial model (quasi-binomial dispersion) for the daily hazard with a natural spline in day (4 df) and an arm-by-time interaction, fitted to weighted person-days. Because the weights are constant within person and the model has only time and arm, it is fitted on the equivalent weighted daily counts. The 30-day risk comes from a separate model of the same form fitted to days 1-30 only, because a 4-df spline over 365 days cannot resolve the first-month hazard (A-014); the estimate read from the 365-day model at day 30 is also shown, labelled.</li>
 <li><strong>Contrasts and intervals.</strong> Risk difference and risk ratio at 365 and 30 days. 95% percentile intervals from 500 nonparametric bootstrap resamples of individuals; the propensity score, weights and truncation are re-estimated in every resample; seed 20261020.</li>
 <li><strong>Censoring.</strong> Loss of entitlement and the end of data are treated as non-informative in the primary analysis. The sensitivity analyses below weight for it.</li>
 <li><strong>E-value</strong> for the 365-day risk ratio (VanderWeele and Ding), point estimate and confidence limit.</li>
@@ -2441,7 +2441,7 @@ vertical-align: -.125em;
 </section>
 <section id="departures-from-the-protocol" class="level2">
 <h2 class="anchored" data-anchor-id="departures-from-the-protocol">9. Departures from the protocol</h2>
-<p>All are recorded as amendments (A-001 to A-013) before use. Items marked “applied” in the amendment log were applied to keep the study estimable and were confirmed afterwards.</p>
+<p>All are recorded as amendments (A-001 to A-014) before use. Items marked “applied” in the amendment log were applied to keep the study estimable and were confirmed afterwards.</p>
 </section>
 
 </main>

@@ -11,7 +11,11 @@ weighted pooled logistic,365,risk_acei,0.2144,0.1642,0.2636
 weighted pooled logistic,365,risk_thiazide,0.1769,0.1363,0.2202
 weighted pooled logistic,365,rd,0.0375,-0.0353,0.0937
 weighted pooled logistic,365,rr,1.2121,0.8395,1.6173
-weighted pooled logistic,30,risk_acei,0.0223,0.0092,0.0373
-weighted pooled logistic,30,risk_thiazide,0.0238,0.0107,0.0404
-weighted pooled logistic,30,rd,-0.0016,-0.0229,0.0177
-weighted pooled logistic,30,rr,0.9348,0.2917,2.3592
+weighted pooled logistic,30,risk_acei,0.0333,0.0136,0.0544
+weighted pooled logistic,30,risk_thiazide,0.0246,0.011,0.0429
+weighted pooled logistic,30,rd,0.0087,-0.0211,0.0343
+weighted pooled logistic,30,rr,1.3532,0.456,3.2949
+"weighted pooled logistic, 365-day model read at day 30",30,risk_acei,0.0223,0.0092,0.0373
+"weighted pooled logistic, 365-day model read at day 30",30,risk_thiazide,0.0238,0.0107,0.0404
+"weighted pooled logistic, 365-day model read at day 30",30,rd,-0.0016,-0.0229,0.0177
+"weighted pooled logistic, 365-day model read at day 30",30,rr,0.9348,0.2917,2.3592

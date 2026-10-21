@@ -44,3 +44,10 @@ README,attrition step 10,| **790** | 790 |,| **790** | 790 |,PASS
 README,final cohort and arms,"790 in the final cohort (ACE inhibitor 433, thiazide/thiazide-like 357)","790 in the final cohort (ACE inhibitor 433, thiazide/thiazide-like 357)",PASS
 README,number of alternative analyses,All 11 alternative analyses,All 11 alternative analyses,PASS
 README,SAS reconciliation rows,all 11 attrition rows and 10 baseline rows match R,all 11 attrition rows and 10 baseline rows match R,PASS
+T6,"T6 matching row: N = 2 x pairs, matched events per arm",552 / 53 / 45,552 / 53 / 45,PASS
+amendments,A-014 separate 30-day model,"separate model: ACE inhibitor 3.3%, thiazide 2.5%, risk difference 0.9 percentage points (95% CI -2.1 to 3.4), risk ratio 1.35 (0.46 to 3.29)","separate model: ACE inhibitor 3.3%, thiazide 2.5%, risk difference 0.9 percentage points (95% CI -2.1 to 3.4), risk ratio 1.35 (0.46 to 3.29)",PASS
+amendments,A-014 365-day model read at day 30,"365-day model read at day 30: 2.2%, 2.4%, risk difference -0.2 (-2.3 to 1.8), risk ratio 0.93 (0.29 to 2.36)","365-day model read at day 30: 2.2%, 2.4%, risk difference -0.2 (-2.3 to 1.8), risk ratio 0.93 (0.29 to 2.36)",PASS
+amendments,A-014 30-day events by arm (crude_events.csv),"ACE inhibitor 11, thiazide 10","ACE inhibitor 11, thiazide 10",PASS
+amendments,A-014 total 30-day events,only 21 events in the first 30 days,only 21 events in the first 30 days,PASS
+amendments,"A-014 risk ratio with 2, 3 and 4 df","(1.352, 1.352 and 1.353;","(1.352, 1.352 and 1.353;",PASS
+amendments,A-014 KM risk ratio at 30 days,weighted KM (1.353),weighted KM (1.353),PASS

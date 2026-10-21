@@ -15,7 +15,7 @@ source("_helpers.R")   # Quarto renders with docs/ as the working directory
 
 **Methods demonstration on synthetic data. Nothing here is a treatment effect.** Every number below is read from the aggregate outputs of the pipeline
 (`qc/`); cells below 11 are flagged. Dataset version `r dataset_version()`. The study question changed twice during feasibility work; the history is in
-the study report and in `docs/amendments.md` (A-001 to A-013).
+the study report and in `docs/amendments.md` (A-001 to A-014).
 
 ## T2. What the data can and cannot support
 
@@ -72,8 +72,8 @@ The hypertension-diagnosis step removed `r fmt(a$persons_removed[a$step == 5])` 
 
 ```{r arms}
 arms <- S("qc", "cohort", "arm_sizes.csv")
-kt(arms)
-kt(S("qc", "cohort", "cohort_baseline_counts.csv") %>% pivot_wider(names_from = arm, values_from = n))
+kt(arms %>% mutate(arm = arm_lab(arm)))
+kt(S("qc", "cohort", "cohort_baseline_counts.csv") %>% mutate(arm = arm_lab(arm)) %>% pivot_wider(names_from = arm, values_from = n))
 ```
 
 ## Follow-up and crude event counts (descriptive, no models)
@@ -83,18 +83,18 @@ Intention-to-treat follow-up ends at the earliest of day 365, end of data (2023-
 ```{r follow}
 kt(S("qc", "cohort", "timing_itt_end_reasons.csv"), caption = "Why ITT follow-up ended")
 ce <- S("qc", "cohort", "crude_events.csv")
-kt(ce %>% transmute(arm, n, n_full_365, hosp_365_itt, hosp_365_among_full_365, crude_risk_365_pct_among_full, hosp_30, crude_risk_30_pct_among_full, fracture_365_itt, flag_lt11))
-gr <- ce %>% transmute(arm, people = n, hospitalizations_365 = hosp_365_itt, meets = n >= 200 & hosp_365_itt >= 40)
+kt(ce %>% transmute(arm = arm_lab(arm), n, n_full_365, hosp_365_itt, hosp_365_among_full_365, crude_risk_365_pct_among_full, hosp_30, crude_risk_30_pct_among_full, fracture_365_itt, flag_lt11))
+gr <- ce %>% transmute(arm = arm_lab(arm), people = n, hospitalizations_365 = hosp_365_itt, meets = n >= 200 & hosp_365_itt >= 40)
 ```
 
 Go rule for the analysis phase (each arm at least 200 people and at least 40 hospitalizations within 365 days): `r if (all(gr$meets)) "met in both arms" else "NOT met"`
-(`r paste(arm_lab(gr$arm), gr$people, "people /", gr$hospitalizations_365, "hospitalizations", collapse = "; ")`).
+(`r paste(gr$arm, gr$people, "people /", gr$hospitalizations_365, "hospitalizations", collapse = "; ")`).
 
 ## Time to add-on, switch and discontinuation (descriptive)
 
 ```{r timing}
 tc <- S("qc", "cohort", "timing_counts.csv"); rp <- S("qc", "cohort", "refill_pattern.csv")
-kt(tc %>% transmute(arm, n, n_addon, n_switch, n_discontinued, n_censored_before_any, median_days_addon, median_days_switch, median_days_discontinuation, index_days_supply_median = idx_days_supply_median, flag_lt11))
+kt(tc %>% transmute(arm = arm_lab(arm), n, n_addon, n_switch, n_discontinued, n_censored_before_any, median_days_addon, median_days_switch, median_days_discontinuation, index_days_supply_median = idx_days_supply_median, flag_lt11))
 kt(S("qc", "cohort", "timing_cif.csv"), caption = "Cumulative incidence (%) of the first event (Aalen-Johansen)")
 kt(rp, caption = "Refill pattern of the index class in the cohort")
 ```

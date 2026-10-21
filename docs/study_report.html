@@ -2398,12 +2398,12 @@ vertical-align: -.125em;
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 6%">
-<col style="width: 19%">
-<col style="width: 19%">
-<col style="width: 18%">
-<col style="width: 19%">
+<col style="width: 32%">
+<col style="width: 5%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2417,6 +2417,14 @@ vertical-align: -.125em;
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">weighted pooled logistic, 365-day model read at day 30</td>
+<td style="text-align: left;">30 days</td>
+<td style="text-align: left;">2.2 (95% CI 0.9 to 3.7)</td>
+<td style="text-align: left;">2.4 (95% CI 1.1 to 4.0)</td>
+<td style="text-align: left;">-0.2 (95% CI -2.3 to 1.8)</td>
+<td style="text-align: left;">0.93 (95% CI 0.29 to 2.36)</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">weighted pooled logistic</td>
 <td style="text-align: left;">365 days</td>
 <td style="text-align: left;">21.4 (95% CI 16.4 to 26.4)</td>
@@ -2424,15 +2432,15 @@ vertical-align: -.125em;
 <td style="text-align: left;">3.8 (95% CI -3.5 to 9.4)</td>
 <td style="text-align: left;">1.21 (95% CI 0.84 to 1.62)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">weighted pooled logistic</td>
 <td style="text-align: left;">30 days</td>
-<td style="text-align: left;">2.2 (95% CI 0.9 to 3.7)</td>
-<td style="text-align: left;">2.4 (95% CI 1.1 to 4.0)</td>
-<td style="text-align: left;">-0.2 (95% CI -2.3 to 1.8)</td>
-<td style="text-align: left;">0.93 (95% CI 0.29 to 2.36)</td>
+<td style="text-align: left;">3.3 (95% CI 1.4 to 5.4)</td>
+<td style="text-align: left;">2.5 (95% CI 1.1 to 4.3)</td>
+<td style="text-align: left;">0.9 (95% CI -2.1 to 3.4)</td>
+<td style="text-align: left;">1.35 (95% CI 0.46 to 3.29)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">weighted KM</td>
 <td style="text-align: left;">365 days</td>
 <td style="text-align: left;">21.4 (95% CI 16.4 to 26.4)</td>
@@ -2440,7 +2448,7 @@ vertical-align: -.125em;
 <td style="text-align: left;">3.8 (95% CI -3.5 to 9.4)</td>
 <td style="text-align: left;">1.21 (95% CI 0.84 to 1.61)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">weighted KM</td>
 <td style="text-align: left;">30 days</td>
 <td style="text-align: left;">3.3 (95% CI 1.4 to 5.4)</td>
@@ -2452,7 +2460,7 @@ vertical-align: -.125em;
 </table>
 </div>
 </div>
-<p>In the weighted Kaplan-Meier analysis the 365-day risk was 21.4% for the ACE inhibitor arm and 17.7% for the thiazide arm: a risk difference of 3.8 (95% CI -3.5 to 9.4) percentage points and a risk ratio of 1.21 (95% CI 0.84 to 1.61). The interval for the risk difference includes zero. The weighted pooled logistic model gave a 365-day risk ratio of 1.21. The E-value for the point estimate is 1.72 and 1.00 for the confidence limit. For the secondary 30-day outcome the risk difference was 0.9 (95% CI -2.1 to 3.4) percentage points (weighted Kaplan-Meier); the 30-day analysis rests on few events (ACE inhibitor 11 and thiazide 10), so it is unstable.</p>
+<p>In the weighted Kaplan-Meier analysis the 365-day risk was 21.4% for the ACE inhibitor arm and 17.7% for the thiazide arm: a risk difference of 3.8 (95% CI -3.5 to 9.4) percentage points and a risk ratio of 1.21 (95% CI 0.84 to 1.61). The interval for the risk difference includes zero. The weighted pooled logistic model gave a 365-day risk ratio of 1.21. The E-value for the point estimate is 1.72 and 1.00 for the confidence limit. For the secondary 30-day outcome the weighted pooled logistic model was fitted to days 1-30 only (A-014), because a 4-df spline over 365 days cannot resolve the first-month hazard; it gave a risk ratio of 1.35, against 0.93 when the 365-day model is read at day 30 (both are in T5). The risk difference was 0.9 (95% CI -2.1 to 3.4) percentage points (weighted Kaplan-Meier); the 30-day analysis rests on few events (ACE inhibitor 11 and thiazide 10), so it is unstable.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2604,13 +2612,13 @@ vertical-align: -.125em;
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">ACEI</td>
+<td style="text-align: left;">ACE inhibitor</td>
 <td style="text-align: right;">433</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">393.3</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">THIAZIDE</td>
+<td style="text-align: left;">thiazide</td>
 <td style="text-align: right;">357</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">327.2</td>
@@ -2624,12 +2632,12 @@ vertical-align: -.125em;
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 5%">
-<col style="width: 10%">
-<col style="width: 10%">
 <col style="width: 19%">
-<col style="width: 40%">
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 37%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2643,7 +2651,7 @@ vertical-align: -.125em;
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">ACEI</td>
+<td style="text-align: left;">ACE inhibitor</td>
 <td style="text-align: right;">433</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">1</td>
@@ -2651,7 +2659,7 @@ vertical-align: -.125em;
 <td style="text-align: right;">90</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">THIAZIDE</td>
+<td style="text-align: left;">thiazide</td>
 <td style="text-align: right;">357</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">2</td>

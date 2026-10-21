@@ -1,6 +1,6 @@
 ---
 title: "Statistical analysis plan: ACE inhibitor versus thiazide initiation and 365-day hospitalization"
-subtitle: "Version 1.0, derived from protocol v0.4 and amendments A-001 to A-013"
+subtitle: "Version 1.0, derived from protocol v0.4 and amendments A-001 to A-014"
 format:
   html:
     embed-resources: true
@@ -50,7 +50,7 @@ Measured in days -365 to -1 (A-009). Propensity score model terms: age (linear a
 1. **Propensity score.** Logistic regression of ACE inhibitor initiation on the covariates above.
 2. **Weights.** Stabilized ATE weights, P(arm) / P(arm | covariates), truncated at the 1st and 99th percentile of the weight distribution. Balance: standardized mean differences with the pooled unweighted standard deviation (target below 0.1), love plot, propensity score distributions. The implementation is checked against `WeightIt` and `cobalt` (`qc/analysis/weightit_cobalt_check.csv`).
 3. **Weighted Kaplan-Meier.** Weighted daily hazards = weighted events / weighted at-risk mass; cumulative incidence = 1 - product(1 - hazard). Unit tests confirm equality with `survival::survfit` on weighted data.
-4. **Weighted pooled logistic regression.** Binomial model (quasi-binomial dispersion) for the daily hazard with a natural spline in day (4 df) and an arm-by-time interaction, fitted to weighted person-days. Because the weights are constant within person and the model has only time and arm, it is fitted on the equivalent weighted daily counts. The 30-day risk is read from the same 365-day model.
+4. **Weighted pooled logistic regression.** Binomial model (quasi-binomial dispersion) for the daily hazard with a natural spline in day (4 df) and an arm-by-time interaction, fitted to weighted person-days. Because the weights are constant within person and the model has only time and arm, it is fitted on the equivalent weighted daily counts. The 30-day risk comes from a separate model of the same form fitted to days 1-30 only, because a 4-df spline over 365 days cannot resolve the first-month hazard (A-014); the estimate read from the 365-day model at day 30 is also shown, labelled.
 5. **Contrasts and intervals.** Risk difference and risk ratio at 365 and 30 days. 95% percentile intervals from 500 nonparametric bootstrap resamples of individuals; the propensity score, weights and truncation are re-estimated in every resample; seed 20261020.
 6. **Censoring.** Loss of entitlement and the end of data are treated as non-informative in the primary analysis. The sensitivity analyses below weight for it.
 7. **E-value** for the 365-day risk ratio (VanderWeele and Ding), point estimate and confidence limit.
@@ -102,4 +102,4 @@ code lists versioned with source and date, independent re-derivations in pandas 
 
 ## 9. Departures from the protocol
 
-All are recorded as amendments (A-001 to A-013) before use. Items marked "applied" in the amendment log were applied to keep the study estimable and were confirmed afterwards.
+All are recorded as amendments (A-001 to A-014) before use. Items marked "applied" in the amendment log were applied to keep the study estimable and were confirmed afterwards.

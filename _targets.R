@@ -21,11 +21,12 @@ list(
   tar_target(cohort,        run(rscript, "R/06_cohort.R", c("qc/cohort/attrition.csv", "qc/cohort/arm_sizes.csv"), enrollment, code_lists)),
   tar_target(followup,      run(rscript, "R/07_followup.R", c("qc/cohort/crude_events.csv", "qc/cohort/timing_counts.csv"), cohort)),
   tar_target(analysis,      run(rscript, "R/09_analysis.R", c("qc/analysis/primary_results.csv", "qc/analysis/sensitivity_results.csv"), followup)),
+  tar_target(pooled30,      run(rscript, "R/09b_pooled30_df_check.R", "qc/analysis/pooled30_df_check.csv", analysis)),
   tar_target(crosscheck,    run("python", "qc/python_crosscheck.py", c("qc/cohort/python_vs_r_attrition.csv", "qc/cohort/python_vs_r_followup.csv"), followup)),
   tar_target(facts,         run(rscript, "R/10_manifest_facts.R", c("qc/feasibility_facts.csv", "qc/dataset_version.txt", "qc/cohort/refill_pattern.csv"), analysis, scan)),
   tar_target(tfl,           run(rscript, "R/11_tfl.R", "output/tfl/provenance.csv", analysis, facts, crosscheck)),
   tar_target(docs, {
-    tfl; scan; profile_extra
+    tfl; scan; profile_extra; pooled30
     for (f in c("docs/feasibility.qmd", "docs/sap.qmd", "docs/study_report.qmd", "qc/indication_scan.qmd", "qc/profiling.qmd"))
       if (system2("quarto", c("render", f)) != 0) stop("quarto render failed: ", f)
     c("docs/feasibility.html", "docs/sap.html", "docs/study_report.html", "qc/indication_scan.html", "qc/profiling.html")

@@ -1,11 +1,11 @@
 Part,Arm,N,Index days supply (median),Add-on,Switch,Discontinued,Censored before any event,Median days to add-on,Median days to switch,Median days to discontinuation,Day,Add-on (%),Switch (%),Discontinuation (%)
-A: counts and medians,ACEI,433,90,8,1,401,23,25.5,35,119,,,,
-A: counts and medians,THIAZIDE,357,90,7,2,327,21,56,94,119,,,,
-B: cumulative incidence by day,ACEI,,,,,,,,,,30,1.4,0,0
-B: cumulative incidence by day,ACEI,,,,,,,,,,90,1.4,0.2,1.2
-B: cumulative incidence by day,ACEI,,,,,,,,,,180,1.9,0.2,91.3
-B: cumulative incidence by day,ACEI,,,,,,,,,,365,1.9,0.2,97.6
-B: cumulative incidence by day,THIAZIDE,,,,,,,,,,30,0.6,0,0
-B: cumulative incidence by day,THIAZIDE,,,,,,,,,,90,1.7,0.3,0.3
-B: cumulative incidence by day,THIAZIDE,,,,,,,,,,180,2,0.6,92.7
-B: cumulative incidence by day,THIAZIDE,,,,,,,,,,365,2,0.6,97
+A: counts and medians,ACE inhibitor,433,90,8,1,401,23,25.5,35,119,,,,
+A: counts and medians,thiazide,357,90,7,2,327,21,56,94,119,,,,
+B: cumulative incidence by day,ACE inhibitor,,,,,,,,,,30,1.4,0,0
+B: cumulative incidence by day,ACE inhibitor,,,,,,,,,,90,1.4,0.2,1.2
+B: cumulative incidence by day,ACE inhibitor,,,,,,,,,,180,1.9,0.2,91.3
+B: cumulative incidence by day,ACE inhibitor,,,,,,,,,,365,1.9,0.2,97.6
+B: cumulative incidence by day,thiazide,,,,,,,,,,30,0.6,0,0
+B: cumulative incidence by day,thiazide,,,,,,,,,,90,1.7,0.3,0.3
+B: cumulative incidence by day,thiazide,,,,,,,,,,180,2,0.6,92.7
+B: cumulative incidence by day,thiazide,,,,,,,,,,365,2,0.6,97
