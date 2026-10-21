@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medicare claims target trial emulation (synthetic data)</title>
+<style>
+body{font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:46rem;margin:2.5rem auto;padding:0 1rem;color:#1f2328}
+h1{font-size:1.5rem;margin-bottom:.2rem} .note{background:#fff8c5;border:1px solid #d4a72c;border-radius:6px;padding:.7rem 1rem}
+li{margin:.35rem 0} a{color:#0969da} small{color:#59636e}
+</style></head><body>
+<h1>Medicare claims target trial emulation</h1>
+<p>ACE inhibitor vs thiazide initiation on CMS synthetic Medicare data: new-user active-comparator cohort, IPTW/IPCW, weighted risk curves, bootstrap, sensitivity analyses, with independent re-derivation in Python and SAS.</p>
+<p class="note"><strong>Synthetic data. Nothing here is a real-world finding.</strong> The estimates demonstrate methods; CMS advises against scientific inference from the Synthea-generated files.</p>
+<h2>Documents</h2>
+<ul>
+<li><a href="docs/study_report.html">Study report</a> <small>- question, data limits, results, the two earlier questions that failed</small></li>
+<li><a href="docs/sap.html">Statistical analysis plan</a></li>
+<li><a href="docs/feasibility.html">Feasibility assessment</a></li>
+<li><a href="output/tfl/index.html">Tables, figures and listings (T1-T7, F1-F4, L1-L2)</a></li>
+<li><a href="qc/profiling.html">Data profiling report</a></li>
+<li><a href="qc/indication_scan.html">Indication scan report</a></li>
+</ul>
+<h2>Source and QC</h2>
+<ul>
+<li><a href="https://github.com/erickyegon/medicare-claims-target-trial-rwe">Repository and README</a></li>
+<li><a href="https://github.com/erickyegon/medicare-claims-target-trial-rwe/blob/main/docs/amendments.md">Amendment log</a></li>
+<li><a href="https://github.com/erickyegon/medicare-claims-target-trial-rwe/blob/main/qc/sas_reconciliation.md">SAS reconciliation (all rows match R)</a></li>
+</ul>
+</body></html>
