@@ -1,0 +1,12 @@
+revenue_center,description,source,download_date,populated_in_data
+0450,Emergency room - general,Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0451,Emergency room - EMTALA screening,Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0452,Emergency room - beyond EMTALA screening,Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0453,Emergency room - urgent care,Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0454,Emergency room - fast track,Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0455,Emergency room - (reserved),Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0456,Emergency room - (reserved),Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0457,Emergency room - (reserved),Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0458,Emergency room - (reserved),Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0459,Emergency room - other,Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE
+0981,Professional fees - emergency room,Revenue codes named in protocol Section 7; descriptions abbreviated and should be checked against the NUBC code set,2026-10-20,FALSE

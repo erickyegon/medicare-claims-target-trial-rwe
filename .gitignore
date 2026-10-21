@@ -1,0 +1,9 @@
+data/
+*.duckdb
+renv/library
+__pycache__/
+.Rproj.user/
+.Rhistory
+.quarto/
+_targets/
+*_files/

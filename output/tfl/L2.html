@@ -1,0 +1,127 @@
+<h3>L2. Variable derivation listing</h3>
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:left;"> Definition </th>
+   <th style="text-align:left;"> Window </th>
+   <th style="text-align:left;"> Source </th>
+   <th style="text-align:left;"> Program </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> arm </td>
+   <td style="text-align:left;"> Class of the study drug filled on the index date: ACE inhibitor (ATC C09AA) or thiazide / thiazide-like (C03AA, C03BA) </td>
+   <td style="text-align:left;"> index date </td>
+   <td style="text-align:left;"> PDE via RxNorm NDC map </td>
+   <td style="text-align:left;"> sql/index_events.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> index date </td>
+   <td style="text-align:left;"> First fill (on or after 2016-03-01) meeting every criterion of Section 5, one episode per person </td>
+   <td style="text-align:left;"> - </td>
+   <td style="text-align:left;"> PDE, enrollment, claims </td>
+   <td style="text-align:left;"> R/06_cohort.R </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> new user </td>
+   <td style="text-align:left;"> No fill of any antihypertensive class </td>
+   <td style="text-align:left;"> days -365 to -1 </td>
+   <td style="text-align:left;"> PDE </td>
+   <td style="text-align:left;"> sql/index_events.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> continuous A+B+D </td>
+   <td style="text-align:left;"> Part A, B and D present in every month from the month of day -365 through the index month </td>
+   <td style="text-align:left;"> days -365 to 0 </td>
+   <td style="text-align:left;"> beneficiary files </td>
+   <td style="text-align:left;"> sql/enrollment_spans.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hypertension diagnosis (eligibility) </td>
+   <td style="text-align:left;"> ICD-10-CM I10-I16 on any carrier, outpatient or inpatient claim </td>
+   <td style="text-align:left;"> days -365 to 0 </td>
+   <td style="text-align:left;"> claims </td>
+   <td style="text-align:left;"> sql/index_events.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hospitalization (outcome) </td>
+   <td style="text-align:left;"> First inpatient admission date </td>
+   <td style="text-align:left;"> days 1 to 365 (1 to 30 for the secondary outcome) </td>
+   <td style="text-align:left;"> inpatient file </td>
+   <td style="text-align:left;"> sql/followup.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ITT follow-up end </td>
+   <td style="text-align:left;"> Earliest of day 365, 2023-03-31, and end of the A+B+D span containing the index month </td>
+   <td style="text-align:left;"> - </td>
+   <td style="text-align:left;"> beneficiary files </td>
+   <td style="text-align:left;"> R/07_followup.R </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> femur fracture (negative control) </td>
+   <td style="text-align:left;"> ICD-10-CM S72 initial-encounter codes, with and without the 7th character </td>
+   <td style="text-align:left;"> days 1 to 365 </td>
+   <td style="text-align:left;"> claims </td>
+   <td style="text-align:left;"> R/03_codelists.R </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:left;"> Completed years at the index date </td>
+   <td style="text-align:left;"> index date </td>
+   <td style="text-align:left;"> beneficiary files </td>
+   <td style="text-align:left;"> sql/baseline.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sex, race, region, index year, index quarter </td>
+   <td style="text-align:left;"> From the beneficiary file for the index year (earliest row if missing); region via ssa_state_region.csv; index month grouped to quarter </td>
+   <td style="text-align:left;"> index </td>
+   <td style="text-align:left;"> beneficiary files </td>
+   <td style="text-align:left;"> sql/baseline.sql, R/08_baseline.R </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> COPD, asthma, ischemic heart disease, diabetes, chronic kidney disease, cancer (dementia, heart failure not modelled) </td>
+   <td style="text-align:left;"> At least one claim with a CCW code for the condition (A-003) </td>
+   <td style="text-align:left;"> days -365 to -1 </td>
+   <td style="text-align:left;"> claims </td>
+   <td style="text-align:left;"> sql/baseline.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> visit days </td>
+   <td style="text-align:left;"> Distinct dates of carrier or outpatient claims that carry a diagnosis; modelled as log(1 + days) </td>
+   <td style="text-align:left;"> days -365 to -1 </td>
+   <td style="text-align:left;"> carrier, outpatient </td>
+   <td style="text-align:left;"> sql/baseline.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> any baseline hospitalization </td>
+   <td style="text-align:left;"> At least one inpatient admission </td>
+   <td style="text-align:left;"> days -365 to -1 </td>
+   <td style="text-align:left;"> inpatient </td>
+   <td style="text-align:left;"> sql/baseline.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> distinct drugs, distinct drug classes </td>
+   <td style="text-align:left;"> Distinct RxNorm drugs and ATC level-4 classes among fills with an RxNorm drug concept </td>
+   <td style="text-align:left;"> days -365 to -1 </td>
+   <td style="text-align:left;"> PDE via RxNorm / RxClass </td>
+   <td style="text-align:left;"> sql/baseline.sql </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> propensity score and weights </td>
+   <td style="text-align:left;"> Logistic model on the covariates above; stabilized ATE weights truncated at the 1st and 99th percentile </td>
+   <td style="text-align:left;"> - </td>
+   <td style="text-align:left;"> analysis data </td>
+   <td style="text-align:left;"> R/09_analysis_functions.R </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> add-on / switch / discontinuation </td>
+   <td style="text-align:left;"> First fill of the other study drug (add-on if the index class still has supply, else switch); discontinuation = no refill within 30 days after the end of supply </td>
+   <td style="text-align:left;"> after index </td>
+   <td style="text-align:left;"> PDE </td>
+   <td style="text-align:left;"> R/07_followup.R </td>
+  </tr>
+</tbody>
+</table>
+<p><small>Program: R/11_tfl.R (inputs from sql/*.sql, R/*.R). Dataset version: 4ac952d194 (CMS synthetic Medicare files, downloaded 2026-10-20). Synthetic data, not inferential.</small></p>

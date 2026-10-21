@@ -1,0 +1,6 @@
+dx3,atc_id,atc_name,n_episodes,n_treated,n_late,n_untreated,min_arm,pooled_share,treated_share,enrichment,dx_description
+E09,A10AC,"Insulins and analogues for injection, intermediate-acting",683,267,85,331,267,0.1299262406607309,0.39092240117130306,3,Drug or chemical induced diabetes mellitus
+E09,A10AD,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",683,267,85,331,267,0.1299262406607309,0.39092240117130306,3,Drug or chemical induced diabetes mellitus
+I13,A10AD,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting",618,247,53,318,247,0.1299262406607309,0.39967637540453077,3.1,Hypertensive heart and chronic kidney disease
+I13,A10AC,"Insulins and analogues for injection, intermediate-acting",618,247,53,318,247,0.1299262406607309,0.39967637540453077,3.1,Hypertensive heart and chronic kidney disease
+J20,N02BE,Anilides,722,480,17,225,225,0.0925214236268589,0.6648199445983379,7.2,Acute bronchitis

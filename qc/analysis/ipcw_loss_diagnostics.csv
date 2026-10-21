@@ -1,0 +1,6 @@
+item,value
+censoring events (loss of A/B/D before day 365 and before end of data),75
+IPCW multiplier at day 365: minimum,0.9284
+median,0.9919
+maximum,1.1882
+combined IPTW x IPCW weight at day 365: maximum,4.5006

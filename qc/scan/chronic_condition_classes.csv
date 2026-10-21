@@ -1,0 +1,115 @@
+cond,atc_id,n_new_users,atc_name
+Acute Myocardial Infarction,C10AA,208,HMG CoA reductase inhibitors
+Anemia,C09AA,692,"ACE inhibitors, plain"
+Anemia,C03AA,594,"Thiazides, plain"
+Anemia,C10AA,589,HMG CoA reductase inhibitors
+Anemia,N02BE,569,Anilides
+Anemia,C08CA,509,Dihydropyridine derivatives
+Anemia,G02CC,349,Antiinflammatory products for vaginal administration
+Anemia,M01AE,349,Propionic acid derivatives
+Anemia,M02AA,349,"Antiinflammatory preparations, non-steroids for topical use"
+Anemia,A10AD,342,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting"
+Anemia,A10AC,342,"Insulins and analogues for injection, intermediate-acting"
+Anemia,A10AB,342,"Insulins and analogues for injection, fast-acting"
+Anemia,A10AF,341,Insulins and analogues for inhalation
+Anemia,A10AE,341,"Insulins and analogues for injection, long-acting"
+Anemia,M05BA,276,Bisphosphonates
+Anemia,B01AC,256,Platelet aggregation inhibitors excl. heparin
+Anemia,C07AB,254,"Beta blocking agents, selective"
+Anemia,C01EB,223,Other cardiac preparations
+Anemia,R02AX,223,Other throat preparations
+Anemia,L04AD,202,Calcineurin inhibitors
+Chronic Kidney Disease,A10AB,505,"Insulins and analogues for injection, fast-acting"
+Chronic Kidney Disease,A10AC,505,"Insulins and analogues for injection, intermediate-acting"
+Chronic Kidney Disease,A10AD,505,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting"
+Chronic Kidney Disease,A10AF,504,Insulins and analogues for inhalation
+Chronic Kidney Disease,A10AE,504,"Insulins and analogues for injection, long-acting"
+Chronic Kidney Disease,C09AA,392,"ACE inhibitors, plain"
+Chronic Kidney Disease,C03AA,369,"Thiazides, plain"
+Chronic Kidney Disease,L04AD,350,Calcineurin inhibitors
+Chronic Kidney Disease,D11AH,349,"Agents for dermatitis, excluding corticosteroids"
+Chronic Kidney Disease,C10AA,348,HMG CoA reductase inhibitors
+Chronic Kidney Disease,N02BE,321,Anilides
+Chronic Kidney Disease,C08CA,304,Dihydropyridine derivatives
+Chronic Kidney Disease,G02CC,207,Antiinflammatory products for vaginal administration
+Chronic Kidney Disease,M01AE,207,Propionic acid derivatives
+Chronic Kidney Disease,M02AA,207,"Antiinflammatory preparations, non-steroids for topical use"
+Diabetes,C09AA,579,"ACE inhibitors, plain"
+Diabetes,C03AA,522,"Thiazides, plain"
+Diabetes,A10AD,505,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting"
+Diabetes,A10AB,505,"Insulins and analogues for injection, fast-acting"
+Diabetes,A10AC,505,"Insulins and analogues for injection, intermediate-acting"
+Diabetes,A10AE,504,"Insulins and analogues for injection, long-acting"
+Diabetes,A10AF,504,Insulins and analogues for inhalation
+Diabetes,C10AA,472,HMG CoA reductase inhibitors
+Diabetes,C08CA,448,Dihydropyridine derivatives
+Diabetes,N02BE,439,Anilides
+Diabetes,L04AD,349,Calcineurin inhibitors
+Diabetes,D11AH,348,"Agents for dermatitis, excluding corticosteroids"
+Diabetes,M01AE,282,Propionic acid derivatives
+Diabetes,G02CC,282,Antiinflammatory products for vaginal administration
+Diabetes,M02AA,282,"Antiinflammatory preparations, non-steroids for topical use"
+Diabetes,A10BA,233,Biguanides
+Diabetes,M05BA,214,Bisphosphonates
+Hyperlipidemia,C10AA,807,HMG CoA reductase inhibitors
+Hyperlipidemia,C09AA,544,"ACE inhibitors, plain"
+Hyperlipidemia,C03AA,477,"Thiazides, plain"
+Hyperlipidemia,N02BE,449,Anilides
+Hyperlipidemia,C08CA,425,Dihydropyridine derivatives
+Hyperlipidemia,G02CC,273,Antiinflammatory products for vaginal administration
+Hyperlipidemia,M01AE,273,Propionic acid derivatives
+Hyperlipidemia,M02AA,273,"Antiinflammatory preparations, non-steroids for topical use"
+Hyperlipidemia,M05BA,244,Bisphosphonates
+Hyperlipidemia,A10AB,218,"Insulins and analogues for injection, fast-acting"
+Hyperlipidemia,A10AC,218,"Insulins and analogues for injection, intermediate-acting"
+Hyperlipidemia,A10AE,218,"Insulins and analogues for injection, long-acting"
+Hyperlipidemia,A10AF,218,Insulins and analogues for inhalation
+Hyperlipidemia,A10AD,218,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting"
+Hyperlipidemia,A10BA,217,Biguanides
+Hypertension,C09AA,884,"ACE inhibitors, plain"
+Hypertension,C03AA,800,"Thiazides, plain"
+Hypertension,C08CA,693,Dihydropyridine derivatives
+Hypertension,C10AA,657,HMG CoA reductase inhibitors
+Hypertension,N02BE,578,Anilides
+Hypertension,M01AE,385,Propionic acid derivatives
+Hypertension,G02CC,385,Antiinflammatory products for vaginal administration
+Hypertension,M02AA,385,"Antiinflammatory preparations, non-steroids for topical use"
+Hypertension,A10AB,374,"Insulins and analogues for injection, fast-acting"
+Hypertension,A10AC,374,"Insulins and analogues for injection, intermediate-acting"
+Hypertension,A10AD,374,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting"
+Hypertension,A10AF,373,Insulins and analogues for inhalation
+Hypertension,A10AE,373,"Insulins and analogues for injection, long-acting"
+Hypertension,B01AC,258,Platelet aggregation inhibitors excl. heparin
+Hypertension,C07AB,254,"Beta blocking agents, selective"
+Hypertension,M05BA,250,Bisphosphonates
+Hypertension,C01EB,247,Other cardiac preparations
+Hypertension,R02AX,247,Other throat preparations
+Hypertension,L04AD,241,Calcineurin inhibitors
+Hypertension,D11AH,240,"Agents for dermatitis, excluding corticosteroids"
+Ischemic Heart Disease,C09AA,735,"ACE inhibitors, plain"
+Ischemic Heart Disease,C10AA,720,HMG CoA reductase inhibitors
+Ischemic Heart Disease,C03AA,655,"Thiazides, plain"
+Ischemic Heart Disease,N02BE,653,Anilides
+Ischemic Heart Disease,C08CA,553,Dihydropyridine derivatives
+Ischemic Heart Disease,M02AA,398,"Antiinflammatory preparations, non-steroids for topical use"
+Ischemic Heart Disease,M01AE,398,Propionic acid derivatives
+Ischemic Heart Disease,G02CC,398,Antiinflammatory products for vaginal administration
+Ischemic Heart Disease,C07AB,396,"Beta blocking agents, selective"
+Ischemic Heart Disease,B01AC,377,Platelet aggregation inhibitors excl. heparin
+Ischemic Heart Disease,M05BA,341,Bisphosphonates
+Ischemic Heart Disease,A10AB,328,"Insulins and analogues for injection, fast-acting"
+Ischemic Heart Disease,A10AD,328,"Insulins and analogues for injection, intermediate- or long-acting combined with fast-acting"
+Ischemic Heart Disease,A10AC,328,"Insulins and analogues for injection, intermediate-acting"
+Ischemic Heart Disease,A10AF,327,Insulins and analogues for inhalation
+Ischemic Heart Disease,A10AE,327,"Insulins and analogues for injection, long-acting"
+Ischemic Heart Disease,C01EB,259,Other cardiac preparations
+Ischemic Heart Disease,R02AX,259,Other throat preparations
+Ischemic Heart Disease,L04AD,235,Calcineurin inhibitors
+Ischemic Heart Disease,D11AH,234,"Agents for dermatitis, excluding corticosteroids"
+Ischemic Heart Disease,R05DA,229,Opium alkaloids and derivatives
+Ischemic Heart Disease,C05AE,227,Muscle relaxants
+Ischemic Heart Disease,C01DA,227,Organic nitrates
+Ischemic Heart Disease,J01CA,222,Penicillins with extended spectrum
+Osteoporosis With or Without Pathological Fracture,M05BA,535,Bisphosphonates
+Osteoporosis With or Without Pathological Fracture,C09AA,218,"ACE inhibitors, plain"
+Osteoporosis With or Without Pathological Fracture,N02BE,210,Anilides

@@ -1,0 +1,18 @@
+Section,Item,Value,Share of total,Consequence
+Data facts and nulls,"beneficiaries (distinct, all years)","9,179",,
+Data facts and nulls,"influenza diagnoses (J09-J11), any claim",0,,influenza question not estimable (v0.1)
+Data facts and nulls,drug concepts named oseltamivir among RxNorm-resolved PDE NDCs,0,,
+Data facts and nulls,deaths recorded in beneficiary files,0,,mortality is not an outcome
+Data facts and nulls,outpatient rows with ED revenue centers 0450-0459 or 0981,0,,ED visits not observable (A-001)
+Data facts and nulls,distinct values of dual-eligibility months,1,,not usable as a covariate
+Data facts and nulls,PDE fills,"515,520",,
+Data facts and nulls,PDE fills with no RxNorm record (measure 1),"101,407",19.7,NDC not found in RxNorm; used for the new-user sensitivity cohort
+Data facts and nulls,PDE fills with no RxNorm drug concept (measure 2),"107,298",20.8,"wider measure (contains measure 1): also NDCs whose record gives no drug; exposure, washout and the scan use fills with a drug concept"
+Data facts and nulls,distinct PDE NDCs,"14,627",,
+Data facts and nulls,distinct PDE NDCs with an RxNorm record,"11,913",81.4,
+Data facts and nulls,"bronchitis episodes (age 65+, 365d A+B+D)",722,,from the indication scan
+Data facts and nulls,bronchitis episodes with any antibacterial (ATC J01) class fill on days 0-30,0,,bronchitis / antibiotic question not estimable (A-004)
+Data facts and nulls,Part D share of person-months,,70.5,
+Hypertension cohort,people in the final cohort,790,,see T1
+Hypertension cohort,ACE inhibitor / thiazide,433 / 357,,see T1
+Hypertension cohort,people removed by the hypertension-diagnosis step,180,,see T1

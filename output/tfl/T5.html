@@ -1,0 +1,49 @@
+<h3>T5. All-cause hospitalization, intention-to-treat: 365-day (primary) and 30-day (secondary) risks, risk difference and risk ratio</h3>
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Method </th>
+   <th style="text-align:left;"> Horizon </th>
+   <th style="text-align:left;"> ACE inhibitor risk, % (95% CI) </th>
+   <th style="text-align:left;"> Thiazide risk, % (95% CI) </th>
+   <th style="text-align:left;"> Risk difference, percentage points (95% CI) </th>
+   <th style="text-align:left;"> Risk ratio (95% CI) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> weighted pooled logistic </td>
+   <td style="text-align:left;"> 365 days </td>
+   <td style="text-align:left;"> 21.4 (16.4 to 26.4) </td>
+   <td style="text-align:left;"> 17.7 (13.6 to 22.0) </td>
+   <td style="text-align:left;"> 3.8 (-3.5 to 9.4) </td>
+   <td style="text-align:left;"> 1.21 (0.84 to 1.62) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> weighted pooled logistic </td>
+   <td style="text-align:left;"> 30 days </td>
+   <td style="text-align:left;"> 2.2 (0.9 to 3.7) </td>
+   <td style="text-align:left;"> 2.4 (1.1 to 4.0) </td>
+   <td style="text-align:left;"> -0.2 (-2.3 to 1.8) </td>
+   <td style="text-align:left;"> 0.93 (0.29 to 2.36) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> weighted KM </td>
+   <td style="text-align:left;"> 365 days </td>
+   <td style="text-align:left;"> 21.4 (16.4 to 26.4) </td>
+   <td style="text-align:left;"> 17.7 (13.6 to 22.0) </td>
+   <td style="text-align:left;"> 3.8 (-3.5 to 9.4) </td>
+   <td style="text-align:left;"> 1.21 (0.84 to 1.61) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> weighted KM </td>
+   <td style="text-align:left;"> 30 days </td>
+   <td style="text-align:left;"> 3.3 (1.4 to 5.4) </td>
+   <td style="text-align:left;"> 2.5 (1.1 to 4.3) </td>
+   <td style="text-align:left;"> 0.9 (-2.1 to 3.4) </td>
+   <td style="text-align:left;"> 1.35 (0.46 to 3.30) </td>
+  </tr>
+</tbody>
+</table>
+<p><em>IPTW-weighted; 95% percentile bootstrap intervals (500 resamples of individuals, propensity score refitted). E-value for the 365-day risk ratio: 1.72 (confidence limit: 1.00). Events: ACE inhibitor 78, thiazide 60 (365 days).</em></p>
+<p><small>Program: R/11_tfl.R (inputs from qc/analysis/primary_results.csv). Dataset version: 4ac952d194 (CMS synthetic Medicare files, downloaded 2026-10-20). Synthetic data, not inferential.</small></p>

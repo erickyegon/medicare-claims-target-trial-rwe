@@ -1,0 +1,72 @@
+time	step	description	n_in	n_out
+2026-10-21 08:52:38	01_ingest	bene typing check: 12 converted columns, 0 mismatches	67257	67257
+2026-10-21 08:52:38	01_ingest	bene loaded (4 date cols, 8 numeric cols typed)	67257	67257
+2026-10-21 08:53:35	01_ingest	carrier typing check: 20 converted columns, 0 mismatches	1121004	1121004
+2026-10-21 08:53:35	01_ingest	carrier loaded (5 date cols, 15 numeric cols typed)	1121004	1121004
+2026-10-21 08:54:13	01_ingest	outpatient typing check: 24 converted columns, 0 mismatches	575092	575092
+2026-10-21 08:54:13	01_ingest	outpatient loaded (5 date cols, 19 numeric cols typed)	575092	575092
+2026-10-21 08:54:21	01_ingest	inpatient typing check: 28 converted columns, 0 mismatches	58066	58066
+2026-10-21 08:54:21	01_ingest	inpatient loaded (9 date cols, 19 numeric cols typed)	58066	58066
+2026-10-21 08:54:30	01_ingest	pde typing check: 14 converted columns, 0 mismatches	515520	515520
+2026-10-21 08:54:30	01_ingest	pde loaded (2 date cols, 12 numeric cols typed)	515520	515520
+2026-10-21 08:54:30	01_ingest	hospice typing check: 16 converted columns, 0 mismatches	12107	12107
+2026-10-21 08:54:30	01_ingest	hospice loaded (7 date cols, 9 numeric cols typed)	12107	12107
+2026-10-21 08:54:43	06_codelists_ahtn	ingredients 119; I10-I16 codes 17; NDCs mapped 3512 (17 with disagreeing RxCUIs)	14559	3539
+2026-10-21 08:54:49	03_codelists	icd10_bronchitis.csv / icd10_exclusions.csv written	10	806
+2026-10-21 08:59:12	03_codelists	ndc_antibiotics.csv: 18015 NDC-11 (FDA 3769; RxNorm 17882; 9 20 mg doxycycline products excluded)	21651	18015
+2026-10-21 08:59:34	04_enrollment	enroll_month: 807084 person-months (A 807084, B 760956, D 569273, A+B+D 538197)	807084	807084
+2026-10-21 08:59:34	04_enrollment	enroll_span: 10500 spans for 8198 beneficiaries (longest 108 months)	538197	10500
+2026-10-21 09:00:12	05_scan	lookups: dx_long 8126522 rows, fill_drug 410120, fill_class 693081, dx_cond 1814082	515504	410120
+2026-10-21 09:00:17	05_scan	acute: first eligible episodes (age>=65, 365d A+B+D) -> 3-char codes with >= 300	49152	47
+2026-10-21 09:00:19	05_scan	chronic: new users by ATC4 class (age>=65, 365d A+B+D); then by condition	17539	70774
+2026-10-21 09:00:25	05_scan	candidates (mechanical + refined): 14 acute, 15 pairs; outcome rows 70	NA	70
+2026-10-21 09:00:50	06_cohort	attrition: 57338 candidates -> 10639 new-user -> 790 final persons (ACEI 433, THIAZIDE 357)	57338	790
+2026-10-21 09:01:10	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:03:39	01_ingest	bene typing check: 12 converted columns, 0 mismatches	67257	67257
+2026-10-21 09:03:39	01_ingest	bene loaded (4 date cols, 8 numeric cols typed)	67257	67257
+2026-10-21 09:04:44	01_ingest	carrier typing check: 20 converted columns, 0 mismatches	1121004	1121004
+2026-10-21 09:04:44	01_ingest	carrier loaded (5 date cols, 15 numeric cols typed)	1121004	1121004
+2026-10-21 09:05:22	01_ingest	outpatient typing check: 24 converted columns, 0 mismatches	575092	575092
+2026-10-21 09:05:22	01_ingest	outpatient loaded (5 date cols, 19 numeric cols typed)	575092	575092
+2026-10-21 09:05:29	01_ingest	inpatient typing check: 28 converted columns, 0 mismatches	58066	58066
+2026-10-21 09:05:29	01_ingest	inpatient loaded (9 date cols, 19 numeric cols typed)	58066	58066
+2026-10-21 09:05:37	01_ingest	pde typing check: 14 converted columns, 0 mismatches	515520	515520
+2026-10-21 09:05:37	01_ingest	pde loaded (2 date cols, 12 numeric cols typed)	515520	515520
+2026-10-21 09:05:38	01_ingest	hospice typing check: 16 converted columns, 0 mismatches	12107	12107
+2026-10-21 09:05:38	01_ingest	hospice loaded (7 date cols, 9 numeric cols typed)	12107	12107
+2026-10-21 09:05:49	06_codelists_ahtn	ingredients 119; I10-I16 codes 17; NDCs mapped 3512 (17 with disagreeing RxCUIs)	14559	3539
+2026-10-21 09:05:53	03_codelists	icd10_bronchitis.csv / icd10_exclusions.csv written	10	806
+2026-10-21 09:08:36	03_codelists	ndc_antibiotics.csv: 18015 NDC-11 (FDA 3769; RxNorm 17882; 9 20 mg doxycycline products excluded)	21651	18015
+2026-10-21 09:08:50	04_enrollment	enroll_month: 807084 person-months (A 807084, B 760956, D 569273, A+B+D 538197)	807084	807084
+2026-10-21 09:08:50	04_enrollment	enroll_span: 10500 spans for 8198 beneficiaries (longest 108 months)	538197	10500
+2026-10-21 09:09:09	05_scan	lookups: dx_long 8126522 rows, fill_drug 410120, fill_class 693081, dx_cond 1814082	515504	410120
+2026-10-21 09:09:14	05_scan	acute: first eligible episodes (age>=65, 365d A+B+D) -> 3-char codes with >= 300	49152	47
+2026-10-21 09:09:15	05_scan	chronic: new users by ATC4 class (age>=65, 365d A+B+D); then by condition	17539	70774
+2026-10-21 09:09:19	05_scan	candidates (mechanical + refined): 14 acute, 15 pairs; outcome rows 70	NA	70
+2026-10-21 09:09:32	06_cohort	attrition: 57338 candidates -> 10639 new-user -> 790 final persons (ACEI 433, THIAZIDE 357)	57338	790
+2026-10-21 09:09:50	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:09:53	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:09:53	09_analysis	primary cohort: 790 people (zero-follow-up dropped: 0); PS covariates 16 (dropped: heart_failure,dementia)	790	790
+2026-10-21 09:10:43	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:10:46	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:11:16	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:11:19	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:12:08	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:12:11	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:13:00	08_baseline	htn_cohort_costart: 1101 people, 26 covariate columns	1101	1101
+2026-10-21 09:13:04	07_followup	htn_cohort_costart: 1101 people; hospitalization in ITT window 183; ITT ended by day 365 for 889	1101	1101
+2026-10-21 09:13:48	08_baseline	htn_cohort_nounid: 669 people, 26 covariate columns	669	669
+2026-10-21 09:13:50	07_followup	htn_cohort_nounid: 669 people; hospitalization in ITT window 114; ITT ended by day 365 for 527	669	669
+2026-10-21 09:14:32	08_baseline	htn_cohort_strictdx: 617 people, 26 covariate columns	617	617
+2026-10-21 09:14:34	07_followup	htn_cohort_strictdx: 617 people; hospitalization in ITT window 120; ITT ended by day 365 for 494	617	617
+2026-10-21 09:15:23	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:15:25	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:16:15	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:16:18	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:17:02	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:17:05	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:17:43	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:17:46	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:24:20	08_baseline	htn_cohort: 790 people, 26 covariate columns	790	790
+2026-10-21 09:24:24	07_followup	htn_cohort: 790 people; hospitalization in ITT window 138; ITT ended by day 365 for 635	790	790
+2026-10-21 09:27:29	09_analysis	analysis complete: 12 analyses, 500 bootstrap resamples each (primary ok: 500)	790	790

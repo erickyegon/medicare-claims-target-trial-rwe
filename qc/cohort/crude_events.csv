@@ -1,0 +1,3 @@
+arm,n,n_full_365,n_full_30,hosp_365_itt,py_itt,hosp_365_among_full_365,hosp_30,hosp_30_among_full_30,fracture_365_itt,py_fracture,hosp_365_addon_switch_censored,py_addon_switch_censored,crude_risk_365_pct_among_full,crude_risk_30_pct_among_full,flag_lt11
+ACEI,433,346,430,78,352.9,69,11,11,1,393.3,76,344.2,19.9,2.6,TRUE
+THIAZIDE,357,289,355,60,298.3,50,10,10,1,327.2,59,289,17.3,2.8,TRUE

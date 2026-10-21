@@ -1,0 +1,4 @@
+check,value
+max |weight difference|: mine (untruncated stabilized ATE) vs WeightIt,1.6529995150449395e-9
+max |unweighted SMD difference| vs cobalt over 30 of 30 name-matched columns,8.099995457915288e-4
+"max |weighted SMD difference| vs cobalt (untruncated weights), same columns",1.1799325532743654e-4

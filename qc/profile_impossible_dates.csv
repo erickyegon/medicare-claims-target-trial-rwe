@@ -1,0 +1,10 @@
+"check","n"
+"carrier: CLM_THRU_DT < CLM_FROM_DT",0
+"outpatient: CLM_THRU_DT < CLM_FROM_DT",0
+"inpatient: CLM_THRU_DT < CLM_FROM_DT",0
+"inpatient: admission date > CLM_THRU_DT",0
+"any claim/PDE date before 2015-01-01 or after 2023-03-31",0
+"claims dated before beneficiary birth date (carrier)",0
+"PDE fills before beneficiary birth date",0
+"beneficiaries with >1 distinct birth date across years",0
+"claim/PDE BENE_ID not in beneficiary files",0

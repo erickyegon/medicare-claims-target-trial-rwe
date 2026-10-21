@@ -1,0 +1,15 @@
+item,value,share_pct,note
+"beneficiaries (distinct, all years)",9179,,
+"influenza diagnoses (J09-J11), any claim",0,,influenza question not estimable (v0.1)
+drug concepts named oseltamivir among RxNorm-resolved PDE NDCs,0,,
+deaths recorded in beneficiary files,0,,mortality is not an outcome
+outpatient rows with ED revenue centers 0450-0459 or 0981,0,,ED visits not observable (A-001)
+distinct values of dual-eligibility months,1,,not usable as a covariate
+PDE fills,515520,,
+PDE fills with no RxNorm record (measure 1),101407,19.7,NDC not found in RxNorm; used for the new-user sensitivity cohort
+PDE fills with no RxNorm drug concept (measure 2),107298,20.8,"wider measure (contains measure 1): also NDCs whose record gives no drug; exposure, washout and the scan use fills with a drug concept"
+distinct PDE NDCs,14627,,
+distinct PDE NDCs with an RxNorm record,11913,81.4,
+"bronchitis episodes (age 65+, 365d A+B+D)",722,,from the indication scan
+bronchitis episodes with any antibacterial (ATC J01) class fill on days 0-30,0,,bronchitis / antibiotic question not estimable (A-004)
+Part D share of person-months,,70.5,

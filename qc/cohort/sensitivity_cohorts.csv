@@ -1,0 +1,5 @@
+cohort,table,n_persons,ACEI,THIAZIDE
+Primary cohort,htn_cohort,790,433,357
+Keep other-class co-starters (indicator covariate),htn_cohort_costart,1101,595,506
+Hypertension diagnosis only in days -365 to -1,htn_cohort_strictdx,617,332,285
+Exclude any baseline fill with no RxNorm record,htn_cohort_nounid,669,364,305

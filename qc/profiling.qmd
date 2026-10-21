@@ -1,0 +1,78 @@
+---
+title: "Data profiling report: CMS synthetic Medicare files"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    code-fold: true
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+.root <- (function(d = getwd()) { while (!file.exists(file.path(d, ".project-root"))) d <- dirname(d); d })()
+source(file.path(.root, "R", "02_profile.R"))
+library(knitr)
+con <- connect_db(read_only = TRUE)
+source(file.path(.root, "R", "format_tables.R"))
+kt <- function(x, ...) kable(format_table(x), align = table_align(x), ...)
+```
+
+These are **synthetic** data (CMS / MITRE, generated with Synthea). Nothing here describes real beneficiaries.
+All counts come from the DuckDB database built by `R/01_ingest.R`.
+
+## 1. Row counts, keys and date ranges
+
+```{r tables}
+ts <- table_summary(con)
+ts$exact_duplicate_rows <- vapply(ts$tbl, function(t) full_row_dups(con, t), 0)
+kt(ts)
+write.csv(ts, file.path(PROJ_ROOT, "qc", "profile_tables.csv"), row.names = FALSE)
+```
+
+`dup_key_rows` = rows sharing a natural key with another row (`BENE_ID` + reference year for beneficiary files, `CLM_ID` for claims, `PDE_ID` for PDE).
+
+## 2. Impossible or inconsistent dates and orphan IDs
+
+```{r dates}
+imp <- impossible_dates(con); kt(imp)
+write.csv(imp, file.path(PROJ_ROOT, "qc", "profile_impossible_dates.csv"), row.names = FALSE)
+```
+
+## 3. Check 1: ED revenue center codes (0450-0459, 0981) in outpatient
+
+```{r rev}
+rc <- rev_center_check(con)
+kt(rc$overall); kt(rc$by_year, caption = "ED-coded outpatient claims by year")
+kt(rc$top, caption = "Most frequent REV_CNTR values"); kt(rc$rows_per_claim, caption = "Outpatient rows per CLM_ID")
+```
+
+## 4. Check 2: PDE product service ID format
+
+```{r pde}
+pi <- pde_id_check(con)
+kt(pi$format, caption = "Length / numeric pattern of PROD_SRVC_ID"); kt(pi$examples, caption = "Most frequent IDs"); kt(pi$missing)
+```
+
+## 5. Fields with a single constant value, or entirely missing
+
+```{r constant}
+fp <- do.call(rbind, lapply(names(PROFILE_TABLES), function(t) field_profile(con, t)))
+write.csv(fp, file.path(PROJ_ROOT, "qc", "profile_fields.csv"), row.names = FALSE)
+cst <- fp[fp$constant | fp$all_missing, c("table", "field", "constant", "all_missing", "min_val")]
+names(cst)[5] <- "value_if_constant"
+kt(cst, row.names = FALSE)
+```
+
+## 6. Missingness per field
+
+Percent of rows missing, for fields with any missingness and not entirely missing (full table in `qc/profile_fields.csv`).
+
+```{r miss}
+for (t in names(PROFILE_TABLES)) {
+  x <- fp[fp$table == t & fp$n_missing > 0 & !fp$all_missing, c("field", "type", "n_missing", "pct_missing", "n_distinct")]
+  cat("\n\n### ", t, " (", nrow(x), " fields)\n\n", sep = "")
+  print(kt(x, row.names = FALSE))
+}
+```

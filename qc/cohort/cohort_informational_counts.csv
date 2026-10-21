@@ -1,0 +1,4 @@
+item,n_persons
+Primary cohort members with >= 1 baseline fill with no RxNorm record (removed in the no-RxNorm-record sensitivity cohort),167
+Primary cohort members whose only hypertension diagnosis falls on the index date (removed in the strict-diagnosis sensitivity cohort),278
+Co-starters (another antihypertensive class on the index date) in the keep-co-starters cohort,373

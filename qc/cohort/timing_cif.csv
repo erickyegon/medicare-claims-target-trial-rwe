@@ -1,0 +1,9 @@
+arm,day,cum_inc_pct_addon,cum_inc_pct_switch,cum_inc_pct_discontinuation
+ACEI,30,1.4,0,0
+ACEI,90,1.4,0.2,1.2
+ACEI,180,1.9,0.2,91.3
+ACEI,365,1.9,0.2,97.6
+THIAZIDE,30,0.6,0,0
+THIAZIDE,90,1.7,0.3,0.3
+THIAZIDE,180,2,0.6,92.7
+THIAZIDE,365,2,0.6,97

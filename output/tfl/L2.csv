@@ -1,0 +1,17 @@
+Variable,Definition,Window,Source,Program
+arm,"Class of the study drug filled on the index date: ACE inhibitor (ATC C09AA) or thiazide / thiazide-like (C03AA, C03BA)",index date,PDE via RxNorm NDC map,sql/index_events.sql
+index date,"First fill (on or after 2016-03-01) meeting every criterion of Section 5, one episode per person",-,"PDE, enrollment, claims",R/06_cohort.R
+new user,No fill of any antihypertensive class,days -365 to -1,PDE,sql/index_events.sql
+continuous A+B+D,"Part A, B and D present in every month from the month of day -365 through the index month",days -365 to 0,beneficiary files,sql/enrollment_spans.sql
+hypertension diagnosis (eligibility),"ICD-10-CM I10-I16 on any carrier, outpatient or inpatient claim",days -365 to 0,claims,sql/index_events.sql
+hospitalization (outcome),First inpatient admission date,days 1 to 365 (1 to 30 for the secondary outcome),inpatient file,sql/followup.sql
+ITT follow-up end,"Earliest of day 365, 2023-03-31, and end of the A+B+D span containing the index month",-,beneficiary files,R/07_followup.R
+femur fracture (negative control),"ICD-10-CM S72 initial-encounter codes, with and without the 7th character",days 1 to 365,claims,R/03_codelists.R
+age,Completed years at the index date,index date,beneficiary files,sql/baseline.sql
+"sex, race, region, index year, index quarter",From the beneficiary file for the index year (earliest row if missing); region via ssa_state_region.csv; index month grouped to quarter,index,beneficiary files,"sql/baseline.sql, R/08_baseline.R"
+"COPD, asthma, ischemic heart disease, diabetes, chronic kidney disease, cancer (dementia, heart failure not modelled)",At least one claim with a CCW code for the condition (A-003),days -365 to -1,claims,sql/baseline.sql
+visit days,Distinct dates of carrier or outpatient claims that carry a diagnosis; modelled as log(1 + days),days -365 to -1,"carrier, outpatient",sql/baseline.sql
+any baseline hospitalization,At least one inpatient admission,days -365 to -1,inpatient,sql/baseline.sql
+"distinct drugs, distinct drug classes",Distinct RxNorm drugs and ATC level-4 classes among fills with an RxNorm drug concept,days -365 to -1,PDE via RxNorm / RxClass,sql/baseline.sql
+propensity score and weights,Logistic model on the covariates above; stabilized ATE weights truncated at the 1st and 99th percentile,-,analysis data,R/09_analysis_functions.R
+add-on / switch / discontinuation,"First fill of the other study drug (add-on if the index class still has supply, else switch); discontinuation = no refill within 30 days after the end of supply",after index,PDE,R/07_followup.R

@@ -1,0 +1,51 @@
+drug_name,code,fills,benes,flag_lt11
+amoxicillin / clavulanate,E669,517,488,FALSE
+amoxicillin / clavulanate,J329,460,439,FALSE
+amoxicillin / clavulanate,R7303,435,409,FALSE
+amoxicillin / clavulanate,Z733,425,404,FALSE
+amoxicillin / clavulanate,Z608,401,383,FALSE
+amoxicillin / clavulanate,D649,371,350,FALSE
+amoxicillin / clavulanate,J0190,360,354,FALSE
+amoxicillin / clavulanate,B9789,314,303,FALSE
+amoxicillin / clavulanate,R931,305,289,FALSE
+amoxicillin / clavulanate,I259,304,288,FALSE
+amoxicillin / clavulanate,Z653,279,260,FALSE
+amoxicillin / clavulanate,B349,278,268,FALSE
+amoxicillin / clavulanate,P292,271,258,FALSE
+amoxicillin / clavulanate,T7432X,263,254,FALSE
+amoxicillin / clavulanate,I10,261,252,FALSE
+amoxicillin / clavulanate,E8881,251,240,FALSE
+amoxicillin / clavulanate,Z604,233,227,FALSE
+amoxicillin / clavulanate,E1121,180,167,FALSE
+amoxicillin / clavulanate,O039,179,164,FALSE
+amoxicillin / clavulanate,M7918,154,145,FALSE
+amoxicillin / clavulanate,E785,147,139,FALSE
+amoxicillin / clavulanate,M5450,122,117,FALSE
+amoxicillin / clavulanate,G479,111,104,FALSE
+amoxicillin / clavulanate,R801,110,108,FALSE
+amoxicillin / clavulanate,Z558,109,105,FALSE
+moxifloxacin,Z733,183,101,FALSE
+moxifloxacin,E669,174,82,FALSE
+moxifloxacin,Z608,169,84,FALSE
+moxifloxacin,E1121,148,51,FALSE
+moxifloxacin,M7918,137,85,FALSE
+moxifloxacin,Z653,137,55,FALSE
+moxifloxacin,D649,131,61,FALSE
+moxifloxacin,M5450,118,71,FALSE
+moxifloxacin,E8881,116,52,FALSE
+moxifloxacin,R931,116,46,FALSE
+moxifloxacin,I259,115,46,FALSE
+moxifloxacin,I10,111,51,FALSE
+moxifloxacin,R7303,108,60,FALSE
+moxifloxacin,T7432X,102,62,FALSE
+moxifloxacin,N1830,98,22,FALSE
+moxifloxacin,R801,96,35,FALSE
+moxifloxacin,P292,94,43,FALSE
+moxifloxacin,Z604,89,54,FALSE
+moxifloxacin,E1129,88,34,FALSE
+moxifloxacin,G8929,86,37,FALSE
+moxifloxacin,R809,85,31,FALSE
+moxifloxacin,M542,82,46,FALSE
+moxifloxacin,M797,75,41,FALSE
+moxifloxacin,N182,74,29,FALSE
+moxifloxacin,N181,71,31,FALSE

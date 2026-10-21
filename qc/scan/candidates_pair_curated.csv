@@ -1,0 +1,6 @@
+cond,a_cls,b_cls,n_a,n_b,n_a_with_b,n_b_with_a,min_arm,overlap,a_name,b_name,flag_lt11
+Hypertension,C09AA,C03AA,806,708,342,341,708,0.48,"ACE inhibitors, plain","Thiazides, plain",FALSE
+Hypertension,C09AA,C08CA,811,635,288,296,635,0.47,"ACE inhibitors, plain",Dihydropyridine derivatives,FALSE
+Hypertension,C03AA,C08CA,734,651,267,275,651,0.42,"Thiazides, plain",Dihydropyridine derivatives,FALSE
+Ischemic Heart Disease,C09AA,C07AB,712,237,38,14,237,0.06,"ACE inhibitors, plain","Beta blocking agents, selective",FALSE
+Ischemic Heart Disease,C08CA,C07AB,532,278,21,0,278,0.04,Dihydropyridine derivatives,"Beta blocking agents, selective",FALSE

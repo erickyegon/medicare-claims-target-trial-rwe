@@ -1,0 +1,5 @@
+dx3,atc_id,atc_name,n_episodes,n_treated,n_late,n_untreated,min_arm,pooled_share,treated_share,enrichment,dx_description
+J01,J01CA,Penicillins with extended spectrum,807,124,0,683,124,0.012445430645667012,0.1536555142503098,12.3,Acute sinusitis
+J03,J01CE,Beta-lactamase sensitive penicillins,497,93,0,404,93,0.005684075420957736,0.18712273641851107,32.9,Acute tonsillitis
+J02,J01CE,Beta-lactamase sensitive penicillins,436,41,1,394,41,0.005684075420957736,0.09403669724770643,16.5,Acute pharyngitis
+J20,N02BE,Anilides,722,480,17,225,225,0.0925214236268589,0.6648199445983379,7.2,Acute bronchitis

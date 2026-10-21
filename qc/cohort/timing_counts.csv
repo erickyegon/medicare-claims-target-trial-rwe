@@ -1,0 +1,3 @@
+arm,n,n_addon,n_switch,n_discontinued,n_censored_before_any,median_days_addon,median_days_switch,median_days_discontinuation,idx_days_supply_median,idx_days_supply_q1,idx_days_supply_q3,any_other_study_drug_fill_in_itt,flag_lt11
+ACEI,433,8,1,401,23,25.5,35,119,90,90,90,16,TRUE
+THIAZIDE,357,7,2,327,21,56,94,119,90,90,90,21,TRUE

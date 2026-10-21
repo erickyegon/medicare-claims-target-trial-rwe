@@ -1,0 +1,12 @@
+step,r_episodes,r_persons,step_label,py_episodes,py_persons,result
+0,,9179,Beneficiaries,,9179,PASS
+1,57338.0,3916,Candidates,57338.0,3916,PASS
+2,10639.0,3561,New user,10639.0,3561,PASS
+3,6162.0,2156,Age,6162.0,2156,PASS
+4,4793.0,1604,Enrollment,4793.0,1604,PASS
+5,3294.0,1424,Hypertension dx,3294.0,1424,PASS
+6,2259.0,1142,Not both,2259.0,1142,PASS
+7,1529.0,821,No other class same day,1529.0,821,PASS
+8,1466.0,792,No hospice,1466.0,792,PASS
+9,1458.0,790,No inpatient overlap,1458.0,790,PASS
+10,790.0,790,Final cohort,790.0,790,PASS

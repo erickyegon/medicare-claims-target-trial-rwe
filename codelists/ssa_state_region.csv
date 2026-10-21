@@ -1,0 +1,79 @@
+ssa_code,state,census_region,source_ssa_code,source_region,download_date
+01,Alabama,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+02,Alaska,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+03,Arizona,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+04,Arkansas,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+05,California,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+06,Colorado,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+07,Connecticut,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+08,Delaware,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+09,District of Columbia,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+10,Florida,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+11,Georgia,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+12,Hawaii,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+13,Idaho,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+14,Illinois,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+15,Indiana,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+16,Iowa,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+17,Kansas,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+18,Kentucky,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+19,Louisiana,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+20,Maine,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+21,Maryland,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+22,Massachusetts,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+23,Michigan,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+24,Minnesota,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+25,Mississippi,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+26,Missouri,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+27,Montana,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+28,Nebraska,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+29,Nevada,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+30,New Hampshire,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+31,New Jersey,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+32,New Mexico,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+33,New York,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+34,North Carolina,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+35,North Dakota,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+36,Ohio,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+37,Oklahoma,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+38,Oregon,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+39,Pennsylvania,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+40,Puerto Rico,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+41,Rhode Island,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+42,South Carolina,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+43,South Dakota,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+44,Tennessee,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+45,Texas,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+46,Utah,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+47,Vermont,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+48,Virgin Islands,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+49,Virginia,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+50,Washington,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+51,West Virginia,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+52,Wisconsin,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+53,Wyoming,West,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+54,Africa,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+55,Asia,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+56,Canada and Islands,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+57,Central America and West Indies,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+58,Europe,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+59,Mexico,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+60,Oceania,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+61,Philippines,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+62,South America,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+63,U.S. Possessions,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+64,American Samoa,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+65,Guam,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+66,Commonwealth of the Northern Marianas Islands,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+67,Texas,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+68,Florida,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+69,Florida,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+70,Kansas,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+71,Louisiana,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+72,Ohio,Midwest,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+73,Pennsylvania,Northeast,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+74,Texas,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+80,Maryland,South,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+97,Northern Marianas,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+98,Guam,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20
+99,With 000 county code is American,other,ResDAC CCW MBSF codebook V1.6 (Feb 2024),US Census Bureau state geocodes (May 2021),2026-10-20

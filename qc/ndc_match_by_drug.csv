@@ -1,0 +1,13 @@
+generic,class,listed_ndc11,matched_ndc11,fills,benes,small_cell_lt11_benes
+amoxicillin,penicillin,3655,134,188,174,FALSE
+amoxicillin-clavulanate,penicillin,1770,33,769,724,FALSE
+azithromycin,macrolide,1585,2,3,3,TRUE
+clarithromycin,macrolide,751,1,1,1,TRUE
+doxycycline,tetracycline,2728,0,0,0,FALSE
+cephalexin,cephalosporin,2714,0,0,0,FALSE
+cefuroxime axetil,cephalosporin,573,39,45,45,FALSE
+cefdinir,cephalosporin,485,1,1,1,TRUE
+cefpodoxime,cephalosporin,199,0,0,0,FALSE
+levofloxacin,fluoroquinolone,1479,0,0,0,FALSE
+moxifloxacin,fluoroquinolone,155,1,652,136,FALSE
+sulfamethoxazole-trimethoprim,sulfonamide,1921,1,13,1,TRUE

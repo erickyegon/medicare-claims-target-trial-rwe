@@ -1,0 +1,104 @@
+---
+title: "Feasibility report: CMS synthetic Medicare claims"
+format:
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+source("_helpers.R")   # Quarto renders with docs/ as the working directory
+```
+
+**Methods demonstration on synthetic data. Nothing here is a treatment effect.** Every number below is read from the aggregate outputs of the pipeline
+(`qc/`); cells below 11 are flagged. Dataset version `r dataset_version()`. The study question changed twice during feasibility work; the history is in
+the study report and in `docs/amendments.md` (A-001 to A-013).
+
+## T2. What the data can and cannot support
+
+```{r t2}
+fx <- S("qc", "feasibility_facts.csv")
+kt(fx %>% transmute(Item = item, Value = value, `Share of total` = share_pct, Consequence = note))
+```
+
+```{r t2text}
+g <- function(pat) fx$value[grepl(pat, fx$item, fixed = TRUE)][1]
+gs <- function(pat) fx$share_pct[grepl(pat, fx$item, fixed = TRUE)][1]
+fills <- g("PDE fills")
+```
+
+Two named measures describe PDE fills that cannot be linked to a drug (both defined in the README): `r fmt(g("no RxNorm record"))` of `r fmt(fills)` fills (`r sprintf("%.1f", gs("no RxNorm record"))`%) have **no RxNorm record** (measure 1), and `r fmt(g("no RxNorm drug concept"))` (`r sprintf("%.1f", gs("no RxNorm drug concept"))`%) have **no RxNorm drug concept** (measure 2, the wider one).
+Exposure, washout and the scan use fills with a drug concept. Part D covers `r sprintf("%.1f", gs("Part D share"))`% of person-months.
+
+### The indication scan (aggregate; details in `qc/indication_scan.html`)
+
+```{r scan}
+ac <- S("qc", "scan", "acute_scan.csv"); cc <- S("qc", "scan", "chronic_condition_classes.csv")
+```
+
+The scan compared first episodes of `r nrow(ac)` acute diagnosis codes (3-character, at least 300 eligible episodes) and new users of drug classes;
+`r n_distinct(cc$atc_id)` classes had at least 200 new users for some condition. Candidate selection used arm sizes and crude aggregate hospitalization counts only; no effect
+estimates were produced. Three passes are kept and labelled as run (pre-specified, refined, curated); see the scan report.
+
+## T1. Cohort attrition (hypertension, protocol v0.4 Section 5)
+
+```{r t1}
+a <- S("qc", "cohort", "attrition.csv")
+kt(a %>% transmute(step, description, episodes = n_episodes, persons = n_persons, persons_removed))
+```
+
+Independent checks: a from-scratch pandas derivation (`qc/python_crosscheck.py`: attrition, arm sizes, ITT end dates and 365-day events) and the SAS program
+(`sas/cohort_qc.sas`, **run manually in SAS OnDemand**; see the README).
+
+```{r xcheck}
+x <- S("qc", "cohort", "python_vs_r_attrition.csv"); xf <- S("qc", "cohort", "python_vs_r_followup.csv")
+```
+
+Python agrees with R on `r sum(x$result == "PASS")` of `r nrow(x)` attrition steps and on `r sum(xf$result == "PASS")` of `r nrow(xf)` arms for follow-up and events.
+
+### Sensitivity cohorts and informational counts
+
+```{r sens}
+kt(S("qc", "cohort", "sensitivity_cohorts.csv") %>% select(-table))
+kt(S("qc", "cohort", "cohort_informational_counts.csv"))
+```
+
+The hypertension-diagnosis step removed `r fmt(a$persons_removed[a$step == 5])` people (A-009 allows the diagnosis from day -365 through the index date).
+
+## Arm sizes and baseline counts
+
+```{r arms}
+arms <- S("qc", "cohort", "arm_sizes.csv")
+kt(arms)
+kt(S("qc", "cohort", "cohort_baseline_counts.csv") %>% pivot_wider(names_from = arm, values_from = n))
+```
+
+## Follow-up and crude event counts (descriptive, no models)
+
+Intention-to-treat follow-up ends at the earliest of day 365, end of data (2023-03-31) and loss of continuous Part A+B+D entitlement (A-008).
+
+```{r follow}
+kt(S("qc", "cohort", "timing_itt_end_reasons.csv"), caption = "Why ITT follow-up ended")
+ce <- S("qc", "cohort", "crude_events.csv")
+kt(ce %>% transmute(arm, n, n_full_365, hosp_365_itt, hosp_365_among_full_365, crude_risk_365_pct_among_full, hosp_30, crude_risk_30_pct_among_full, fracture_365_itt, flag_lt11))
+gr <- ce %>% transmute(arm, people = n, hospitalizations_365 = hosp_365_itt, meets = n >= 200 & hosp_365_itt >= 40)
+```
+
+Go rule for the analysis phase (each arm at least 200 people and at least 40 hospitalizations within 365 days): `r if (all(gr$meets)) "met in both arms" else "NOT met"`
+(`r paste(gr$arm, gr$people, "people /", gr$hospitalizations_365, "hospitalizations", collapse = "; ")`).
+
+## Time to add-on, switch and discontinuation (descriptive)
+
+```{r timing}
+tc <- S("qc", "cohort", "timing_counts.csv"); rp <- S("qc", "cohort", "refill_pattern.csv")
+kt(tc %>% transmute(arm, n, n_addon, n_switch, n_discontinued, n_censored_before_any, median_days_addon, median_days_switch, median_days_discontinuation, index_days_supply_median = idx_days_supply_median, flag_lt11))
+kt(S("qc", "cohort", "timing_cif.csv"), caption = "Cumulative incidence (%) of the first event (Aalen-Johansen)")
+kt(rp, caption = "Refill pattern of the index class in the cohort")
+```
+
+Index fills are a median `r rp$index_days_supply_median` days of supply, and `r fmt(rp$with_second_fill)` of `r fmt(rp$cohort_n)` people have a second fill of the same class,
+at a median of `r rp$median_days_to_second_fill` days (quartiles `r rp$q1_days_to_second_fill` to `r rp$q3_days_to_second_fill`); only `r fmt(rp$second_fill_within_120_days)` refilled within 120 days.
+This is why the as-treated analysis with a discontinuation rule was dropped (A-007).

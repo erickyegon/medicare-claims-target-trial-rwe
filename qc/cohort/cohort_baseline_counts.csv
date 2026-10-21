@@ -1,0 +1,11 @@
+arm,variable,level,n
+ACEI,age_group,65-74,294
+ACEI,age_group,75-84,87
+ACEI,age_group,85+,52
+ACEI,sex,female,209
+ACEI,sex,male,224
+THIAZIDE,age_group,65-74,246
+THIAZIDE,age_group,75-84,64
+THIAZIDE,age_group,85+,47
+THIAZIDE,sex,female,171
+THIAZIDE,sex,male,186

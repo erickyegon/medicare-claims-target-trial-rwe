@@ -1,0 +1,92 @@
+<h3>T1. Cohort attrition</h3>
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Step </th>
+   <th style="text-align:left;"> Criterion </th>
+   <th style="text-align:right;"> Episodes </th>
+   <th style="text-align:right;"> Persons </th>
+   <th style="text-align:right;"> Persons removed </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> Beneficiaries in the beneficiary files </td>
+   <td style="text-align:right;"> – </td>
+   <td style="text-align:right;"> 9,179 </td>
+   <td style="text-align:right;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Fill of an ACE inhibitor or thiazide/thiazide-like diuretic on/after 2016-03-01 (candidate index dates) </td>
+   <td style="text-align:right;"> 57,338 </td>
+   <td style="text-align:right;"> 3,916 </td>
+   <td style="text-align:right;"> 5,263 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> New user: no antihypertensive fill in days -365 to -1 </td>
+   <td style="text-align:right;"> 10,639 </td>
+   <td style="text-align:right;"> 3,561 </td>
+   <td style="text-align:right;"> 355 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> Age 65 or older on the index date </td>
+   <td style="text-align:right;"> 6,162 </td>
+   <td style="text-align:right;"> 2,156 </td>
+   <td style="text-align:right;"> 1,405 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> Continuous Part A+B+D from the month of day -365 through the index month </td>
+   <td style="text-align:right;"> 4,793 </td>
+   <td style="text-align:right;"> 1,604 </td>
+   <td style="text-align:right;"> 552 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> Hypertension diagnosis (I10-I16) in days -365 to 0 (A-009) </td>
+   <td style="text-align:right;"> 3,294 </td>
+   <td style="text-align:right;"> 1,424 </td>
+   <td style="text-align:right;"> 180 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> Not both study drugs filled on the index date </td>
+   <td style="text-align:right;"> 2,259 </td>
+   <td style="text-align:right;"> 1,142 </td>
+   <td style="text-align:right;"> 282 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> No other antihypertensive class filled on the index date (A-010) </td>
+   <td style="text-align:right;"> 1,529 </td>
+   <td style="text-align:right;"> 821 </td>
+   <td style="text-align:right;"> 321 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> No hospice claim in days -365 to -1 </td>
+   <td style="text-align:right;"> 1,466 </td>
+   <td style="text-align:right;"> 792 </td>
+   <td style="text-align:right;"> 29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:left;"> No inpatient stay overlapping the index date </td>
+   <td style="text-align:right;"> 1,458 </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:left;"> First qualifying episode per beneficiary (final cohort) </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+</tbody>
+</table>
+<p><small>Program: R/11_tfl.R (inputs from qc/cohort/attrition.csv). Dataset version: 4ac952d194 (CMS synthetic Medicare files, downloaded 2026-10-20). Synthetic data, not inferential.</small></p>

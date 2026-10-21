@@ -1,0 +1,38 @@
+"chapter","adm_type","n"
+"A-B infectious","1",152
+"A-B infectious","3",1
+"C-D4 neoplasms","1",5
+"C-D4 neoplasms","3",494
+"D5-D8 blood","3",1
+"E endocrine","1",67
+"E endocrine","3",5
+"F mental","1",231
+"F mental","3",24
+"G nervous","1",214
+"G nervous","3",293
+"H eye/ear","1",2
+"I circulatory","1",359
+"I circulatory","2",307
+"I circulatory","3",73
+"J respiratory","1",797
+"J respiratory","3",148
+"K digestive","1",256
+"K digestive","2",35
+"K digestive","3",1
+"L skin","1",53
+"M musculoskeletal","1",569
+"M musculoskeletal","2",16
+"M musculoskeletal","3",9
+"N genitourinary","1",282
+"N genitourinary","3",8
+"O pregnancy","3",3
+"R symptoms","1",454
+"R symptoms","3",202
+"S-T injury","1",6079
+"S-T injury","2",300
+"S-T injury","3",977
+"Z factors","1",6589
+"Z factors","2",2
+"Z factors","3",1527
+"other","1",263
+"other","3",69

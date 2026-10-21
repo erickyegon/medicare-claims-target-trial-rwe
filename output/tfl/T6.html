@@ -1,0 +1,138 @@
+<h3>T6. Sensitivity analyses: 365-day hospitalization (weighted Kaplan-Meier)</h3>
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Analysis </th>
+   <th style="text-align:right;"> N </th>
+   <th style="text-align:left;"> Events (ACEI / thiazide) </th>
+   <th style="text-align:left;"> ACEI risk, % </th>
+   <th style="text-align:left;"> Thiazide risk, % </th>
+   <th style="text-align:left;"> RD, points (95% CI) </th>
+   <th style="text-align:left;"> RR (95% CI) </th>
+   <th style="text-align:left;"> Note </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Primary: IPTW, ITT, follow-up to loss of A/B/D, end of data 2023-03-31 </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:left;"> 78 / 60 </td>
+   <td style="text-align:left;"> 21.4 </td>
+   <td style="text-align:left;"> 17.7 </td>
+   <td style="text-align:left;"> 3.8 (-3.5 to 9.4) </td>
+   <td style="text-align:left;"> 1.21 (0.84 to 1.61) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Unadjusted (no weights) </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:left;"> 78 / 60 </td>
+   <td style="text-align:left;"> 19.7 </td>
+   <td style="text-align:left;"> 18.2 </td>
+   <td style="text-align:left;"> 1.5 (-4.4 to 6.6) </td>
+   <td style="text-align:left;"> 1.08 (0.79 to 1.43) </td>
+   <td style="text-align:left;"> reference only </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Untruncated weights </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:left;"> 78 / 60 </td>
+   <td style="text-align:left;"> 21.5 </td>
+   <td style="text-align:left;"> 17.7 </td>
+   <td style="text-align:left;"> 3.8 (-3.0 to 11.0) </td>
+   <td style="text-align:left;"> 1.21 (0.84 to 1.70) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PS matching 1:1, caliper 0.2 SD of the logit (matched sample, ATT) </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:left;"> 78 / 60 </td>
+   <td style="text-align:left;"> 20.8 </td>
+   <td style="text-align:left;"> 17.5 </td>
+   <td style="text-align:left;"> 3.4 (-4.5 to 9.2) </td>
+   <td style="text-align:left;"> 1.19 (0.79 to 1.60) </td>
+   <td style="text-align:left;"> pairs formed in each bootstrap resample; 276 matched pairs in the full sample </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Keep other-class co-starters, indicator covariate (A-010) </td>
+   <td style="text-align:right;"> 1,101 </td>
+   <td style="text-align:left;"> 95 / 88 </td>
+   <td style="text-align:left;"> 17.8 </td>
+   <td style="text-align:left;"> 19.4 </td>
+   <td style="text-align:left;"> -1.6 (-6.9 to 3.5) </td>
+   <td style="text-align:left;"> 0.92 (0.70 to 1.21) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Exclude any baseline fill with no RxNorm record (A-010) </td>
+   <td style="text-align:right;"> 669 </td>
+   <td style="text-align:left;"> 64 / 50 </td>
+   <td style="text-align:left;"> 21.9 </td>
+   <td style="text-align:left;"> 17.2 </td>
+   <td style="text-align:left;"> 4.7 (-2.9 to 11.7) </td>
+   <td style="text-align:left;"> 1.27 (0.86 to 1.84) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Hypertension diagnosis only in days -365 to -1 (A-009) </td>
+   <td style="text-align:right;"> 617 </td>
+   <td style="text-align:left;"> 63 / 57 </td>
+   <td style="text-align:left;"> 22.4 </td>
+   <td style="text-align:left;"> 21.9 </td>
+   <td style="text-align:left;"> 0.5 (-7.5 to 7.7) </td>
+   <td style="text-align:left;"> 1.02 (0.71 to 1.44) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ITT follow-up ignoring loss of Part D (A-008) </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:left;"> 82 / 61 </td>
+   <td style="text-align:left;"> 21.4 </td>
+   <td style="text-align:left;"> 17.5 </td>
+   <td style="text-align:left;"> 3.9 (-2.7 to 9.4) </td>
+   <td style="text-align:left;"> 1.22 (0.85 to 1.61) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ITT follow-up v0.3 rule: last claim date 2023-03-02, Part A+B only (A-008) </td>
+   <td style="text-align:right;"> 789 </td>
+   <td style="text-align:left;"> 82 / 61 </td>
+   <td style="text-align:left;"> 21.4 </td>
+   <td style="text-align:left;"> 17.7 </td>
+   <td style="text-align:left;"> 3.8 (-3.0 to 9.3) </td>
+   <td style="text-align:left;"> 1.21 (0.85 to 1.59) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Exclude chronic kidney disease </td>
+   <td style="text-align:right;"> 629 </td>
+   <td style="text-align:left;"> 58 / 45 </td>
+   <td style="text-align:left;"> 20.5 </td>
+   <td style="text-align:left;"> 16.4 </td>
+   <td style="text-align:left;"> 4.1 (-2.9 to 10.7) </td>
+   <td style="text-align:left;"> 1.25 (0.84 to 1.84) </td>
+   <td style="text-align:left;"> – </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> IPCW for loss of Part A/B/D entitlement, primary ITT outcome (A-013) </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:left;"> 78 / 60 </td>
+   <td style="text-align:left;"> 21.4 </td>
+   <td style="text-align:left;"> 17.7 </td>
+   <td style="text-align:left;"> 3.7 (-3.6 to 9.3) </td>
+   <td style="text-align:left;"> 1.21 (0.83 to 1.61) </td>
+   <td style="text-align:left;"> IPTW x stabilized IPCW from a person-month censoring model on baseline covariates </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Add-on/switch-censored with IPCW (A-007) </td>
+   <td style="text-align:right;"> 790 </td>
+   <td style="text-align:left;"> 76 / 59 </td>
+   <td style="text-align:left;"> 21.8 </td>
+   <td style="text-align:left;"> 18.0 </td>
+   <td style="text-align:left;"> 3.8 (-3.6 to 9.5) </td>
+   <td style="text-align:left;"> 1.21 (0.84 to 1.61) </td>
+   <td style="text-align:left;"> IPTW x stabilized IPCW; risk set censored at the other study drug </td>
+  </tr>
+</tbody>
+</table>
+<p><small>Program: R/11_tfl.R (inputs from qc/analysis/sensitivity_results.csv). Dataset version: 4ac952d194 (CMS synthetic Medicare files, downloaded 2026-10-20). Synthetic data, not inferential.</small></p>

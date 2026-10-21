@@ -1,0 +1,105 @@
+---
+title: "Statistical analysis plan: ACE inhibitor versus thiazide initiation and 365-day hospitalization"
+subtitle: "Version 1.0, derived from protocol v0.4 and amendments A-001 to A-013"
+format:
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+source("_helpers.R")   # Quarto renders with docs/ as the working directory
+```
+
+**Methods demonstration on CMS synthetic Medicare claims. Estimates are illustrative; they are not treatment effects and are not inferential.**
+This plan restates the protocol (`docs/protocol.md`, v0.4) as executable specifications and records every choice the protocol left open.
+Where this plan and an amendment differ, the amendment (`docs/amendments.md`) governs. Dataset version `r dataset_version()`.
+
+## 1. Objectives and estimands
+
+| | Specification |
+| --- | --- |
+| Primary | 365-day risk of all-cause hospitalization, initiators of an ACE inhibitor vs a thiazide or thiazide-like diuretic, intention-to-treat |
+| Secondary | 30-day risk of all-cause hospitalization, intention-to-treat |
+| Contrasts | Risk difference (percentage points) and risk ratio, ACE inhibitor minus (over) thiazide |
+| Target population | The eligible cohort as a whole (average effect, stabilized ATE weights) |
+| Negative control | Hip or femur fracture within 365 days: counts and person-time only, no model (A-006) |
+| Sensitivity (A-007) | Censoring at add-on or switch to the other study drug, with IPCW. Discontinuation does not censor |
+
+## 2. Data and populations
+
+- **Source:** CMS Synthetic Medicare Enrollment, FFS Claims and PDE files (RIF format), loaded into DuckDB with every field first read as text (`R/01_ingest.R`; typing check on every converted column).
+- **Population:** one episode per beneficiary, the first fill of a study drug on or after 2016-03-01 that meets every criterion in protocol Section 5, in this order: new user (no antihypertensive fill, days -365 to -1); age 65 or older; continuous Part A, B and D from the month of day -365 through the index month; hypertension diagnosis (I10-I16) in days -365 to 0 (A-009); not both study drugs on the index date; no other antihypertensive class on the index date (A-010); no hospice claim in days -365 to -1; no inpatient stay overlapping the index date.
+- **Analysis set:** everyone in that cohort with at least one day of follow-up. The attrition table (T1) is produced by `R/06_cohort.R`, re-derived independently in pandas (`qc/python_crosscheck.py`) and in SAS (`sas/cohort_qc.sas`, run manually).
+
+## 3. Exposure, outcomes and follow-up
+
+- **Exposure:** class of the study drug filled on the index date; fills with an RxNorm drug concept only (measure 2, defined in the README; NDC mapped through RxNorm and RxClass/ATC, `codelists/ndc_antihypertensive.csv`).
+- **Outcome:** first inpatient admission date (`CLM_ADMSN_DT`) on days 1 to 365 (primary) or 1 to 30 (secondary) after the index date. ED visits cannot be observed (A-001).
+- **ITT follow-up (A-008):** day 1 until the earliest of the outcome, day 365, 2023-03-31 (end of data) and loss of continuous Part A, B or D entitlement (end of the A+B+D span containing the index month). There are no deaths in the data. Persons with no follow-up day are excluded and reported.
+
+## 4. Covariates
+
+Measured in days -365 to -1 (A-009). Propensity score model terms: age (linear and squared), sex, race, Census region (via `codelists/ssa_state_region.csv`, A-012), index year (factor), index quarter, the CCW-based conditions COPD, asthma, ischemic heart disease, diabetes, chronic kidney disease and cancer (at least one qualifying claim, A-003), log(1 + visit days), any baseline hospitalization, number of distinct drugs and number of distinct ATC level-4 classes (fills with an RxNorm drug concept). Heart failure and dementia are modelled only if at least 10 people have and at least 10 lack the characteristic; otherwise they are dropped and reported (A-011). Factor levels with fewer than 10 people are pooled. Missing demographics receive an explicit "unknown" level. Index setting (A-002), dual eligibility, ED visits and vaccination are not used.
+
+## 5. Methods
+
+1. **Propensity score.** Logistic regression of ACE inhibitor initiation on the covariates above.
+2. **Weights.** Stabilized ATE weights, P(arm) / P(arm | covariates), truncated at the 1st and 99th percentile of the weight distribution. Balance: standardized mean differences with the pooled unweighted standard deviation (target below 0.1), love plot, propensity score distributions. The implementation is checked against `WeightIt` and `cobalt` (`qc/analysis/weightit_cobalt_check.csv`).
+3. **Weighted Kaplan-Meier.** Weighted daily hazards = weighted events / weighted at-risk mass; cumulative incidence = 1 - product(1 - hazard). Unit tests confirm equality with `survival::survfit` on weighted data.
+4. **Weighted pooled logistic regression.** Binomial model (quasi-binomial dispersion) for the daily hazard with a natural spline in day (4 df) and an arm-by-time interaction, fitted to weighted person-days. Because the weights are constant within person and the model has only time and arm, it is fitted on the equivalent weighted daily counts. The 30-day risk is read from the same 365-day model.
+5. **Contrasts and intervals.** Risk difference and risk ratio at 365 and 30 days. 95% percentile intervals from 500 nonparametric bootstrap resamples of individuals; the propensity score, weights and truncation are re-estimated in every resample; seed 20261020.
+6. **Censoring.** Loss of entitlement and the end of data are treated as non-informative in the primary analysis. The sensitivity analyses below weight for it.
+7. **E-value** for the 365-day risk ratio (VanderWeele and Ding), point estimate and confidence limit.
+8. **Small cells.** Any count below 11 is flagged in tables and must not be interpreted.
+9. **Missing data.** Absence of a code means absence of the condition. Missingness of every baseline variable is reported (`qc/analysis/baseline_missingness.csv`).
+
+## 6. Sensitivity analyses
+
+| Analysis | What changes |
+| --- | --- |
+| Unadjusted | No weights (reference only) |
+| Untruncated weights | No truncation |
+| PS matching | 1:1 greedy nearest neighbour on the logit, caliper 0.2 SD, without replacement, repeated in each bootstrap resample |
+| Keep other-class co-starters (A-010) | Cohort without the co-start exclusion; `costart` indicator in the propensity model |
+| Exclude baseline fills with no RxNorm record (A-010) | New-user status certain for everyone (measure 1) |
+| Strict diagnosis window (A-009) | Hypertension diagnosis only in days -365 to -1 |
+| Follow-up ignoring Part D loss (A-008) | ITT ends at loss of A+B instead of A+B+D |
+| Old follow-up rule (A-008) | Last claim date 2023-03-02 as the end of data, Part A+B only |
+| Exclude chronic kidney disease | Restriction |
+| Add-on/switch censoring with IPCW (A-007) | Censor at the other study drug; stabilized IPCW from an aggregated censoring model on arm, age group and sex |
+| IPCW for loss of A/B/D entitlement (A-013) | Stabilized IPCW from a person-month censoring model on baseline covariates (age, sex, region, prior hospitalization, diabetes, chronic kidney disease, ischemic heart disease) |
+
+## 7. Tables, figures and listings (shells)
+
+```{r shells}
+kt(tibble::tribble(
+  ~ID, ~Title, ~Program,
+  "T1", "Cohort attrition", "R/06_cohort.R",
+  "T2", "Feasibility: data facts, nulls and the hypertension cohort", "R/10_manifest_facts.R",
+  "T3", "Baseline characteristics by arm before and after IPTW, with SMDs", "R/09_analysis.R",
+  "T4", "Treatment patterns: days supply, time to add-on, switch and discontinuation", "R/07_followup.R",
+  "T5", "365-day and 30-day hospitalization risks, risk difference, risk ratio", "R/09_analysis.R",
+  "T6", "Sensitivity analyses", "R/09_analysis.R",
+  "T7", "Negative control outcome (descriptive)", "R/07_followup.R",
+  "F1", "Study design diagram", "R/11_tfl.R",
+  "F2", "Love plot", "R/09_analysis.R",
+  "F3", "Propensity score distributions", "R/09_analysis.R",
+  "F4", "Weighted cumulative incidence of hospitalization", "R/09_analysis.R",
+  "L1", "Code lists", "R/03_codelists.R, R/06_codelists_ahtn.R",
+  "L2", "Variable derivation listing", "R/11_tfl.R"))
+```
+
+Every output carries a footnote naming the generating program, the dataset version and "synthetic data, not inferential" (`output/tfl/provenance.csv`).
+
+## 8. Quality control
+
+Unit tests with hand-built beneficiaries (`tests/testthat`), an end-to-end test on a synthetic fixture, step logs (`qc/step_log.tsv`), profiling (`qc/profiling.html`),
+code lists versioned with source and date, independent re-derivations in pandas and SAS, and package cross-checks of the weighting code.
+
+## 9. Departures from the protocol
+
+All are recorded as amendments (A-001 to A-013) before use. Items marked "applied" in the amendment log were applied to keep the study estimable and were confirmed afterwards.

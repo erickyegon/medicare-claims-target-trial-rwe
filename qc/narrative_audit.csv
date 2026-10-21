@@ -1,0 +1,29 @@
+document,claim,text,recomputed,result
+amendments,outpatient rows,"575,092 rows",575092,PASS
+amendments,rev 0001 rows,"0001 on 574,480 rows",574480,PASS
+amendments,rev 0780/0789 rows,0780 and 0789 on 612 rows,612,PASS
+amendments,ED revenue rows,**0 rows** in 0450-0459 or 0981,0,PASS
+amendments,bronchitis outpatient claims,"8,768 outpatient claims",8768,PASS
+amendments,bronchitis outpatient benes,"(2,494 beneficiaries)",2494,PASS
+amendments,bronchitis carrier claims,"only 1,015 carrier claims",1015,PASS
+amendments,bronchitis carrier benes,(657 beneficiaries),657,PASS
+amendments,POS 11 share (83%),11 (office) on 83% of lines,83,PASS
+amendments,rev 0001 share (99.9%),99.9% of lines have revenue code 0001,99.9,PASS
+amendments,PDE distinct NDCs,"14,627 distinct PDE NDCs",14627,PASS
+amendments,resolved NDCs,"11,913 (81.4%)",11913 (81.4%),PASS
+amendments,unresolved NDCs,"2,714 (18.6%)",2714 (18.6%),PASS
+amendments,PDE fills,"All PDE fills (515,520)",515520,PASS
+amendments,resolved fills,"414,113 (80.3%)",414113 (80.3%),PASS
+amendments,unresolved fills,"101,407 (19.7%)",101407 (19.7%),PASS
+amendments,FDA directory coverage,"only 14.1% of fills (72,693)",14.1% (72693),PASS
+amendments,listed-antibiotic fills,"(1,672 listed-antibiotic fills in total, 0.3%)","(1672 listed-antibiotic fills in total, 0.3%)",PASS
+amendments,antibiotic NDC list size,"18,015 eleven-digit NDCs",18015,PASS
+amendments,disagreeing NDCs,"17 NDCs, 829 fills, 0.7% of antihypertensive fills","17 NDCs, 829 fills, 0.7% of antihypertensive fills",PASS
+amendments,S72009 persons/claims,"`S72009` (115 beneficiaries, 678 claims)","`S72009` (115 beneficiaries, 678 claims)",PASS
+amendments,heart failure people,heart failure (0 people),heart failure (0 people),PASS
+amendments,dementia people,dementia (8 people),dementia (8 people),PASS
+amendments,final cohort size,54 of the 790 cohort members,54 of the 790 cohort members,PASS
+profiling_notes,admission type shares,"1 (emergency) 78.5%, 2 (urgent) 3.2%, 3 (elective) 18.4%","1 (emergency) 78.5%, 2 (urgent) 3.2%, 3 (elective) 18.4%",PASS
+profiling_notes,Cramer V chapter,Cramer's V = 0.41,Cramer's V = 0.41,PASS
+profiling_notes,Cramer V source,"Cramer's V = 0.011, p = 0.49","Cramer's V = 0.011, p = 0.49",PASS
+scan report,no classes for COPD/asthma/HF,"no new-user classes for COPD, asthma or heart failure","no new-user classes for COPD, asthma or heart failure",PASS

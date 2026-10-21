@@ -1,0 +1,127 @@
+---
+title: "Indication feasibility scan (CMS synthetic Medicare)"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    code-fold: true
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+library(knitr); library(dplyr); library(readr)
+.root <- (function(d = getwd()) { while (!file.exists(file.path(d, ".project-root"))) d <- dirname(d); d })()
+S <- function(f) read_csv(file.path(.root, "qc", "scan", f), show_col_types = FALSE)
+source(file.path(.root, "R", "format_tables.R"))
+kt <- function(x, ...) kable(format_table(x), align = table_align(x), ...)
+trunc <- function(x, n) ifelse(nchar(x) > n, paste0(substr(x, 1, n - 1), "…"), x)
+```
+
+**Aggregate output only; synthetic data.** Population for every table: age 65+ with 365 days of continuous Part A+B+D before the event
+(monthly entitlement spans). Rows marked `flag_lt11 = TRUE` contain a cell below 11 and should be read as suppressed.
+A fill "with a drug concept" is one whose PDE NDC resolves to a drug in RxNorm. Fills without one have **no RxNorm drug concept** (measure 2 in the README; about one fill in five),
+so "no fill" below means *no fill at all*, and the group with only no-drug-concept fills is shown separately.
+Nothing here changes the protocol or the code lists.
+
+**Use of this report (amendment A-005):** the hypertension re-scope was selected from arm sizes and crude aggregate hospitalization counts only; no effect estimates were computed or viewed. All three candidate passes are kept below, labelled as run.
+
+## 1. Acute conditions (3-character ICD-10, >= 300 first episodes)
+
+An episode is the first eligible claim for that code on/after 2016-03-01 with no same-code claim in the prior 365 days
+(carrier + outpatient; no inpatient admission on the index date or the day before).
+`with_drug` = at least one fill with a drug concept in the window; `no_drug_only` = only fills with no RxNorm drug concept; `nofill` = no fill.
+
+```{r acute}
+a <- S("acute_scan.csv")
+kt(a %>% transmute(dx3, description = trunc(description, 38), n_episodes, with_drug_0_2, pct_with_drug_0_2, no_drug_only_0_2, nofill_0_2,
+                   with_drug_0_7, pct_with_drug_0_7, no_drug_only_0_7, nofill_0_7, flag_lt11))
+```
+
+### Top 5 drugs in the windows (episodes with a fill; counts below 11 shown as <11)
+
+```{r acutetop}
+kt(a %>% transmute(dx3, description = trunc(description, 30), top5_drugs_0_2 = trunc(top5_drugs_0_2, 140), top5_drugs_0_7 = trunc(top5_drugs_0_7, 140)))
+```
+
+### Antibacterial classes (ATC J01) among treated episodes, arms as in the candidate analyses
+
+Treated = first fill of the class on days 0-2; late = first fill on days 3-30 (in neither arm); untreated = no fill of the class on days 0-30.
+`enrichment` = share treated for this diagnosis divided by the share over all scanned episodes (1 = background use of the drug).
+
+```{r j01}
+kt(S("acute_class_arms.csv") %>% filter(grepl("^J01", atc_id)) %>% transmute(dx3, dx = trunc(dx_description, 30), atc_id, atc_name, n_episodes, n_treated, n_late, n_untreated, enrichment, flag_lt11) %>% arrange(desc(n_treated)))
+```
+
+### Re-test of the bronchitis finding (amendment A-004) with ingredient-based identification
+
+```{r j20}
+j20 <- S("bronchitis_recheck_classes.csv")
+cat("Bronchitis episodes (age 65+, 365d A+B+D):", j20$n_episodes[1], "\n\n")
+cat("J01 (antibacterial) classes with any treated episode:", sum(grepl("^J01", j20$atc_id)), "\n")
+kt(j20 %>% transmute(atc_id, atc_name = trunc(atc_name, 50), n_treated, n_late, n_untreated) %>% head(8))
+```
+
+## 2. Chronic new users
+
+New user = first fill of an ATC level-4 class on/after 2016-03-01 with no fill of that class in the prior 365 days. The condition is present at the
+fill if a claim with a CCW code for it falls in the 365 days up to the fill (amendment A-003 rule). Classes with >= 200 new users per condition:
+
+```{r chronic}
+cc <- S("chronic_condition_classes.csv")
+cat(nrow(cc), "condition x class combinations;", n_distinct(cc$cond), "conditions have at least one class\n")
+kt(cc %>% group_by(cond) %>% summarise(classes_ge_200 = n(), largest = paste0(atc_id[which.max(n_new_users)], " (", max(n_new_users), ")")) %>% arrange(desc(classes_ge_200)))
+```
+
+**Data caveat:** the same background drug bundle (ACE inhibitors, thiazides, calcium-channel blockers, statins, NSAIDs, insulin) appears as new use
+in people with every condition, and there are no new-user classes for COPD, asthma or heart failure. The insulin A10AB/AC/AD/AE/AF classes all
+describe the same insulin product (RxClass maps one ingredient set to several A10A classes), so those "pairs" are one drug counted twice.
+
+### Active-comparator pairs (same ATC level-2 group, both >= 200 new users)
+
+`overlap` = largest share of an arm that also fills the other class within 30 days of index (high overlap = arms share a product).
+
+```{r pairs}
+p <- S("chronic_pairs.csv")
+kt(p %>% filter(overlap < 0.2) %>% transmute(cond = trunc(cond, 28), a_cls, a_name = trunc(a_name, 28), b_cls, b_name = trunc(b_name, 28), n_a, n_b, overlap, flag_lt11) %>% head(25))
+```
+
+## 3. Antibiotics that exist in PDE
+
+```{r inventory}
+kt(S("pde_antibacterial_inventory.csv"), caption = "All systemic antibacterial (ATC J01) fills identified through RxNorm (no age or enrollment restriction)")
+kt(S("trace_summary.csv"), caption = "Amoxicillin-clavulanate and moxifloxacin: fills, and fills with any diagnosis recorded in the 7 days up to the fill")
+t3 <- S("trace_dx3.csv")
+for (d in unique(t3$drug_name)) { cat("\n\n#### ", d, ": diagnoses (3-character) in the 7 days up to the fill\n\n", sep = ""); print(kt(t3 %>% filter(drug_name == d) %>% transmute(dx3, description = trunc(description, 50), fills, benes, flag_lt11) %>% head(15))) }
+```
+
+Many diagnoses in the 7-day window are the generator's near-universal social-problem codes (Z60, Z73, T74, ...), so the informative signal is the
+excess of J01/J32 (sinusitis) around amoxicillin-clavulanate; moxifloxacin shows no infection pattern, and 375 of its 652 fills have no diagnosis in the window.
+
+## 4. Candidates: hospitalization counts per arm
+
+Hospitalization = inpatient admission on days 1-30 or 1-365 after index. Only people with the full horizon observable before the last claim date
+(2023-03-02) are counted as evaluable; no censoring for enrollment loss or switching (descriptive counts, not an analysis). There are no deaths in the data.
+
+### Pass 1, pre-specified rule (fixed in advance: smaller arm size, max 2 per diagnosis/condition)
+
+These came out as artifacts (generic social-problem codes with background drugs; insulin product counted under several classes).
+
+```{r outcomes_mech}
+o <- S("candidate_outcomes.csv")
+show <- function(x) kt(x %>% transmute(candidate = trunc(candidate, 70), arm = trunc(arm, 30), n, n_eval_30, hosp_30, risk_30_pct, n_eval_365, hosp_365, risk_365_pct, flag_lt11))
+show(o %>% filter(rule == "mechanical"))
+```
+
+### Pass 2, refined (added after seeing pass 1): indication-specific enrichment >= 3 / arms with < 20% product overlap
+
+```{r outcomes_ref}
+show(o %>% filter(rule == "refined"))
+```
+
+### Pass 3, curated (post-hoc, chosen by clinical judgement from sections 1-3; the hypertension pairs come from here)
+
+```{r outcomes_cur}
+show(o %>% filter(rule == "curated"))
+```

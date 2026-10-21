@@ -1,0 +1,14 @@
+id,title,file,source_program,inputs,dataset_version
+T1,Cohort attrition,T1.csv / .html,R/06_cohort.R,qc/cohort/attrition.csv,4ac952d194
+T2,"Feasibility: data facts, nulls and the hypertension cohort",T2.csv / .html,"R/10_manifest_facts.R, R/06_cohort.R","qc/feasibility_facts.csv, qc/cohort/",4ac952d194
+T3,"Baseline characteristics by arm before and after IPTW, with standardized mean differences",T3.csv / .html,R/09_analysis.R,qc/analysis/balance_smd.csv,4ac952d194
+T4,"Treatment patterns: days supply and time to add-on, switch and discontinuation (first event; descriptive)",T4.csv / .html,R/07_followup.R,"qc/cohort/timing_counts.csv, timing_cif.csv",4ac952d194
+T5,"All-cause hospitalization, intention-to-treat: 365-day (primary) and 30-day (secondary) risks, risk difference and risk ratio",T5.csv / .html,R/09_analysis.R,qc/analysis/primary_results.csv,4ac952d194
+T6,Sensitivity analyses: 365-day hospitalization (weighted Kaplan-Meier),T6.csv / .html,R/09_analysis.R,qc/analysis/sensitivity_results.csv,4ac952d194
+T7,"Negative control outcome: hip or femur fracture within 365 days (counts and person-time only; no model, A-006)",T7.csv / .html,"R/07_followup.R, R/09_analysis.R",qc/analysis/negative_control_descriptive.csv,4ac952d194
+F1,Study design diagram,F1.png,R/11_tfl.R,protocol v0.4 Sections 5 and 9,4ac952d194
+F2,Love plot of covariate balance,F2.png,R/09_analysis.R,qc/analysis/balance_smd.csv,4ac952d194
+F3,Propensity score distributions by arm,F3.png,R/09_analysis.R,"database table analysis_primary (person-level, not published)",4ac952d194
+F4,IPTW-weighted cumulative incidence of hospitalization,F4.png,R/09_analysis.R,qc/analysis/cumulative_incidence_curves.csv,4ac952d194
+L1,"Code lists used (counts, columns and sources; full lists are in codelists/)",L1.csv / .html,"R/03_codelists.R, R/06_codelists_ahtn.R, codelists/build/*.py",codelists/*.csv,4ac952d194
+L2,Variable derivation listing,L2.csv / .html,R/11_tfl.R,"sql/*.sql, R/*.R",4ac952d194

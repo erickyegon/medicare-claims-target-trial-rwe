@@ -1,0 +1,13 @@
+drug_name,fills,benes,flag_lt11
+amoxicillin / clavulanate,769,724,FALSE
+moxifloxacin,652,136,FALSE
+penicillin V,341,328,FALSE
+amoxicillin,188,174,FALSE
+tetracycline,161,145,FALSE
+nitrofurantoin,113,88,FALSE
+cefuroxime,45,45,FALSE
+sulfamethoxazole / trimethoprim,13,1,TRUE
+clindamycin,6,5,TRUE
+azithromycin,3,3,TRUE
+clarithromycin,1,1,TRUE
+cefdinir,1,1,TRUE

@@ -1,0 +1,24 @@
+Package: medicareclaimstargettrialrwe
+Title: Active-Comparator New-User Study on CMS Synthetic Medicare Claims (Methods Demonstration)
+Version: 0.4.0
+Description: Reproducible pipeline for a claims-based RWE methods demonstration. Not an R package; this file lists dependencies for continuous integration.
+License: MIT (see LICENSE)
+Encoding: UTF-8
+Imports:
+    DBI,
+    duckdb,
+    dplyr,
+    tidyr,
+    tibble,
+    readr,
+    stringr,
+    survival,
+    ggplot2,
+    knitr,
+    rmarkdown
+Suggests:
+    testthat,
+    WeightIt,
+    cobalt,
+    targets,
+    tarchetypes

@@ -1,0 +1,12 @@
+step,description,n_episodes,n_persons,persons_removed,episodes_removed
+0,Beneficiaries in the beneficiary files,,9179,,
+1,Fill of an ACE inhibitor or thiazide/thiazide-like diuretic on/after 2016-03-01 (candidate index dates),57338,3916,5263,
+2,New user: no antihypertensive fill in days -365 to -1,10639,3561,355,46699
+3,Age 65 or older on the index date,6162,2156,1405,4477
+4,Continuous Part A+B+D from the month of day -365 through the index month,4793,1604,552,1369
+5,Hypertension diagnosis (I10-I16) in days -365 to 0 (A-009),3294,1424,180,1499
+6,Not both study drugs filled on the index date,2259,1142,282,1035
+7,No other antihypertensive class filled on the index date (A-010),1529,821,321,730
+8,No hospice claim in days -365 to -1,1466,792,29,63
+9,No inpatient stay overlapping the index date,1458,790,2,8
+10,First qualifying episode per beneficiary (final cohort),790,790,0,668
