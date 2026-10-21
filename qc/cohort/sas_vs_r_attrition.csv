@@ -1,0 +1,12 @@
+step,description,r_episodes,sas_episodes,r_persons,sas_persons,result
+0,"Beneficiaries in the beneficiary files",,,9179,9179,PASS
+1,"Candidate index dates (study-drug fills on/after 2016-03-01)",57338,57338,3916,3916,PASS
+2,"New user",10639,10639,3561,3561,PASS
+3,"Age 65 or older",6162,6162,2156,2156,PASS
+4,"Continuous A+B+D",4793,4793,1604,1604,PASS
+5,"Hypertension diagnosis",3294,3294,1424,1424,PASS
+6,"Not both study drugs",2259,2259,1142,1142,PASS
+7,"No other class on index date",1529,1529,821,821,PASS
+8,"No hospice",1466,1466,792,792,PASS
+9,"No inpatient overlap",1458,1458,790,790,PASS
+10,"First qualifying episode per beneficiary (final cohort)",790,790,790,790,PASS

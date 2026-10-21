@@ -6,41 +6,31 @@
   enrollment criterion: it counts A+B+D months in the look-back range per candidate instead of
   building continuous spans.
 
-  SETUP (SAS OnDemand for Academics):
-    1. Upload to your home folder (Files and Folders pane):
-         data/raw/            -> &RAW   (beneficiary_20xx.csv, pde.csv, inpatient.csv, hospice.csv, carrier/, outpatient/)
-         codelists/           -> &CL    (ndc_antihypertensive.csv, icd10_hypertension.csv, ndc_resolved.csv)
-         qc/cohort/           -> &RQC   (attrition.csv, cohort_baseline_counts.csv, cohort_sensitivity_counts.csv from R)
-         sas/import_raw.sas   -> &SASDIR
-    2. Edit the four %let paths below, then submit the whole program.
-  OUTPUT: &OUT/sas_attrition.csv, &OUT/sas_baseline_counts.csv, and a PASS/FAIL table in the log and results.
-  NOT RUN by the author: the program has not been executed in SAS; review the log for notes and warnings.
+  SETUP (SAS OnDemand for Academics), in one SAS Studio session:
+    1. Run sas/download_raw.sas   (downloads the public CMS files into ~/rwe/raw with PROC HTTP; nothing is uploaded)
+    2. Run sas/inputs_codelists.sas (creates library RWE with the NDC map, ICD-10 hypertension codes and the R counts to reconcile against)
+    3. Run sas/import_raw.sas      (reads the needed columns into WORK)   [this program %includes it from &SASDIR if WORK is empty]
+    4. Run this program.
+  The generated files come from sas/build/gen_sas_import.py and sas/build/gen_sas_inputs.py (re-run them if the R outputs change).
+  OUTPUT: library OUTD (~/rwe/out) with sas_attrition, sas_baseline, recon_attr, recon_baseline, and a PASS/FAIL table in the log and results.
+  FIRST RUN 2026-10-21 in SAS OnDemand: all attrition and baseline rows PASS; see qc/sas_reconciliation.md.
 ============================================================================================*/
-%let RAW    = /home/YOUR_USER/rwe/data/raw;
-%let CL     = /home/YOUR_USER/rwe/codelists;
-%let RQC    = /home/YOUR_USER/rwe/qc/cohort;
-%let SASDIR = /home/YOUR_USER/rwe/sas;
-%let OUT    = /home/YOUR_USER/rwe/qc;
-options mprint nosymbolgen nomlogic;
+%let ROOT   = /home/&sysuserid/rwe;
+%let RAW    = &ROOT/raw;
+%let SASDIR = &ROOT/sas;
+options dlcreatedir mprint nosymbolgen nomlogic;
+libname rwe  "&ROOT/lib";
+libname outd "&ROOT/out";
 
-%include "&SASDIR/import_raw.sas";
+%macro get_raw;
+  %if %sysfunc(exist(work.bene_raw)) = 0 %then %do; %include "&SASDIR/import_raw.sas"; %end;
+%mend;
+%get_raw;
 
-/* ---- code lists (character, keep leading zeros) ---- */
-data ndc_map;
-  infile "&CL/ndc_antihypertensive.csv" dsd firstobs=2 truncover lrecl=4096;
-  length ndc11 $11 ahtn_class $20 ingredients $200 source $120 dl_date $20;
-  input ndc11 ahtn_class ingredients source dl_date;
-run;
-data htn_codes;
-  infile "&CL/icd10_hypertension.csv" dsd firstobs=2 truncover lrecl=4096;
-  length role $80 family $80 code $7 description $200 source $120 dl_date $20;
-  input role family code description source dl_date;
-run;
-data ndc_resolved;
-  infile "&CL/ndc_resolved.csv" dsd firstobs=2 truncover lrecl=4096;
-  length ndc11 $11 source $120 dl_date $20;
-  input ndc11 source dl_date;
-run;
+
+/* ---- code lists from library RWE (see sas/inputs_codelists.sas) ---- */
+data ndc_map; set rwe.ndc_map; run;
+data htn_codes; set rwe.htn_codes; run;
 
 /* ---- 1. monthly A+B+D entitlement (month index mi = year*12 + month) ---- */
 data enroll_m(keep=BENE_ID mi);
@@ -112,25 +102,52 @@ proc sql;
   where ahtn_class in ('ACEI','THIAZIDE') and fill_dt >= '01MAR2016'd
   group by BENE_ID, fill_dt;
 
-  /* criterion 1: new user */
+  /* criterion 1: new user (no study-class or other antihypertensive fill in days -365 to -1) */
   create table cand_nu as
-  select s.* from study_day s
-  where not exists (select 1 from ahtn_fill a where a.BENE_ID = s.BENE_ID and a.fill_dt between s.idx - 365 and s.idx - 1);
+  select s.BENE_ID, s.idx, s.acei, s.thiazide
+  from study_day s left join ahtn_fill a on a.BENE_ID = s.BENE_ID and a.fill_dt between s.idx - 365 and s.idx - 1
+  group by s.BENE_ID, s.idx, s.acei, s.thiazide
+  having count(a.fill_dt) = 0;
 
-  /* criteria 2-7 as 0/1 flags */
+  /* criteria 2-7 as 0/1 flags; each is a join-and-count per candidate (joins, not correlated subqueries: those did not finish on SAS OnDemand) */
+  create table fl_enroll as
+  select c.BENE_ID, c.idx, count(e.mi) as n_months
+  from cand_nu c left join enroll_m e on e.BENE_ID = c.BENE_ID
+       and e.mi between (year(c.idx - 365)*12 + month(c.idx - 365)) and (year(c.idx)*12 + month(c.idx))
+  group by c.BENE_ID, c.idx;
+  create table fl_htn as
+  select c.BENE_ID, c.idx, count(x.dt) as n    /* A-009: days -365 to 0 */
+  from cand_nu c left join dx_htn x on x.BENE_ID = c.BENE_ID and x.dt between c.idx - 365 and c.idx
+  group by c.BENE_ID, c.idx;
+  create table fl_cost as
+  select c.BENE_ID, c.idx, count(a.fill_dt) as n    /* A-010: another class filled on the index date */
+  from cand_nu c left join ahtn_fill a on a.BENE_ID = c.BENE_ID and a.fill_dt = c.idx and a.ahtn_class not in ('ACEI','THIAZIDE')
+  group by c.BENE_ID, c.idx;
+  create table fl_hos as
+  select c.BENE_ID, c.idx, count(h.from_dt) as n
+  from cand_nu c left join hospice h on h.BENE_ID = c.BENE_ID and h.from_dt <= c.idx - 1 and h.thru_dt >= c.idx - 365
+  group by c.BENE_ID, c.idx;
+  create table fl_ip as
+  select c.BENE_ID, c.idx, count(s.adm_dt) as n
+  from cand_nu c left join ip_stay s on s.BENE_ID = c.BENE_ID and s.adm_dt <= c.idx and s.thru_dt >= c.idx
+  group by c.BENE_ID, c.idx;
+
   create table cand_flags as
   select c.BENE_ID, c.idx, c.acei, c.thiazide,
     case when c.idx >= intnx('year', d.birth, 65, 'sameday') then 1 else 0 end as f_age,
-    case when (select count(*) from enroll_m e where e.BENE_ID = c.BENE_ID
-                 and e.mi between (year(c.idx - 365)*12 + month(c.idx - 365)) and (year(c.idx)*12 + month(c.idx)))
-              = ((year(c.idx)*12 + month(c.idx)) - (year(c.idx - 365)*12 + month(c.idx - 365)) + 1)
-         then 1 else 0 end as f_enroll,
-    case when exists (select 1 from dx_htn x where x.BENE_ID = c.BENE_ID and x.dt between c.idx - 365 and c.idx) then 1 else 0 end as f_htn,   /* A-009: days -365 to 0 */
+    case when en.n_months = ((year(c.idx)*12 + month(c.idx)) - (year(c.idx - 365)*12 + month(c.idx - 365)) + 1) then 1 else 0 end as f_enroll,
+    case when ht.n > 0 then 1 else 0 end as f_htn,
     case when c.acei = 1 and c.thiazide = 1 then 0 else 1 end as f_notboth,
-    case when exists (select 1 from ahtn_fill a where a.BENE_ID = c.BENE_ID and a.fill_dt = c.idx and a.ahtn_class not in ('ACEI','THIAZIDE')) then 0 else 1 end as f_nocostart,   /* A-010 */
-    case when exists (select 1 from hospice h where h.BENE_ID = c.BENE_ID and h.from_dt <= c.idx - 1 and h.thru_dt >= c.idx - 365) then 0 else 1 end as f_nohospice,
-    case when exists (select 1 from ip_stay s where s.BENE_ID = c.BENE_ID and s.adm_dt <= c.idx and s.thru_dt >= c.idx) then 0 else 1 end as f_noinpt
-  from cand_nu c inner join demo d on d.BENE_ID = c.BENE_ID;
+    case when co.n > 0 then 0 else 1 end as f_nocostart,
+    case when ho.n > 0 then 0 else 1 end as f_nohospice,
+    case when ip.n > 0 then 0 else 1 end as f_noinpt
+  from cand_nu c
+       inner join demo d on d.BENE_ID = c.BENE_ID
+       inner join fl_enroll en on en.BENE_ID = c.BENE_ID and en.idx = c.idx
+       inner join fl_htn ht on ht.BENE_ID = c.BENE_ID and ht.idx = c.idx
+       inner join fl_cost co on co.BENE_ID = c.BENE_ID and co.idx = c.idx
+       inner join fl_hos ho on ho.BENE_ID = c.BENE_ID and ho.idx = c.idx
+       inner join fl_ip ip on ip.BENE_ID = c.BENE_ID and ip.idx = c.idx;
 quit;
 
 /* ---- 4. sequential attrition ---- */
@@ -191,8 +208,8 @@ quit;
 data sas_base; set base_age base_sex; run;
 
 /* ---- 6. reconcile with R ---- */
-proc import datafile="&RQC/attrition.csv" out=r_attr dbms=csv replace; guessingrows=max; run;
-proc import datafile="&RQC/cohort_baseline_counts.csv" out=r_base dbms=csv replace; guessingrows=max; run;
+data r_attr; set rwe.r_attr; run;
+data r_base; set rwe.r_base; run;
 
 proc sql;
   create table recon_attr as
@@ -211,7 +228,7 @@ title 'Attrition: R vs SAS'; proc print data=recon_attr noobs; run;
 title 'Baseline counts: R vs SAS'; proc print data=recon_base noobs; run;
 title;
 
-proc export data=sas_attr outfile="&OUT/sas_attrition.csv" dbms=csv replace; run;
-proc export data=sas_base outfile="&OUT/sas_baseline_counts.csv" dbms=csv replace; run;
-proc export data=recon_attr outfile="&OUT/r_vs_sas_attrition.csv" dbms=csv replace; run;
-proc export data=recon_base outfile="&OUT/r_vs_sas_baseline.csv" dbms=csv replace; run;
+data outd.sas_attrition; set sas_attr; run;
+data outd.sas_baseline; set sas_base; run;
+data outd.recon_attr; set recon_attr; run;
+data outd.recon_baseline; set recon_base; run;

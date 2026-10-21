@@ -1,0 +1,11 @@
+arm,variable,level,r_n,sas_n,result
+ACEI,age_group,65-74,294,294,PASS
+ACEI,age_group,75-84,87,87,PASS
+ACEI,age_group,85+,52,52,PASS
+ACEI,sex,female,209,209,PASS
+ACEI,sex,male,224,224,PASS
+THIAZIDE,age_group,65-74,246,246,PASS
+THIAZIDE,age_group,75-84,64,64,PASS
+THIAZIDE,age_group,85+,47,47,PASS
+THIAZIDE,sex,female,171,171,PASS
+THIAZIDE,sex,male,186,186,PASS
